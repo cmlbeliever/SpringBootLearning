@@ -1,7 +1,2 @@
-.DS_Store
-/target
 
-/bin/
-.idea/
-.settings/
-.classpath
+/target/
