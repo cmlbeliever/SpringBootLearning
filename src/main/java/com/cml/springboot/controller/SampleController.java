@@ -2,8 +2,11 @@ package com.cml.springboot.controller;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
+import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,10 +17,10 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistration;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
-@EnableWebMvc
-@Controller()
-@EnableAutoConfiguration(exclude = {})
-@ServletComponentScan(basePackages = "com.cml.springboot")
+import com.cml.springboot.test.SampleTomcatJspApplication;
+
+@SpringBootApplication
+@Controller
 public class SampleController {
 
 	@RequestMapping("/test")
@@ -26,14 +29,10 @@ public class SampleController {
 		return "test";
 	}
 
-	@Bean
-	public InternalResourceViewResolver initViewResolver() {
-		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-		viewResolver.setPrefix("/webapp/");
-		// viewResolver.setPrefix("/");
-		viewResolver.setSuffix(".jsp");
-		viewResolver.setOrder(1);
-		return viewResolver;
+	@RequestMapping("/welcome")
+	public String welcome() {
+		System.out.println("test");
+		return "welcome";
 	}
 
 	@RequestMapping("/")
@@ -59,6 +58,10 @@ public class SampleController {
 	// // registration.addUrlMappings("*.do");
 	// // registration.addUrlMappings("*.json");
 	// return registration;
+	// }
+	// protected SpringApplicationBuilder configure(SpringApplicationBuilder
+	// application) {
+	// return application.sources(SampleController.class);
 	// }
 
 	public static void main(String[] args) throws Exception {
