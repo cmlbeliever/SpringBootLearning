@@ -8,6 +8,7 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,6 +22,7 @@ import com.cml.springboot.test.SampleTomcatJspApplication;
 
 @SpringBootApplication
 @Controller
+@ComponentScan(basePackages = "com.cml.springboot.framework")
 public class SampleController {
 
 	@RequestMapping("/test")
@@ -47,6 +49,7 @@ public class SampleController {
 		registration.getUrlMappings().clear();
 		registration.addUrlMappings("*.do");
 		registration.addUrlMappings("*.json");
+		// WebMvcAutoConfiguration
 		return registration;
 	}
 
