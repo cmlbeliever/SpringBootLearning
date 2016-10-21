@@ -1,8 +1,5 @@
 package com.cml.springboot.controller.test;
 
-import static org.hamcrest.Matchers.equalTo;
-import static org.junit.Assert.assertThat;
-
 import java.net.URL;
 
 import org.junit.Before;
