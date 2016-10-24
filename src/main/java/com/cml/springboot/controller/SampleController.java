@@ -12,6 +12,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -24,6 +26,14 @@ import com.cml.springboot.test.SampleTomcatJspApplication;
 @Controller
 @ComponentScan(basePackages = "com.cml.springboot.framework")
 public class SampleController {
+
+	@RequestMapping("/uploadAction")
+	@ResponseBody
+	public String upload(MultipartHttpServletRequest req) {
+		MultipartFile file = req.getFile("file");
+		System.out.println(file.getName());
+		return file.getName();
+	}
 
 	@RequestMapping("/test")
 	public String test() {
