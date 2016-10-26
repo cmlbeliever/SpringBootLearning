@@ -22,7 +22,7 @@ public class SampleController {
 	public String addLog(HttpServletRequest request) {
 		LogBean logbean = new LogBean();
 		logbean.setApiUrl(request.getRequestURL().toString());
-		logbean.setCallDayStr("today");
+		logbean.setCallDayStr("20161111");
 		logbean.setParameters("param:" + request.getParameterMap());
 		logbean.setReturnStatusCode(200);
 		logbean.setReturns("returns");
