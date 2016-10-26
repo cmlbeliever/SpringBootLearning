@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -31,6 +32,12 @@ public class SampleController {
 	@ResponseBody
 	public String upload(MultipartHttpServletRequest req) {
 		MultipartFile file = req.getFile("file");
+		System.out.println(file.getName());
+		return file.getName();
+	}
+	@RequestMapping("/uploadAction2")
+	@ResponseBody
+	public String upload2(@RequestParam(name="file2" ,required=true) MultipartFile file) {
 		System.out.println(file.getName());
 		return file.getName();
 	}
