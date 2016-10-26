@@ -15,7 +15,6 @@ public class DatasourceConfig {
 
 	@Bean(destroyMethod = "close", name = "dataSource")
 	public DataSource dataSource() {
-		System.out.println("=========>" + properties);
 		BasicDataSource dataSource = new BasicDataSource();
 		dataSource.setDriverClassName(properties.driverClassName);
 		dataSource.setUrl(properties.url);
@@ -26,6 +25,11 @@ public class DatasourceConfig {
 		dataSource.setMaxWait(properties.maxWait);
 		dataSource.setInitialSize(properties.initialSize);
 		dataSource.setValidationQuery(properties.validationQuery);
+		dataSource.setRemoveAbandoned(true);
+		dataSource.setTestWhileIdle(true);
+		dataSource.setTimeBetweenEvictionRunsMillis(30000);
+		dataSource.setNumTestsPerEvictionRun(30);
+		dataSource.setMinEvictableIdleTimeMillis(1800000);
 		return dataSource;
 	}
 }

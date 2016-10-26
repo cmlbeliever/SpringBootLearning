@@ -9,7 +9,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.DispatcherServlet;
 
-@Controller
 public class SampleController {
 
 	@RequestMapping("/upload")
