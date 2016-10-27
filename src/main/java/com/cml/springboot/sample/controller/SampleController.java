@@ -48,7 +48,7 @@ public class SampleController {
 
 	@ExceptionHandler(Exception.class)
 	@ResponseBody
-	public String onError(Exception e, HttpServletRequest request) {
+	public String onError(Exception e, HttpServletRequest request)throws Exception {
 		return "报错了:" + e.getMessage();
 	}
 	// @ExceptionHandler(Exception.class)
