@@ -1,4 +1,4 @@
-package com.cml.springboot.sample.interceptor;
+package com.cml.springboot.framework.interceptor;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -28,8 +28,7 @@ public class ParamInterceptor implements HandlerInterceptor {
 			logbean.setParameters("param:" + request.getParameterMap());
 			logbean.setReturnStatusCode(200);
 			logbean.setReturns("returns");
-			Integer count = logService.insertLog(logbean);
-			System.out.println("=========================>" + request.getRequestURL() + ",log:" + count);
+			logService.insertLog(logbean);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

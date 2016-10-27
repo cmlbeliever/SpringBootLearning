@@ -127,6 +127,11 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc-portlet</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.jgroups</groupId>
+			<artifactId>jgroups</artifactId>
+			<version>3.6.9.Final</version>
+		</dependency>
 	</dependencies>
 
 	<!-- Package as an executable jar -->

@@ -22,14 +22,16 @@ public class SampleController {
 	@RequestMapping("/addLog")
 	@ResponseBody
 	public String addLog(HttpServletRequest request) {
+		System.out.println("SampleController.addLog threadId:" + Thread.currentThread().getId() + ","
+				+ Thread.currentThread().getName());
 		LogBean logbean = new LogBean();
 		logbean.setApiUrl(request.getRequestURL().toString());
 		logbean.setCallDayStr("20161111");
 		logbean.setParameters("param:" + request.getParameterMap());
 		logbean.setReturnStatusCode(200);
 		logbean.setReturns("returns");
-		Integer count = logService.insertLog(logbean);
-		return "addLog count=" + count;
+		logService.insertLog(logbean);
+		return "addLog count=" + 1;
 	}
 
 	@RequestMapping("/addReadOnlyLog")
@@ -42,13 +44,13 @@ public class SampleController {
 		logbean.setParameters("param:" + request.getParameterMap());
 		logbean.setReturnStatusCode(200);
 		logbean.setReturns("returns");
-		Integer count = logService.insertLogReadOnly(logbean);
-		return "addLog count=" + count;
+		logService.insertLogReadOnly(logbean);
+		return "addLog count=" + 1;
 	}
 
 	@ExceptionHandler(Exception.class)
 	@ResponseBody
-	public String onError(Exception e, HttpServletRequest request)throws Exception {
+	public String onError(Exception e, HttpServletRequest request) throws Exception {
 		return "报错了:" + e.getMessage();
 	}
 	// @ExceptionHandler(Exception.class)
