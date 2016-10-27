@@ -19,7 +19,7 @@
 			#{returnStatusCode},
 			#{returns},
 			#{apiUrl},
-			NOW(),
+			#{createDate},
 			NOW()
 		)
 	</insert>

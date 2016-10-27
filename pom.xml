@@ -11,6 +11,8 @@
 		<m2eclipse.wtp.contextRoot>/</m2eclipse.wtp.contextRoot>
 		<boot.mybatis.version>1.1.1</boot.mybatis.version>
 		<mybatis.version>3.2.2</mybatis.version>
+		<joda.version>2.9.4</joda.version>
+		<commons.version>2.6</commons.version>
 	</properties>
 
 	<parent>
@@ -20,6 +22,22 @@
 	</parent>
 
 	<dependencies>
+
+		<!-- https://mvnrepository.com/artifact/commons-lang/commons-lang -->
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.6</version>
+		</dependency>
+
+
+		<!-- https://mvnrepository.com/artifact/joda-time/joda-time -->
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>${joda.version}</version><!--$NO-MVN-MAN-VER$ -->
+		</dependency>
+
 
 		<!-- mybatis官方插件 http://www.mybatis.org/spring-boot-starter/mybatis-spring-boot-autoconfigure/ -->
 		<dependency>
@@ -32,7 +50,7 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jdbc</artifactId>
-			<version>1.4.1.RELEASE</version>
+			<version>1.4.1.RELEASE</version><!--$NO-MVN-MAN-VER$ -->
 		</dependency>
 
 
@@ -86,7 +104,6 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.25</version>
 		</dependency>
 
 		<dependency>

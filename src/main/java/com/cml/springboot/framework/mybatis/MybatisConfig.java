@@ -23,6 +23,9 @@ public class MybatisConfig {
 
 	private String configLocation;
 
+	@Value("${db.mybatis.type-handler-package}")
+	private String typeHandlerPackage;
+	
 	@Value("${db.mybatis.mapper-locations}")
 	private String mapperLocations;
 
@@ -32,6 +35,7 @@ public class MybatisConfig {
 		SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
 		sessionFactory.setDataSource(datasource);
 		sessionFactory.setTypeAliasesPackage(typeAliasesPackage);
+		sessionFactory.setTypeHandlersPackage(typeHandlerPackage);
 
 		ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
 		sessionFactory.setMapperLocations(resolver.getResources(mapperLocations));

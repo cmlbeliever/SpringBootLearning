@@ -2,6 +2,8 @@ package com.cml.springboot.sample.bean;
 
 import java.math.BigInteger;
 
+import org.joda.time.DateTime;
+
 public class LogBean {
 	private BigInteger id;
 
@@ -26,8 +28,17 @@ public class LogBean {
 	private String apiUrl;
 
 	private String createDateStr;
+	private DateTime createDate;
 
 	private String updateDateStr;
+
+	public DateTime getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(DateTime createDate) {
+		this.createDate = createDate;
+	}
 
 	public BigInteger getId() {
 		return id;
