@@ -15,6 +15,9 @@ public class InterceptorConfig extends WebMvcConfigurerAdapter {
 	@Autowired
 	private ParamInterceptor paramInterceptor;
 
+	@Autowired
+	private TokenInterceptor tokenInterceptor;
+
 	/**
 	 * 1、 extends WebMvcConfigurationSupport 2、重写下面方法; setUseSuffixPatternMatch
 	 * : 设置是否是后缀模式匹配，如“/user”是否匹配/user.*，默认真即匹配； setUseTrailingSlashMatch :
@@ -28,6 +31,7 @@ public class InterceptorConfig extends WebMvcConfigurerAdapter {
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(paramInterceptor).addPathPatterns("/*");
+		registry.addInterceptor(tokenInterceptor).addPathPatterns("/*");
 		super.addInterceptors(registry);
 	}
 
