@@ -6,13 +6,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
-import org.springframework.boot.json.GsonJsonParser;
-import org.springframework.integration.support.json.Jackson2JsonObjectMapper;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import com.fasterxml.jackson.core.JsonGenerationException;
-import com.fasterxml.jackson.databind.JsonMappingException;
+import com.cml.springboot.framework.Configuration;
+import com.cml.springboot.framework.response.BaseResponse;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
@@ -47,7 +47,13 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
 	private void writeInvalidAccess(HttpServletResponse response) throws Exception {
 		ObjectMapper mapper = new ObjectMapper();
 		response.setContentType("application/json");
-		mapper.writeValue(response.getOutputStream(), "不许你访问");
+		// Include.Include.ALWAYS 默认
+		// Include.NON_DEFAULT 属性为默认值不序列化
+		// Include.NON_EMPTY 属性为 空（“”） 或者为 NULL 都不序列化
+		// Include.NON_NULL 属性为NULL 不序列化
+		mapper.setSerializationInclusion(Include.NON_NULL);
+		BaseResponse responseBean = new BaseResponse(Configuration.Status.STATUS_INVALID_TOKEN, "invalid token!");
+		mapper.writeValue(response.getOutputStream(), responseBean);
 	}
 
 }
