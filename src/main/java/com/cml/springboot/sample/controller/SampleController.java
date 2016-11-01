@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.portlet.ModelAndView;
 
+import com.cml.springboot.framework.Configuration;
+import com.cml.springboot.framework.response.BaseResponse;
 import com.cml.springboot.sample.bean.LogBean;
 import com.cml.springboot.sample.service.LogService;
 
@@ -18,6 +20,12 @@ public class SampleController {
 
 	@Resource(name = "logServiceImpl")
 	private LogService logService;
+
+	@RequestMapping("/test")
+	@ResponseBody
+	public BaseResponse test() {
+		return new BaseResponse(Configuration.Status.STATUS_OK, "测试访问成功");
+	}
 
 	@RequestMapping("/addLog")
 	@ResponseBody

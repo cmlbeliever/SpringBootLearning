@@ -15,7 +15,7 @@ import com.cml.springboot.sample.service.LogService;
 
 @Component
 public class ParamInterceptor implements HandlerInterceptor {
-	
+
 	protected static Log LOG = LogFactory.getLog(ParamInterceptor.class);
 
 	@Resource(name = "logServiceImpl")
@@ -42,15 +42,15 @@ public class ParamInterceptor implements HandlerInterceptor {
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
-		System.out.println("======>postHandle,handler:" + handler);
-		System.out.println("======>postHandle,modelAndView:" + modelAndView);
+		LOG.info("======>postHandle,handler:" + handler);
+		LOG.info("======>postHandle,modelAndView:" + modelAndView);
 	}
 
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {
-		System.out.println("======>afterCompletion,handler:" + handler);
-		System.out.println("======>afterCompletion,ex:" + ex);
+		LOG.info("======>afterCompletion,handler:" + handler);
+		LOG.info("======>afterCompletion,ex:" + ex);
 	}
 
 }
