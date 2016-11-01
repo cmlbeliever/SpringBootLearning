@@ -55,7 +55,7 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
 		// Include.NON_NULL 属性为NULL 不序列化
 		mapper.setSerializationInclusion(Include.NON_NULL);
 		BaseResponse responseBean = new BaseResponse(Configuration.Status.STATUS_INVALID_TOKEN, "invalid token!");
-		mapper.writeValue(response.getOutputStream(), responseBean);
+		mapper.writeValue(response.getWriter(), responseBean);
 	}
 
 }

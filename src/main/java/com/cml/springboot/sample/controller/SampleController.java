@@ -27,6 +27,12 @@ public class SampleController {
 		return new BaseResponse(Configuration.Status.STATUS_OK, "测试访问成功");
 	}
 
+	@RequestMapping("/ex")
+	@ResponseBody
+	public BaseResponse ex() {
+		throw new RuntimeException("controller报错了！！");
+	}
+
 	@RequestMapping("/addLog")
 	@ResponseBody
 	public String addLog(HttpServletRequest request) {
@@ -56,11 +62,11 @@ public class SampleController {
 		return "addLog count=" + 1;
 	}
 
-	@ExceptionHandler(Exception.class)
-	@ResponseBody
-	public String onError(Exception e, HttpServletRequest request) throws Exception {
-		return "报错了:" + e.getMessage();
-	}
+//	@ExceptionHandler(Exception.class)
+//	@ResponseBody
+//	public String onError(Exception e, HttpServletRequest request) throws Exception {
+//		return "报错了:" + e.getMessage();
+//	}
 	// @ExceptionHandler(Exception.class)
 	// public String onError(Exception e, HttpServletRequest request) {
 	// System.out.println("------------------->exception!!!!");
