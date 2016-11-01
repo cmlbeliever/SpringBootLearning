@@ -30,7 +30,9 @@ public class ExceptionHandler implements HandlerExceptionResolver {
 		mapper.setSerializationInclusion(Include.NON_NULL);
 		BaseResponse responseBean = new BaseResponse(Configuration.Status.STATUS_INVALID_TOKEN, ex.getMessage());
 		try {
-			mapper.writeValue(response.getWriter(), responseBean);
+			String message = mapper.writeValueAsString(responseBean);
+			response.getWriter().write(message.toCharArray());
+			response.getWriter().flush();
 		} catch (Exception e) {
 			log.error(e);
 		}

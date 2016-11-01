@@ -1,9 +1,18 @@
 package com.cml.springboot.framework.interceptor;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
+import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
+import org.springframework.web.servlet.HandlerExceptionResolver;
+import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+
+import com.cml.springboot.framework.MyArgumentsResolver;
+import com.cml.springboot.framework.response.MethodResponseHandler;
 
 @Configuration
 public class InterceptorConfig extends WebMvcConfigurerAdapter {
@@ -30,6 +39,20 @@ public class InterceptorConfig extends WebMvcConfigurerAdapter {
 		registry.addInterceptor(tokenInterceptor).addPathPatterns("/*");
 		super.addInterceptors(registry);
 	}
+
+	@Override
+	public void extendHandlerExceptionResolvers(List<HandlerExceptionResolver> exceptionResolvers) {
+		exceptionResolvers.clear();
+		super.extendHandlerExceptionResolvers(exceptionResolvers);
+		System.out.println("====================================================");
+		System.out.println(exceptionResolvers);
+		// org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver,
+		// org.springframework.web.servlet.mvc.annotation.ResponseStatusExceptionResolver@7e307087,
+		// org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver@1220ef43]
+		System.out.println("====================================================");
+	}
+
+	
 
 	// @Override
 	// public void configureAsyncSupport(AsyncSupportConfigurer configurer) {

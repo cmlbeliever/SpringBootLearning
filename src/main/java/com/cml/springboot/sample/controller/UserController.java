@@ -30,11 +30,11 @@ public class UserController {
 		return new BaseResponse(Configuration.Status.STATUS_OK, "登录成功");
 	}
 
-	@ExceptionHandler({ MissingServletRequestParameterException.class })
-	@ResponseBody
-	public BaseResponse exception(MissingServletRequestParameterException e) {
-		LOG.info(LogUtil.formatControllerLog(this, e.getMessage()));
-		throw new RuntimeException(e);
-		// return new BaseResponse(Configuration.Status.STATUS_OK, "异常处理");
-	}
+//	@ExceptionHandler({ MissingServletRequestParameterException.class })
+//	@ResponseBody
+//	public BaseResponse exception(MissingServletRequestParameterException e) {
+//		LOG.info(LogUtil.formatControllerLog(this, e.getMessage()));
+//		throw new RuntimeException(e);
+//		// return new BaseResponse(Configuration.Status.STATUS_OK, "异常处理");
+//	}
 }
