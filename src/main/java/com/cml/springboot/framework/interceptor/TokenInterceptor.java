@@ -1,18 +1,17 @@
 package com.cml.springboot.framework.interceptor;
 
-import java.io.IOException;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.cml.springboot.framework.Configuration;
 import com.cml.springboot.framework.response.BaseResponse;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
@@ -24,6 +23,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Component
 public class TokenInterceptor extends HandlerInterceptorAdapter {
 	private static final String TOKEN_NAME = "token";
+
+	protected static Log LOG = LogFactory.getLog(TokenInterceptor.class);
 
 	// private UserService userService;
 
@@ -45,6 +46,7 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
 	}
 
 	private void writeInvalidAccess(HttpServletResponse response) throws Exception {
+		LOG.info("<<<无效的token>>>");
 		ObjectMapper mapper = new ObjectMapper();
 		response.setContentType("application/json");
 		// Include.Include.ALWAYS 默认

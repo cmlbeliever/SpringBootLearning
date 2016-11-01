@@ -4,8 +4,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,6 +15,8 @@ import com.cml.springboot.sample.service.LogService;
 
 @Component
 public class ParamInterceptor implements HandlerInterceptor {
+	
+	protected static Log LOG = LogFactory.getLog(ParamInterceptor.class);
 
 	@Resource(name = "logServiceImpl")
 	private LogService logService;
