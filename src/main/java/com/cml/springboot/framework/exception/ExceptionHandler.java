@@ -25,17 +25,17 @@ public class ExceptionHandler implements HandlerExceptionResolver {
 
 		log.info("====exception====>" + ex.getMessage());
 
-		ObjectMapper mapper = new ObjectMapper();
-		response.setContentType("application/json");
-		mapper.setSerializationInclusion(Include.NON_NULL);
-		BaseResponse responseBean = new BaseResponse(Configuration.Status.STATUS_INVALID_TOKEN, ex.getMessage());
-		try {
-			String message = mapper.writeValueAsString(responseBean);
-			response.getWriter().write(message.toCharArray());
-			response.getWriter().flush();
-		} catch (Exception e) {
-			log.error(e);
-		}
+//		ObjectMapper mapper = new ObjectMapper();
+//		response.setContentType("application/json");
+//		mapper.setSerializationInclusion(Include.NON_NULL);
+//		BaseResponse responseBean = new BaseResponse(Configuration.Status.STATUS_INVALID_TOKEN, ex.getMessage());
+//		try {
+//			String message = mapper.writeValueAsString(responseBean);
+//			response.getWriter().write(message.toCharArray());
+//			response.getWriter().flush();
+//		} catch (Exception e) {
+//			log.error(e);
+//		}
 		return null;
 	}
 

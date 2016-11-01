@@ -14,6 +14,7 @@ public class MyArgumentsResolver implements HandlerMethodArgumentResolver {
 
 	@Override
 	public boolean supportsParameter(MethodParameter parameter) {
+		System.out.println("=================sssssssssssssssssssss");
 		log.info("===================>MyArgumentsResolver.supportsParameter:" + parameter);
 		return true;
 	}
@@ -22,6 +23,7 @@ public class MyArgumentsResolver implements HandlerMethodArgumentResolver {
 	public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
 			NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
 		log.info("===================>MyArgumentsResolver.resolveArgument:" + parameter);
+		System.out.println("=================sssssssssssssssssssss");
 		return null;
 	}
 
