@@ -1,16 +1,19 @@
-package com.cml.springboot.framework.interceptor;
+package com.cml.springboot.framework;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.HandlerExceptionResolver;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import com.cml.springboot.framework.interceptor.ParamInterceptor;
+import com.cml.springboot.framework.interceptor.TokenInterceptor;
+
 @Configuration
-public class InterceptorConfig extends WebMvcConfigurerAdapter {
+public class GlobalConfiguration extends WebMvcConfigurerAdapter {
 
 	@Autowired
 	private ParamInterceptor paramInterceptor;
@@ -45,6 +48,11 @@ public class InterceptorConfig extends WebMvcConfigurerAdapter {
 		// org.springframework.web.servlet.mvc.annotation.ResponseStatusExceptionResolver@7e307087,
 		// org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver@1220ef43]
 		System.out.println("====================================================");
+	}
+
+	@Override
+	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
+		argumentResolvers.add(new MyArgumentsResolver());
 	}
 
 	// @Override

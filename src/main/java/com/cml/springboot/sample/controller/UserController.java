@@ -3,15 +3,13 @@ package com.cml.springboot.sample.controller;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.MissingServletRequestParameterException;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cml.springboot.framework.Configuration;
 import com.cml.springboot.framework.response.BaseResponse;
-import com.cml.springboot.framework.util.LogUtil;
+import com.cml.springboot.sample.bean.User;
 
 @Controller
 @RequestMapping("/user")
@@ -30,11 +28,21 @@ public class UserController {
 		return new BaseResponse(Configuration.Status.STATUS_OK, "登录成功");
 	}
 
-//	@ExceptionHandler({ MissingServletRequestParameterException.class })
-//	@ResponseBody
-//	public BaseResponse exception(MissingServletRequestParameterException e) {
-//		LOG.info(LogUtil.formatControllerLog(this, e.getMessage()));
-//		throw new RuntimeException(e);
-//		// return new BaseResponse(Configuration.Status.STATUS_OK, "异常处理");
-//	}
+	@RequestMapping("/login2")
+	@ResponseBody
+	public BaseResponse login2(User user) {
+		// if (result.hasErrors()) {
+		// LOG.info(LogUtil.formatControllerLog(this, "有错误信息需要处理"));
+		// }
+		return new BaseResponse(Configuration.Status.STATUS_OK, "登录成功" + user.getUsername());
+	}
+
+	// @ExceptionHandler({ MissingServletRequestParameterException.class })
+	// @ResponseBody
+	// public BaseResponse exception(MissingServletRequestParameterException e)
+	// {
+	// LOG.info(LogUtil.formatControllerLog(this, e.getMessage()));
+	// throw new RuntimeException(e);
+	// // return new BaseResponse(Configuration.Status.STATUS_OK, "异常处理");
+	// }
 }

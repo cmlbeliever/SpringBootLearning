@@ -22,6 +22,7 @@ public class ExceptionHandler extends DefaultHandlerExceptionResolver {
 	@Override
 	public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler,
 			Exception ex) {
+		
 
 		log.info("====exception===================================>" + ex.getMessage());
 
