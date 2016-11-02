@@ -55,11 +55,11 @@
 
 
 		<!-- mybatis官方插件 http://www.mybatis.org/spring-boot-starter/mybatis-spring-boot-autoconfigure/ -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.mybatis.spring.boot</groupId>
 			<artifactId>mybatis-spring-boot-starter</artifactId>
 			<version>${boot.mybatis.version}</version>
-		</dependency>
+		</dependency> -->
 
 		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-jdbc -->
 		<dependency>
