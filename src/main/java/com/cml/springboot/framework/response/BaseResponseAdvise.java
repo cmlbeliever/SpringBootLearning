@@ -25,7 +25,7 @@ public class BaseResponseAdvise implements ResponseBodyAdvice<BaseResponse> {
 	public BaseResponse beforeBodyWrite(BaseResponse body, MethodParameter returnType, MediaType selectedContentType,
 			Class<? extends HttpMessageConverter<?>> selectedConverterType, ServerHttpRequest request,
 			ServerHttpResponse response) {
-		body.setMessage("被我修改了");
+//		body.setMessage("被我修改了");
 		return body;
 	}
 

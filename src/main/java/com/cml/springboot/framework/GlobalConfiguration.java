@@ -34,7 +34,7 @@ public class GlobalConfiguration extends WebMvcConfigurerAdapter {
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(paramInterceptor).addPathPatterns("/*");
-		registry.addInterceptor(tokenInterceptor).addPathPatterns("/*");
+		registry.addInterceptor(tokenInterceptor).addPathPatterns("/*").excludePathPatterns("/user/login*");
 		super.addInterceptors(registry);
 	}
 
@@ -52,7 +52,7 @@ public class GlobalConfiguration extends WebMvcConfigurerAdapter {
 
 	@Override
 	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
-		argumentResolvers.add(new MyArgumentsResolver());
+		// argumentResolvers.add(new MyArgumentsResolver());
 	}
 
 	// @Override
