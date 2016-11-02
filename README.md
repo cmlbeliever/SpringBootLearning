@@ -8,7 +8,7 @@
 
 - **结构说明**
 
-![结构图](http://git.oschina.net/cmlbeliever/SpringBootLearning/blob/master/screenshots/structure.png?dir=0&filepath=screenshots%2Fstructure.png&oid=0686d747fde185513ec2f332a7d5afb1a06d24de&sha=ed911b23e458964ffd85034ab5c567b086d567c8)
+![结构图](http://git.oschina.net/cmlbeliever/SpringBootLearning/raw/master/screenshots/structure.png?dir=0&filepath=screenshots%2Fstructure.png&oid=0686d747fde185513ec2f332a7d5afb1a06d24de&sha=ed911b23e458964ffd85034ab5c567b086d567c8)
 
 
 ### Built exclusively for Markdown ###
