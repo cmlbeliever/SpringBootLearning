@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.HandlerExceptionResolver;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
@@ -45,8 +46,6 @@ public class InterceptorConfig extends WebMvcConfigurerAdapter {
 		// org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver@1220ef43]
 		System.out.println("====================================================");
 	}
-
-	
 
 	// @Override
 	// public void configureAsyncSupport(AsyncSupportConfigurer configurer) {
