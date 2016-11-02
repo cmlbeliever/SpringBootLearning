@@ -5,9 +5,8 @@ import org.hibernate.validator.constraints.NotBlank;
 
 public class User {
 
-	
 	@Length(min = 3, message = "用户名长度不对")
-	@NotBlank(message = "请输入用户名")
+	@NotBlank(message = "${user.empty.username}")
 	private String username;
 
 	@Length(min = 3, message = "密码长度不对")
