@@ -13,7 +13,7 @@ import com.cml.springboot.framework.interceptor.ParamInterceptor;
 import com.cml.springboot.framework.interceptor.TokenInterceptor;
 
 @Configuration
-public class GlobalConfiguration extends WebMvcConfigurerAdapter {
+public class WebGlobalConfiguration extends WebMvcConfigurerAdapter {
 
 	@Autowired
 	private ParamInterceptor paramInterceptor;
@@ -21,6 +21,7 @@ public class GlobalConfiguration extends WebMvcConfigurerAdapter {
 	@Autowired
 	private TokenInterceptor tokenInterceptor;
 
+	
 	/**
 	 * 1、 extends WebMvcConfigurationSupport 2、重写下面方法; setUseSuffixPatternMatch
 	 * : 设置是否是后缀模式匹配，如“/user”是否匹配/user.*，默认真即匹配； setUseTrailingSlashMatch :

@@ -11,13 +11,15 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
+
 /**
  * 目前只能通过类名命名来设置执行顺序
  * 
  * @author team-lab
  *
  */
-@WebFilter(urlPatterns = "/*", filterName = "myFilter")
 public class MyFilter implements Filter {
 
 	public void destroy() {
