@@ -3,43 +3,33 @@
 此项目主要作为SpringBoot学习，和根据实际项目对SpringBoot进行配置改造
 
 # 项目结构 #
-## 程序入口 ##
+ - **程序入口**
 > com.cml.springboot.main.BootApplication
 
+ - **核心配置**
+com.cml.springboot.framework 是核心包，取代原有的xml配置，将xml配置等价转换为注解配置！ 
+
+ - **demo代码**
+ - com.cml.springboot.sample为测试使用的代码，主要结构为Controller,bean,db,service几个常用的包层级。
 
 
+# 分支说明 #
 
-##  结构说明 ##
-![结构图](http://git.oschina.net/cmlbeliever/SpringBootLearning/raw/master/screenshots/structure.png?dir=0&filepath=screenshots%2Fstructure.png&oid=0686d747fde185513ec2f332a7d5afb1a06d24de&sha=ed911b23e458964ffd85034ab5c567b086d567c8)
+ 1. master 
 
+    主要分支，模拟常用api功能。
 
-### Built exclusively for Markdown ###
+ 2. branch_learn
 
-Enjoy first-class Markdown support with easy access to  Markdown syntax and convenient keyboard shortcuts.
+    初始化分支，混杂各种spring boot学习代码，未做具体区分
 
-Give them a try:
+ 3. branch_shiro
+    
+    comming soon
 
-- **Bold** (`Ctrl+B`) and *Italic* (`Ctrl+I`)
-- 水电费水电费
-- Quotes (`Ctrl+Q`)
-- Code blocks (`Ctrl+K`)
-- Headings 1, 2, 3 (`Ctrl+1`, `Ctrl+2`, `Ctrl+3`)
-- Lists (`Ctrl+U` and `Ctrl+Shift+O`)
+# 当前分支（master）测试说明 #
+  
 
-### See your changes instantly with LivePreview ###
+    
+  
 
-Don't guess if your [hyperlink syntax](http://markdownpad.com) is correct; LivePreview will show you exactly what your document looks like every time you press a key.
-
-### Make it your own ###
-
-Fonts, color schemes, layouts and stylesheets are all 100% customizable so you can turn MarkdownPad into your perfect editor.
-
-### A robust editor for advanced Markdown users ###
-
-MarkdownPad supports multiple Markdown processing engines, including standard Markdown, Markdown Extra (with Table support) and GitHub Flavored Markdown.
-
-With a tabbed document interface, PDF export, a built-in image uploader, session management, spell check, auto-save, syntax highlighting and a built-in CSS management interface, there's no limit to what you can do with MarkdownPad.
-
-
-发的鬼地方![规格](http://markdownpad.com/img/markdownpad2-dropshadow-128.png)
-水电费收费34567
