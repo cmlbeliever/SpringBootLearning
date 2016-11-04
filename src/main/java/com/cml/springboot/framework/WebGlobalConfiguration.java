@@ -4,6 +4,9 @@ import java.util.List;
 
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.web.ResourceProperties;
+import org.springframework.boot.autoconfigure.web.WebMvcProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -11,6 +14,7 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import com.cml.springboot.framework.deserializer.DateTimeDeserializer;
 import com.cml.springboot.framework.interceptor.ParamInterceptor;
@@ -35,6 +39,7 @@ import com.fasterxml.jackson.databind.type.MapType;
 import com.fasterxml.jackson.databind.type.ReferenceType;
 
 @Configuration
+@EnableConfigurationProperties({ WebMvcProperties.class })
 public class WebGlobalConfiguration extends WebMvcConfigurerAdapter {
 
 	@Autowired
@@ -42,6 +47,9 @@ public class WebGlobalConfiguration extends WebMvcConfigurerAdapter {
 
 	@Autowired
 	private TokenInterceptor tokenInterceptor;
+
+	@Autowired
+	private WebMvcProperties mvcProperties;
 
 	/**
 	 * 1、 extends WebMvcConfigurationSupport 2、重写下面方法; setUseSuffixPatternMatch
@@ -56,17 +64,17 @@ public class WebGlobalConfiguration extends WebMvcConfigurerAdapter {
 	@Bean
 	public MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter() {
 		MappingJackson2HttpMessageConverter jsonConverter = new MappingJackson2HttpMessageConverter();
-		
+
 		ObjectMapper objectMapper = new ObjectMapper();
 		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		objectMapper.setSerializationInclusion(Include.NON_NULL);
-		
+
 		SimpleModule serModule = new SimpleModule();
 		serModule.addSerializer(DateTime.class, new DateTimeDeserializer());
 		objectMapper.registerModule(serModule);
-		
+
 		jsonConverter.setObjectMapper(objectMapper);
-		
+
 		return jsonConverter;
 	}
 
@@ -92,6 +100,19 @@ public class WebGlobalConfiguration extends WebMvcConfigurerAdapter {
 	@Override
 	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
 		// argumentResolvers.add(new MyArgumentsResolver());
+	}
+
+	/**
+	 * 自定义viewResolver
+	 * 
+	 * @return
+	 */
+	@Bean(name = "viewResolver")
+	public InternalResourceViewResolver viewResolver() {
+		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+		resolver.setPrefix(mvcProperties.getView().getPrefix());
+		resolver.setSuffix(mvcProperties.getView().getSuffix());
+		return resolver;
 	}
 
 	// @Override
