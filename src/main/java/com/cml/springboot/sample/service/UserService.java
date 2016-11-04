@@ -6,4 +6,6 @@ import com.cml.springboot.sample.bean.User;
 
 public interface UserService {
 	User findUserByToken(String token) throws SQLException;
+
+	User login(User user) throws Exception;
 }

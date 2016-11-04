@@ -1,5 +1,6 @@
 package com.cml.springboot.sample.controller;
 
+import javax.annotation.Resource;
 import javax.validation.Valid;
 
 import org.apache.commons.logging.Log;
@@ -14,6 +15,8 @@ import com.cml.springboot.framework.controller.BaseController;
 import com.cml.springboot.framework.response.BaseResponse;
 import com.cml.springboot.framework.util.LogUtil;
 import com.cml.springboot.sample.bean.User;
+import com.cml.springboot.sample.bean.UserResponse;
+import com.cml.springboot.sample.service.UserService;
 
 @Controller
 @RequestMapping("/user")
@@ -21,33 +24,24 @@ public class UserController extends BaseController {
 
 	protected static Log LOG = LogFactory.getLog(UserController.class);
 
+	@Resource(name = "userServiceImpl")
+	private UserService userService;
+
 	@RequestMapping("/login")
 	@ResponseBody
-	public BaseResponse login(@Valid User user, BindingResult result) {
+	public BaseResponse login(@Valid User user, BindingResult result) throws Exception {
 
 		if (result.hasErrors()) {
 			LOG.info(LogUtil.formatControllerLog(this, "有错误信息需要处理"));
-			return new BaseResponse(Configuration.Status.STATUS_FAIL, getAllErrors(result));
+			return new BaseResponse(FAIL, getAllErrors(result));
 		}
-		return new BaseResponse(Configuration.Status.STATUS_OK, "登录成功");
+
+		User loginUser = userService.login(user);
+
+		if (null != loginUser) {
+			return new UserResponse(SUCCESS, loginUser);
+		}
+
+		return new BaseResponse(FAIL, "用户名或密码错误");
 	}
-
-	// @RequestMapping("/login2")
-	// @ResponseBody
-	// public BaseResponse login2(User user) {
-	// // if (result.hasErrors()) {
-	// // LOG.info(LogUtil.formatControllerLog(this, "有错误信息需要处理"));
-	// // }
-	// return new BaseResponse(Configuration.Status.STATUS_OK, "登录成功" +
-	// user.getUsername());
-	// }
-
-	// @ExceptionHandler({ MissingServletRequestParameterException.class })
-	// @ResponseBody
-	// public BaseResponse exception(MissingServletRequestParameterException e)
-	// {
-	// LOG.info(LogUtil.formatControllerLog(this, e.getMessage()));
-	// throw new RuntimeException(e);
-	// // return new BaseResponse(Configuration.Status.STATUS_OK, "异常处理");
-	// }
 }
