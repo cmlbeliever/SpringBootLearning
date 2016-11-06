@@ -2,12 +2,16 @@ package com.cml.springboot.sample.controller;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import javax.websocket.server.PathParam;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cml.springboot.framework.Configuration;
@@ -44,4 +48,27 @@ public class UserController extends BaseController {
 
 		return new BaseResponse(FAIL, "用户名或密码错误");
 	}
+
+	@RequestMapping(name = "/{username}/login", method = RequestMethod.POST)
+	@ResponseBody
+	public BaseResponse restfulLogin(@PathParam("username") String username, @RequestParam("password") String password)
+			throws Exception {
+
+		if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
+			return new BaseResponse(FAIL, "用户名或密码为空");
+		}
+
+		User user = new User();
+		user.setUsername(username);
+		user.setPassword(password);
+
+		User loginUser = userService.login(user);
+
+		if (null != loginUser) {
+			return new UserResponse(SUCCESS, loginUser);
+		}
+
+		return new BaseResponse(FAIL, "用户名或密码错误");
+	}
+
 }
