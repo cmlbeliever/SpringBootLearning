@@ -25,9 +25,6 @@ public class UserServiceImpl implements UserService {
 		return userMapper.getUserByToken(token);
 	}
 
-	public static void main(String[] args) {
-		System.out.println(MD5.getMD5("123456"));
-	}
 
 	@Override
 	public User login(User user) throws Exception {
