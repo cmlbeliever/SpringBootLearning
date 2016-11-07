@@ -18,56 +18,72 @@ import org.springframework.stereotype.Component;
 @MapperScan(basePackages = "com.cml.springboot", sqlSessionFactoryRef = "sqlSessionFactory")
 public class MybatisConfig {
 
-	@Value("${db.mybatis.type-aliases-package}")
-	private String typeAliasesPackage;
-
-	private String configLocation;
-
-	@Value("${db.mybatis.type-handler-package}")
-	private String typeHandlerPackage;
-
-	@Value("${db.mybatis.mapper-locations}")
-	private String mapperLocations;
-
 	@Bean(name = "sqlSessionFactory")
-	public SqlSessionFactory sqlSessionFactory(DataSource datasource) throws Exception {
+	public SqlSessionFactory sqlSessionFactory(DataSource datasource, MybatisConfigurationProperties properties)
+			throws Exception {
 
 		SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
 		sessionFactory.setDataSource(datasource);
-		sessionFactory.setTypeAliasesPackage(typeAliasesPackage);
-		sessionFactory.setTypeHandlersPackage(typeHandlerPackage);
+		sessionFactory.setTypeAliasesPackage(properties.typeAliasesPackage);
+		sessionFactory.setTypeHandlersPackage(properties.typeHandlerPackage);
 
 		ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-		sessionFactory.setMapperLocations(resolver.getResources(mapperLocations));
+		sessionFactory.setMapperLocations(resolver.getResources(properties.mapperLocations));
 
 		return sessionFactory.getObject();
 	}
 
-	@Configuration
-	public static class DatasourceConfig {
+	@Bean(destroyMethod = "close", name = "dataSource")
+	public DataSource dataSource(DataSourceProperties properties) {
+		BasicDataSource dataSource = new BasicDataSource();
+		dataSource.setDriverClassName(properties.driverClassName);
+		dataSource.setUrl(properties.url);
+		dataSource.setUsername(properties.username);
+		dataSource.setPassword(properties.password);
+		dataSource.setMaxIdle(properties.maxIdle);
+		dataSource.setMaxActive(properties.maxActive);
+		dataSource.setMaxWait(properties.maxWait);
+		dataSource.setInitialSize(properties.initialSize);
+		dataSource.setValidationQuery(properties.validationQuery);
+		dataSource.setRemoveAbandoned(true);
+		dataSource.setTestWhileIdle(true);
+		dataSource.setTimeBetweenEvictionRunsMillis(30000);
+		dataSource.setNumTestsPerEvictionRun(30);
+		dataSource.setMinEvictableIdleTimeMillis(1800000);
+		return dataSource;
+	}
 
-		@javax.annotation.Resource(name = "dataSourceProperties")
-		private DataSourceProperties properties;
+	@ConfigurationProperties(prefix = "db.mybatis")
+	@Component
+	private static class MybatisConfigurationProperties {
+		private String typeAliasesPackage;
+		private String typeHandlerPackage;
+		private String mapperLocations;
 
-		@Bean(destroyMethod = "close", name = "dataSource")
-		public DataSource dataSource() {
-			BasicDataSource dataSource = new BasicDataSource();
-			dataSource.setDriverClassName(properties.driverClassName);
-			dataSource.setUrl(properties.url);
-			dataSource.setUsername(properties.username);
-			dataSource.setPassword(properties.password);
-			dataSource.setMaxIdle(properties.maxIdle);
-			dataSource.setMaxActive(properties.maxActive);
-			dataSource.setMaxWait(properties.maxWait);
-			dataSource.setInitialSize(properties.initialSize);
-			dataSource.setValidationQuery(properties.validationQuery);
-			dataSource.setRemoveAbandoned(true);
-			dataSource.setTestWhileIdle(true);
-			dataSource.setTimeBetweenEvictionRunsMillis(30000);
-			dataSource.setNumTestsPerEvictionRun(30);
-			dataSource.setMinEvictableIdleTimeMillis(1800000);
-			return dataSource;
+		public String getTypeAliasesPackage() {
+			return typeAliasesPackage;
 		}
+
+		public void setTypeAliasesPackage(String typeAliasesPackage) {
+			this.typeAliasesPackage = typeAliasesPackage;
+		}
+
+		public String getTypeHandlerPackage() {
+			return typeHandlerPackage;
+		}
+
+		public void setTypeHandlerPackage(String typeHandlerPackage) {
+			this.typeHandlerPackage = typeHandlerPackage;
+		}
+
+		public String getMapperLocations() {
+			return mapperLocations;
+		}
+
+		public void setMapperLocations(String mapperLocations) {
+			this.mapperLocations = mapperLocations;
+		}
+
 	}
 
 	@Component("dataSourceProperties")
