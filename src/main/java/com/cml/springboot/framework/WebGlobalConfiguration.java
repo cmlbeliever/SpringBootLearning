@@ -13,6 +13,7 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
@@ -81,7 +82,8 @@ public class WebGlobalConfiguration extends WebMvcConfigurerAdapter {
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(paramInterceptor).addPathPatterns("/*");
-		registry.addInterceptor(tokenInterceptor).addPathPatterns("/*").excludePathPatterns("/user/login*");
+		registry.addInterceptor(tokenInterceptor).addPathPatterns("/*").excludePathPatterns("/user/*/login**",
+				"/user/login*");
 		super.addInterceptors(registry);
 	}
 
@@ -113,6 +115,11 @@ public class WebGlobalConfiguration extends WebMvcConfigurerAdapter {
 		resolver.setPrefix(mvcProperties.getView().getPrefix());
 		resolver.setSuffix(mvcProperties.getView().getSuffix());
 		return resolver;
+	}
+
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("/*.html").addResourceLocations("/");
 	}
 
 	// @Override

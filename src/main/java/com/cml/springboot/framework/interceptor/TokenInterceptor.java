@@ -34,6 +34,8 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
 
 		String token = request.getParameter(TOKEN_NAME);
 
+		LOG.info("<<token>>请求url:" + request.getRequestURL());
+
 		if (StringUtils.isNotBlank(token)) {
 			// 1、TODO 获取用户信息
 

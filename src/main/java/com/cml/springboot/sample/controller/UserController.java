@@ -49,7 +49,7 @@ public class UserController extends BaseController {
 		return new BaseResponse(FAIL, "用户名或密码错误");
 	}
 
-	@RequestMapping(name = "/{username}/login", method = RequestMethod.POST)
+	@RequestMapping(name = "/{username}/login")
 	@ResponseBody
 	public BaseResponse restfulLogin(@PathParam("username") String username, @RequestParam("password") String password)
 			throws Exception {
