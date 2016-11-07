@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
 public class MybatisConfig {
 
 	@Configuration
-	@MapperScan(basePackages = "com.cml.springboot", sqlSessionFactoryRef = "sqlSessionFactory")
+	@MapperScan(basePackages = "com.cml.springboot.sample.db", sqlSessionFactoryRef = "sqlSessionFactory")
 	public static class MybatisScanConfiguration {
 	}
 
