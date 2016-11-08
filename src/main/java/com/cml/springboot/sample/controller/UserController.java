@@ -2,7 +2,6 @@ package com.cml.springboot.sample.controller;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
-import javax.websocket.server.PathParam;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
@@ -11,11 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.cml.springboot.framework.Configuration;
 import com.cml.springboot.framework.controller.BaseController;
 import com.cml.springboot.framework.response.BaseResponse;
 import com.cml.springboot.framework.util.LogUtil;
