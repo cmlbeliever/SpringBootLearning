@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cml.springboot.framework.controller.BaseController;
@@ -46,13 +47,11 @@ public class UserController extends BaseController {
 		return new BaseResponse(FAIL, "用户名或密码错误");
 	}
 
-	@RequestMapping(name = "/{username}/login")
+	@RequestMapping(path = "/{username}/login")
 	@ResponseBody
-	public BaseResponse restfulLogin(@PathVariable("username") String username)
+	public BaseResponse restfulLogin(@PathVariable("username") String username, @RequestParam String password)
 			throws Exception {
 
-		String password="123";
-		
 		if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
 			return new BaseResponse(FAIL, "用户名或密码为空");
 		}
