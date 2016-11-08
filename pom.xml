@@ -55,11 +55,8 @@
 
 
 		<!-- mybatis官方插件 http://www.mybatis.org/spring-boot-starter/mybatis-spring-boot-autoconfigure/ -->
-		<!-- <dependency>
-			<groupId>org.mybatis.spring.boot</groupId>
-			<artifactId>mybatis-spring-boot-starter</artifactId>
-			<version>${boot.mybatis.version}</version>
-		</dependency> -->
+		<!-- <dependency> <groupId>org.mybatis.spring.boot</groupId> <artifactId>mybatis-spring-boot-starter</artifactId> 
+			<version>${boot.mybatis.version}</version> </dependency> -->
 
 		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-jdbc -->
 		<dependency>
@@ -191,20 +188,14 @@
 			</exclusions>
 		</dependency>
 
-		<!-- <dependency>
-			<groupId>org.jboss</groupId>
-			<artifactId>jboss-common-core</artifactId>
-			<version>2.2.10.GA</version>
-		</dependency> -->
+		<!-- <dependency> <groupId>org.jboss</groupId> <artifactId>jboss-common-core</artifactId> 
+			<version>2.2.10.GA</version> </dependency> -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc-portlet</artifactId>
 		</dependency>
-		<!-- <dependency>
-			<groupId>org.jgroups</groupId>
-			<artifactId>jgroups</artifactId>
-			<version>3.6.9.Final</version>
-		</dependency> -->
+		<!-- <dependency> <groupId>org.jgroups</groupId> <artifactId>jgroups</artifactId> 
+			<version>3.6.9.Final</version> </dependency> -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-integration</artifactId>
@@ -218,6 +209,28 @@
 
 	<!-- Package as an executable jar -->
 	<build>
+		<sourceDirectory>src/main/java</sourceDirectory>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>false</filtering>
+			</resource>
+			<resource>
+				<directory>src/main/i18n</directory>
+				<filtering>false</filtering>
+			</resource>
+			<resource>
+				<directory>src/main/tags</directory>
+			</resource>
+			<!-- xml files for each module -->
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.xml</include>
+				</includes>
+			</resource>
+		</resources>
+
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
