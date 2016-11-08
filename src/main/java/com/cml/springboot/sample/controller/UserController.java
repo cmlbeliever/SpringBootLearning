@@ -52,9 +52,11 @@ public class UserController extends BaseController {
 
 	@RequestMapping(name = "/{username}/login")
 	@ResponseBody
-	public BaseResponse restfulLogin(@PathVariable("username") String username, @RequestParam("password") String password)
+	public BaseResponse restfulLogin(@PathVariable("username") String username)
 			throws Exception {
 
+		String password="123";
+		
 		if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
 			return new BaseResponse(FAIL, "用户名或密码为空");
 		}
