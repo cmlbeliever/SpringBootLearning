@@ -4,7 +4,7 @@
 
 # 项目结构 #
  - **程序入口**
-> com.cml.springboot.main.BootApplication
+> com.cml.springboot.BootApplication
 
  - **核心配置**
 > com.cml.springboot.framework 是核心包，取代原有的xml配置，将xml配置等价转换为注解配置！ 
