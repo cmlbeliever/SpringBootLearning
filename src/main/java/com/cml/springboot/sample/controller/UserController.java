@@ -1,73 +1,45 @@
 package com.cml.springboot.sample.controller;
 
-import javax.annotation.Resource;
-import javax.validation.Valid;
-
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
-import com.cml.springboot.framework.controller.BaseController;
-import com.cml.springboot.framework.response.BaseResponse;
-import com.cml.springboot.framework.util.LogUtil;
-import com.cml.springboot.sample.bean.User;
-import com.cml.springboot.sample.bean.UserResponse;
-import com.cml.springboot.sample.service.UserService;
-
-@Controller
+@RestController
 @RequestMapping("/user")
-public class UserController extends BaseController {
+public class UserController {
 
 	protected static Log LOG = LogFactory.getLog(UserController.class);
 
-	@Resource(name = "userServiceImpl")
-	private UserService userService;
+	public static final int SUCCESS = 1;
+	public static final int FAIL = 2;
+
+	public static String getAllErrors(Errors errors) {
+		StringBuilder builder = new StringBuilder();
+		for (ObjectError error : errors.getAllErrors()) {
+			builder.append(error.getDefaultMessage()).append("\n");
+		}
+		return builder.toString();
+	}
 
 	@RequestMapping("/login")
 	@ResponseBody
-	public BaseResponse login(@Valid User user, BindingResult result) throws Exception {
+	public String login(String a) throws Exception {
 
-		if (result.hasErrors()) {
-			LOG.info(LogUtil.formatControllerLog(this, "有错误信息需要处理"));
-			return new BaseResponse(FAIL, getAllErrors(result));
-		}
-
-		User loginUser = userService.login(user);
-
-		if (null != loginUser) {
-			return new UserResponse(SUCCESS, loginUser);
-		}
-
-		return new BaseResponse(FAIL, "用户名或密码错误");
+		return "用户名或密码错误";
 	}
 
-	@RequestMapping(name = "/{username}/login")
+	@RequestMapping(name = "/{username}/login/{password}")
 	@ResponseBody
-	public BaseResponse restfulLogin(@PathVariable("username") String username)
+	public String restfulLogin3(@PathVariable("username") String username, @PathVariable String password)
 			throws Exception {
 
-		String password="123";
-		
-		if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
-			return new BaseResponse(FAIL, "用户名或密码为空");
-		}
+		return username + "," + password;
 
-		User user = new User();
-		user.setUsername(username);
-		user.setPassword(password);
-
-		User loginUser = userService.login(user);
-
-		if (null != loginUser) {
-			return new UserResponse(SUCCESS, loginUser);
-		}
-
-		return new BaseResponse(FAIL, "用户名或密码错误");
 	}
 
 }
