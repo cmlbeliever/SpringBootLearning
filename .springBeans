@@ -7,9 +7,9 @@
 	</configSuffixes>
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
+		<config>java:com.cml.springboot.BootApplication</config>
 	</configs>
 	<autoconfigs>
-		<config>java:com.cml.springboot.main.BootApplication</config>
 	</autoconfigs>
 	<configSets>
 	</configSets>
