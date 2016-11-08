@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @SpringBootApplication(exclude = { DataSourceAutoConfiguration.class,XADataSourceAutoConfiguration.class })
 @EnableTransactionManagement()
 @EnableAsync
-@PropertySources({ @PropertySource("classpath:config/application-jdbc.properties") })
 public class BootApplication {
 
 	// @Bean
