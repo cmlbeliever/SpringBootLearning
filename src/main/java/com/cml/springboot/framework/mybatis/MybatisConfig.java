@@ -3,6 +3,8 @@ package com.cml.springboot.framework.mybatis;
 import javax.sql.DataSource;
 
 import org.apache.commons.dbcp.BasicDataSource;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
@@ -14,13 +16,16 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.stereotype.Component;
 
+import com.cml.springboot.sample.controller.UserController;
 import com.cml.springboot.sample.db.LogMapper;
 
 @Configuration
 public class MybatisConfig {
 
+	protected static Log log = LogFactory.getLog(MybatisConfig.class);
+
 	@Bean(name = "sqlSessionFactory")
-	public SqlSessionFactory sqlSessionFactory(DataSource datasource, MybatisConfigurationProperties properties)
+	public static SqlSessionFactory sqlSessionFactory(DataSource datasource, MybatisConfigurationProperties properties)
 			throws Exception {
 
 		SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
@@ -31,11 +36,20 @@ public class MybatisConfig {
 		ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
 		sessionFactory.setMapperLocations(resolver.getResources(properties.mapperLocations));
 
-		return sessionFactory.getObject();
+		SqlSessionFactory resultSessionFactory = sessionFactory.getObject();
+
+		log.info("*************************sqlSessionFactory:" + resultSessionFactory + "***********************"
+				+ properties);
+
+		return resultSessionFactory;
+
 	}
 
 	@Bean(destroyMethod = "close", name = "dataSource")
 	public DataSource dataSource(DataSourceProperties properties) {
+
+		log.info("*************************dataSource***********************");
+
 		BasicDataSource dataSource = new BasicDataSource();
 		dataSource.setDriverClassName(properties.driverClassName);
 		dataSource.setUrl(properties.url);
@@ -83,6 +97,12 @@ public class MybatisConfig {
 
 		public void setMapperLocations(String mapperLocations) {
 			this.mapperLocations = mapperLocations;
+		}
+
+		@Override
+		public String toString() {
+			return "MybatisConfigurationProperties [typeAliasesPackage=" + typeAliasesPackage + ", typeHandlerPackage="
+					+ typeHandlerPackage + ", mapperLocations=" + mapperLocations + "]";
 		}
 
 	}
