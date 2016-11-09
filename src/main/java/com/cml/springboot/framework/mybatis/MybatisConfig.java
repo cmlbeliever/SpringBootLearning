@@ -25,21 +25,28 @@ public class MybatisConfig {
 	protected static Log log = LogFactory.getLog(MybatisConfig.class);
 
 	@Bean(name = "sqlSessionFactory")
-	public static SqlSessionFactory sqlSessionFactory(DataSource datasource, MybatisConfigurationProperties properties)
+	public SqlSessionFactory sqlSessionFactory(DataSource datasource, MybatisConfigurationProperties properties)
 			throws Exception {
 
-		SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
-		sessionFactory.setDataSource(datasource);
-		sessionFactory.setTypeAliasesPackage(properties.typeAliasesPackage);
-		sessionFactory.setTypeHandlersPackage(properties.typeHandlerPackage);
+		log.info("*************************sqlSessionFactory:begin***********************" + properties);
 
-		ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-		sessionFactory.setMapperLocations(resolver.getResources(properties.mapperLocations));
+		SqlSessionFactory resultSessionFactory = null;
+		try {
+			SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
+			sessionFactory.setDataSource(datasource);
+			sessionFactory.setTypeAliasesPackage(properties.typeAliasesPackage);
+			sessionFactory.setTypeHandlersPackage(properties.typeHandlerPackage);
 
-		SqlSessionFactory resultSessionFactory = sessionFactory.getObject();
+			ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+			sessionFactory.setMapperLocations(resolver.getResources(properties.mapperLocations));
 
-		log.info("*************************sqlSessionFactory:" + resultSessionFactory + "***********************"
-				+ properties);
+			resultSessionFactory = sessionFactory.getObject();
+		} catch (Exception e) {
+			log.error(e);
+		}
+
+		log.info("*************************sqlSessionFactory:successs:" + resultSessionFactory
+				+ "***********************" + properties);
 
 		return resultSessionFactory;
 
