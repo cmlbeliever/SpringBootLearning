@@ -9,20 +9,14 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.core.Ordered;
-import org.springframework.core.annotation.Order;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.stereotype.Component;
 
+import com.cml.springboot.sample.db.LogMapper;
+
 @Configuration
 public class MybatisConfig {
-
-	@Configuration
-	@MapperScan(basePackages = "com.cml.springboot.sample.db", sqlSessionFactoryRef = "sqlSessionFactory")
-	public static class MybatisScanConfiguration {
-	}
 
 	@Bean(name = "sqlSessionFactory")
 	public SqlSessionFactory sqlSessionFactory(DataSource datasource, MybatisConfigurationProperties properties)

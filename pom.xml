@@ -3,10 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.cml.spring</groupId>
 	<artifactId>boot</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<version>1.0</version>
+	<packaging>jar</packaging>
 
 	<properties>
+		<java.version>1.8</java.version>
 		<main.basedir>${basedir}/../..</main.basedir>
 		<m2eclipse.wtp.contextRoot>/</m2eclipse.wtp.contextRoot>
 		<boot.mybatis.version>1.1.1</boot.mybatis.version>
@@ -244,9 +245,6 @@
 						<goals>
 							<goal>repackage</goal>
 						</goals>
-						<configuration>
-							<classifier>exec</classifier>
-						</configuration>
 					</execution>
 				</executions>
 			</plugin>
