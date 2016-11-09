@@ -4,7 +4,7 @@
 	<groupId>com.cml.spring</groupId>
 	<artifactId>boot</artifactId>
 	<version>1.0</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<properties>
 		<maven.compiler.encoding>UTF-8</maven.compiler.encoding>
@@ -246,7 +246,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.0</version>
 				<!-- <dependencies> <dependency> <groupId>org.codehaus.plexus</groupId> 
 					<artifactId>plexus-compiler-javac</artifactId> <version>1.6</version> </dependency> 
 					</dependencies> -->
