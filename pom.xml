@@ -4,7 +4,7 @@
 	<groupId>com.cml.spring</groupId>
 	<artifactId>boot</artifactId>
 	<version>1.0</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<properties>
 		<java.version>1.8</java.version>

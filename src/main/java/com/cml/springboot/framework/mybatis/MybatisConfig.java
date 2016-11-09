@@ -9,6 +9,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.stereotype.Component;
@@ -55,7 +56,7 @@ public class MybatisConfig {
 
 	@ConfigurationProperties(prefix = "db.mybatis")
 	@Component
-	private static class MybatisConfigurationProperties {
+	public static class MybatisConfigurationProperties {
 		private String typeAliasesPackage;
 		private String typeHandlerPackage;
 		private String mapperLocations;
