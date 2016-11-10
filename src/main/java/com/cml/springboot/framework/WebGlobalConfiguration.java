@@ -68,7 +68,7 @@ public class WebGlobalConfiguration extends WebMvcConfigurerAdapter {
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(paramInterceptor).addPathPatterns("/*");
 		registry.addInterceptor(tokenInterceptor).addPathPatterns("/*").excludePathPatterns("/user/*/login**",
-				"/user/login*");
+				"/user/info/**");
 		super.addInterceptors(registry);
 	}
 

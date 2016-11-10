@@ -25,7 +25,6 @@ public class UserServiceImpl implements UserService {
 		return userMapper.getUserByToken(token);
 	}
 
-
 	@Override
 	public User login(User user) throws Exception {
 
@@ -33,11 +32,17 @@ public class UserServiceImpl implements UserService {
 
 		User loginUser = userMapper.getUser(user);
 		if (null != loginUser) {
+			String newToken = UUIDUtil.generateUUID();
 			// 重新生成token
-			user.setNewToken(UUIDUtil.generateUUID());
+			user.setNewToken(newToken);
 			user.setToken(loginUser.getToken());
 			int updateCount = userMapper.updateToken(user);
-			return updateCount > 0 ? loginUser : null;
+
+			if (updateCount > 0) {
+				loginUser.setToken(newToken);
+				return loginUser;
+			}
+
 		}
 		return null;
 	}

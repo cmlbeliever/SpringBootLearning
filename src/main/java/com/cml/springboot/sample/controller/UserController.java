@@ -29,6 +29,18 @@ public class UserController extends BaseController {
 	@Resource(name = "userServiceImpl")
 	private UserService userService;
 
+	@RequestMapping("/info/{token}")
+	@ResponseBody
+	public BaseResponse userInfo(@PathVariable String token) throws Exception {
+
+		if (StringUtils.isBlank(token)) {
+			return new BaseResponse(FAIL, "token 必须传入！");
+		}
+		User user = userService.findUserByToken(token);
+		LOG.info("token=" + token + ",user:" + user);
+		return new UserResponse(SUCCESS, user);
+	}
+
 	@RequestMapping("/login")
 	@ResponseBody
 	public BaseResponse login(@Valid User user, BindingResult result) throws Exception {

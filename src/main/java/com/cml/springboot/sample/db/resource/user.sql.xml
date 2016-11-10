@@ -4,7 +4,10 @@
 
 	<select id="getUserByToken" parameterType="string" resultType="User">
 		SELECT
-			 *
+			 user_id	AS	userId,
+			 birthday	AS	birthday,
+			 nick_name	AS	nickName,
+			 token		AS	token
 		FROM
 			 t_user
 		WHERE
