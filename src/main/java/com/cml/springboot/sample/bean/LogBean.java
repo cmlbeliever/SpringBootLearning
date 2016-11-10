@@ -2,8 +2,10 @@ package com.cml.springboot.sample.bean;
 
 import java.math.BigInteger;
 
+import org.apache.ibatis.type.Alias;
 import org.joda.time.DateTime;
 
+@Alias("LogBean")
 public class LogBean {
 	private BigInteger id;
 

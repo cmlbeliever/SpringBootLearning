@@ -30,20 +30,15 @@ public class MybatisConfig {
 
 		log.info("*************************sqlSessionFactory:begin***********************" + properties);
 
-		SqlSessionFactory resultSessionFactory = null;
-		try {
-			SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
-			sessionFactory.setDataSource(datasource);
-			sessionFactory.setTypeAliasesPackage(properties.typeAliasesPackage);
-			sessionFactory.setTypeHandlersPackage(properties.typeHandlerPackage);
+		SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
+		sessionFactory.setDataSource(datasource);
+		sessionFactory.setTypeAliasesPackage(properties.typeAliasesPackage);
+		sessionFactory.setTypeHandlersPackage(properties.typeHandlerPackage);
 
-			ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-			sessionFactory.setMapperLocations(resolver.getResources(properties.mapperLocations));
+		ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+		sessionFactory.setMapperLocations(resolver.getResources(properties.mapperLocations));
 
-			resultSessionFactory = sessionFactory.getObject();
-		} catch (Exception e) {
-			log.error(e);
-		}
+		SqlSessionFactory resultSessionFactory = sessionFactory.getObject();
 
 		log.info("*************************sqlSessionFactory:successs:" + resultSessionFactory
 				+ "***********************" + properties);

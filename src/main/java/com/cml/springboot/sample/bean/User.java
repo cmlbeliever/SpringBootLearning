@@ -1,9 +1,11 @@
 package com.cml.springboot.sample.bean;
 
+import org.apache.ibatis.type.Alias;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 import org.joda.time.DateTime;
 
+@Alias("User")
 public class User {
 
 	@Length(min = 3, message = "用户名长度不对")
