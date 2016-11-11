@@ -29,6 +29,13 @@
 
 	<dependencies>
 
+		<dependency>
+			<!-- To build an executable war use one of the profiles below -->
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
 		<!-- log4j. -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -219,6 +226,7 @@
 
 	<!-- Package as an executable jar -->
 	<build>
+		<finalName>api</finalName>
 		<sourceDirectory>src/main/java</sourceDirectory>
 		<resources>
 			<resource>
@@ -242,22 +250,9 @@
 		</resources>
 
 		<plugins>
-			<!-- Disable annotation processors during normal compilation -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.0</version>
-				<!-- <dependencies> <dependency> <groupId>org.codehaus.plexus</groupId> 
-					<artifactId>plexus-compiler-javac</artifactId> <version>1.6</version> </dependency> 
-					</dependencies> -->
-				<configuration>
-					<encoding>${project.build.sourceEncoding}</encoding>
-					<source>${maven.compiler.source}</source>
-					<target>${maven.compiler.target}</target>
-					<!-- Disable annotation processors during normal compilation -->
-					<!-- <compilerArgument>-proc:none</compilerArgument> -->
-				</configuration>
-			</plugin>
+			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-compiler-plugin</artifactId> 
+				<configuration> <encoding>${project.build.sourceEncoding}</encoding> <source>${maven.compiler.source}</source> 
+				<target>${maven.compiler.target}</target> </configuration> </plugin> -->
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
@@ -278,4 +273,16 @@
 			</plugin>
 		</plugins>
 	</build>
+	<profiles>
+		<profile>
+			<id>tomcat</id>
+			<dependencies>
+				<dependency>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-tomcat</artifactId>
+					<scope>provided</scope>
+				</dependency>
+			</dependencies>
+		</profile>
+	</profiles>
 </project>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+    <!DOCTYPE configuration
+    PUBLIC "-//ibatis.apache.org//DTD Config 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-config.dtd">
+<configuration>
+	<settings>
+		<setting name="mapUnderscoreToCamelCase" value="true" />
+	</settings>
+	<typeAliases>
+		<typeAlias type="com.cml.springboot.sample.bean.LogBean" alias="logbean"/>
+		<typeAlias type="com.cml.springboot.sample.bean.User" alias="user"/>
+	</typeAliases>
+	<typeHandlers>
+		<typeHandler javaType="org.joda.time.DateTime"
+			handler="com.cml.springboot.framework.mybatis.typehandler.JodaDateTimeTypeHandler" />
+		<typeHandler javaType="org.joda.time.LocalTime"
+			handler="com.cml.springboot.framework.mybatis.typehandler.JodaLocalTimeTypeHandler" />
+	</typeHandlers>
+</configuration>

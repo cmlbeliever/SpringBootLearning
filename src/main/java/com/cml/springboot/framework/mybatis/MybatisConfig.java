@@ -7,17 +7,12 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.stereotype.Component;
-
-import com.cml.springboot.sample.controller.UserController;
-import com.cml.springboot.sample.db.LogMapper;
 
 @Configuration
 public class MybatisConfig {
@@ -30,20 +25,20 @@ public class MybatisConfig {
 
 		log.info("*************************sqlSessionFactory:begin***********************" + properties);
 
-		SqlSessionFactory resultSessionFactory = null;
-		try {
-			SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
-			sessionFactory.setDataSource(datasource);
-			sessionFactory.setTypeAliasesPackage(properties.typeAliasesPackage);
-			sessionFactory.setTypeHandlersPackage(properties.typeHandlerPackage);
+		SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
+		sessionFactory.setDataSource(datasource);
+		sessionFactory.setTypeAliasesPackage(properties.typeAliasesPackage);
+		sessionFactory.setTypeHandlersPackage(properties.typeHandlerPackage);
 
-			ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-			sessionFactory.setMapperLocations(resolver.getResources(properties.mapperLocations));
+		ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+		sessionFactory.setMapperLocations(resolver.getResources(properties.mapperLocations));
 
-			resultSessionFactory = sessionFactory.getObject();
-		} catch (Exception e) {
-			log.error(e);
-		}
+		sessionFactory
+				.setConfigLocation(new PathMatchingResourcePatternResolver().getResource(properties.configLocation));
+
+		SqlSessionFactory resultSessionFactory = sessionFactory.getObject();
+
+		log.info("===typealias==>" + resultSessionFactory.getConfiguration().getTypeAliasRegistry().getTypeAliases());
 
 		log.info("*************************sqlSessionFactory:successs:" + resultSessionFactory
 				+ "***********************" + properties);
@@ -81,6 +76,15 @@ public class MybatisConfig {
 		private String typeAliasesPackage;
 		private String typeHandlerPackage;
 		private String mapperLocations;
+		private String configLocation;
+
+		public String getConfigLocation() {
+			return configLocation;
+		}
+
+		public void setConfigLocation(String configLocation) {
+			this.configLocation = configLocation;
+		}
 
 		public String getTypeAliasesPackage() {
 			return typeAliasesPackage;
@@ -109,7 +113,8 @@ public class MybatisConfig {
 		@Override
 		public String toString() {
 			return "MybatisConfigurationProperties [typeAliasesPackage=" + typeAliasesPackage + ", typeHandlerPackage="
-					+ typeHandlerPackage + ", mapperLocations=" + mapperLocations + "]";
+					+ typeHandlerPackage + ", mapperLocations=" + mapperLocations + ", configLocation=" + configLocation
+					+ "]";
 		}
 
 	}

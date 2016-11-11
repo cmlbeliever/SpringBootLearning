@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cml.springboot.sample.db.UserMapper">
 
-	<select id="getUserByToken" parameterType="string" resultType="User">
+	<select id="getUserByToken" parameterType="string" resultType="user">
 		SELECT
 			 user_id	AS	userId,
 			 birthday	AS	birthday,
@@ -16,7 +16,7 @@
 			del_flg	=	0 <!-- 未删除 -->
 	</select>
 
-	<select id="getUser" parameterType="User" resultType="User">
+	<select id="getUser" parameterType="user" resultType="user">
 		SELECT
 			 user_id	AS	userId,
 			 birthday	AS	birthday,
@@ -33,7 +33,7 @@
 	
 	</select>
 
-	<update id="updateToken" parameterType="User">
+	<update id="updateToken" parameterType="user">
 		UPDATE
 			t_user
 		SET
