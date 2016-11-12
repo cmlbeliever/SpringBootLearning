@@ -5,8 +5,8 @@ import javax.sql.DataSource;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.ibatis.io.VFS;
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,7 +25,9 @@ public class MybatisConfig {
 
 		log.info("*************************sqlSessionFactory:begin***********************" + properties);
 
-		SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
+//		VFS.addImplClass(SpringBootVFS.class);
+
+		DefaultSqlSessionFactoryBean sessionFactory = new DefaultSqlSessionFactoryBean();
 		sessionFactory.setDataSource(datasource);
 		sessionFactory.setTypeAliasesPackage(properties.typeAliasesPackage);
 		sessionFactory.setTypeHandlersPackage(properties.typeHandlerPackage);
@@ -33,8 +35,8 @@ public class MybatisConfig {
 		ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
 		sessionFactory.setMapperLocations(resolver.getResources(properties.mapperLocations));
 
-		sessionFactory
-				.setConfigLocation(new PathMatchingResourcePatternResolver().getResource(properties.configLocation));
+//		sessionFactory
+//				.setConfigLocation(new PathMatchingResourcePatternResolver().getResource(properties.configLocation));
 
 		SqlSessionFactory resultSessionFactory = sessionFactory.getObject();
 
