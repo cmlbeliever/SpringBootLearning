@@ -25,7 +25,7 @@ public class MybatisConfig {
 
 		log.info("*************************sqlSessionFactory:begin***********************" + properties);
 
-//		VFS.addImplClass(SpringBootVFS.class);
+		VFS.addImplClass(SpringBootVFS.class);
 
 		DefaultSqlSessionFactoryBean sessionFactory = new DefaultSqlSessionFactoryBean();
 		sessionFactory.setDataSource(datasource);
