@@ -219,6 +219,7 @@
 
 	<!-- Package as an executable jar -->
 	<build>
+		<finalName>api</finalName>
 		<sourceDirectory>src/main/java</sourceDirectory>
 		<resources>
 			<resource>
