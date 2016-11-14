@@ -5,7 +5,14 @@
 <title>Insert title here</title>
 </head>
 <body >
-	<h1>master api demo</h1>
+	<h1>branch_shiro 权限管理 demo</h1>
+	<h3>有权限访问</h3>
+	<ul>
+		<li>通常方式登录(user/login)：<a target="_blank" href="user/login?username=11111111111&password=123456">user/login?username=11111111111&pasword=123456</a></span></li>
+		<li>restful方式登录(user/{username}/login)：<a target="_blank" href="user/11111111111/login?password=123456">user/11111111111/login?password=123456</a></li>
+		<li>restful方式获取用户信息(user/info/{token})：<a target="_blank" href="user/info/token">user/info/token</a></li>
+	</ul>
+	<h3>无权限访问</h3>
 	<ul>
 		<li>通常方式登录(user/login)：<a target="_blank" href="user/login?username=11111111111&password=123456">user/login?username=11111111111&pasword=123456</a></span></li>
 		<li>restful方式登录(user/{username}/login)：<a target="_blank" href="user/11111111111/login?password=123456">user/11111111111/login?password=123456</a></li>
