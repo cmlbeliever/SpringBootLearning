@@ -1,7 +1,6 @@
 package com.cml.springboot.framework.shiro;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.servlet.DispatcherType;
 
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.remoting.SecureRemoteInvocationExecutor;
@@ -70,19 +69,13 @@ public class ShiroConfiguration {
 	}
 
 	@Bean
-	public FilterRegistrationBean shiroFilter() {
-		
-		FilterRegistrationBean filterBean = new FilterRegistrationBean();
-
-		List<String> urlPatterns = new ArrayList<String>();
-		urlPatterns.add("/*");
-		filterBean.setUrlPatterns(urlPatterns);
-
-		DelegatingFilterProxy filter = new DelegatingFilterProxy();
-		filter.setTargetFilterLifecycle(true);
-		filterBean.setFilter(filter);
-
-		return filterBean;
+	public FilterRegistrationBean filterRegistrationBean() {
+		FilterRegistrationBean filterRegistration = new FilterRegistrationBean();
+		filterRegistration.setFilter(new DelegatingFilterProxy("shiroFilterFactoryBean"));
+		filterRegistration.setEnabled(true);
+		filterRegistration.addUrlPatterns("/*");
+		filterRegistration.setDispatcherTypes(DispatcherType.REQUEST);
+		return filterRegistration;
 	}
 
 }
