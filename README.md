@@ -12,6 +12,9 @@
  - **demo代码**
 > com.cml.springboot.sample为测试使用的代码，主要结构为Controller,bean,db,service几个常用的包层级。
 
+ - **db**
+> demo工程的数据库ddl
+
 
 # 分支说明 #
 
@@ -25,7 +28,7 @@
 
  3. branch_shiro
     
-  >   comming soon
+  >   整合shiro框架，实现授权，认证与自定义拦截器授权处理
   
   4. deploy_jar_bugfind 
     
