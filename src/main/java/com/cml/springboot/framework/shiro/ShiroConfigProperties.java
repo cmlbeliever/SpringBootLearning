@@ -7,7 +7,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 @Component
-@PropertySource("classpath:shiro/shiro.properties")
+@PropertySource("classpath:shiro/shiro.yml")
 @ConfigurationProperties(prefix = "shiro")
 public class ShiroConfigProperties {
 	private String loginUrl;

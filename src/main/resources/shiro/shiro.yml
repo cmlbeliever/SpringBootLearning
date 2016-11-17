@@ -1,0 +1,20 @@
+shiro
+ loginUrl:/login.html
+ loginSuccess:/loginSuccess.html
+ unauthorized:/login.html
+ filters
+  /demo.html=anon
+  /login**=anon
+  /loginSuccess**=anon
+  /**=token
+#\u62e6\u622a\u5668\u5b9a\u4e49\uff0cmap\u5f62\u5f0f shiro.filters.A=xxx,shiro.filters.B=xxx
+#\u9ed8\u8ba4\u62e6\u622a\u5668\u5b9e\u73b0\u5982\u4e0b
+#anon	org.apache.shiro.web.filter.authc.AnonymousFilter
+#authc	org.apache.shiro.web.filter.authc.FormAuthenticationFilter
+#authcBasic	org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter
+#perms	org.apache.shiro.web.filter.authz.PermissionsAuthorizationFilter
+#port	org.apache.shiro.web.filter.authz.PortFilter
+#rest	org.apache.shiro.web.filter.authz.HttpMethodPermissionFilter
+#roles	org.apache.shiro.web.filter.authz.RolesAuthorizationFilter
+#ssl	org.apache.shiro.web.filter.authz.SslFilter
+#user	org.apache.shiro.web.filter.authc.UserFilter
