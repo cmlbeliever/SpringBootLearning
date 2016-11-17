@@ -38,7 +38,8 @@
 1、Mybatis打包jar后无法扫描到bean与mapper问题，解决对应地址http://blog.csdn.net/cml_blog/article/details/53138851
 
 # 当前分支（master）测试说明 #
-  详见demo.html
+    >  详见demo.html
+  >   端口号为2222，可在config/application.properties 中server.port进行配置  
 
     
   
