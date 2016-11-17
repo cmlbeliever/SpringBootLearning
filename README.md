@@ -13,7 +13,7 @@
 > com.cml.springboot.sample为测试使用的代码，主要结构为Controller,bean,db,service几个常用的包层级。
 
  - **db**
-> demo工程的数据库ddl
+> db文件夹下为demo工程的数据库ddl
 
 
 # 分支说明 #
