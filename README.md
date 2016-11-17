@@ -15,6 +15,8 @@
  - **db**
 > db文件夹下为demo工程的数据库ddl
 
+# 执行程序 #
+ 详见：http://git.oschina.net/cmlbeliever/SpringBootLearning/wikis/home
 
 # 分支说明 #
 
