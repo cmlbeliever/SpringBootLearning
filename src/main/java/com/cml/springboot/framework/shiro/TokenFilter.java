@@ -2,7 +2,9 @@ package com.cml.springboot.framework.shiro;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.shiro.web.filter.AccessControlFilter;
@@ -17,8 +19,15 @@ public class TokenFilter extends AccessControlFilter {
 	protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue)
 			throws Exception {
 
+		HttpServletRequest req = (HttpServletRequest) request;
+		String token = req.getParameter("token");
+
 		log.debug("=======>CookieAuthenticationFilter ,getUnauthorizedUrl=" + this.getUnauthorizedUrl() + ","
 				+ mappedValue);
+
+		if (StringUtils.isNotBlank(token)) {
+			return true;
+		}
 
 		return false;
 	}
