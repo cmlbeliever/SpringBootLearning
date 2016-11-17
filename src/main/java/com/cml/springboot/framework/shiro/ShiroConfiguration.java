@@ -1,5 +1,8 @@
 package com.cml.springboot.framework.shiro;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.DispatcherType;
 
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
@@ -12,6 +15,7 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
+import org.springframework.integration.annotation.Filter;
 import org.springframework.web.filter.DelegatingFilterProxy;
 
 @Configuration
@@ -64,6 +68,13 @@ public class ShiroConfiguration {
 		shiroFilter.setSuccessUrl(properties.getLoginSuccess());
 		shiroFilter.setUnauthorizedUrl(properties.getUnauthorized());
 		shiroFilter.setFilterChainDefinitionMap(properties.getFilters());
+
+		Map<String, javax.servlet.Filter> filters = new HashMap<>();
+		TokenFilter tokenFilter = new TokenFilter();
+		tokenFilter.setEnabled(true);
+		tokenFilter.setUnauthorizedUrl(properties.getUnauthorized());
+		filters.put("token", tokenFilter);
+		shiroFilter.setFilters(filters);
 
 		return shiroFilter;
 	}
