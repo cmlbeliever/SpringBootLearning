@@ -32,7 +32,7 @@
     
   >   整合shiro框架，实现授权，认证与自定义拦截器授权处理
   
-  4. deploy_jar_bugfind 
+ 4. deploy_jar_bugfind 
     
   >   查找与解决打包jar后Mybatis扫描问题
   
