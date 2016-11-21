@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cml.springboot.sample.bean.LogBean;
-import com.cml.springboot.sample.db.LogMapper;
+import com.cml.springboot.sample.db.rw.LogMapper;
 import com.cml.springboot.sample.service.LogService;
 
 @Service("logServiceImpl")

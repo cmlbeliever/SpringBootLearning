@@ -7,12 +7,12 @@ import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@AutoConfigureAfter(MybatisConfig.class)
-@MapperScan(basePackages = { "com.cml.springboot.sample.db" }, sqlSessionFactoryRef = "sqlSessionFactory")
-public class MybatisScanConfiguration {
-	protected static Log log = LogFactory.getLog(MybatisScanConfiguration.class);
+@AutoConfigureAfter(MybatisRConfig.class)
+@MapperScan(basePackages = { "com.cml.springboot.sample.db.r" }, sqlSessionFactoryRef = "readOnlySqlSessionFactory")
+public class MybatisRScanConfiguration {
+	protected static Log log = LogFactory.getLog(MybatisRScanConfiguration.class);
 
-	public MybatisScanConfiguration() {
+	public MybatisRScanConfiguration() {
 		log.info("*************************MybatisScanConfiguration***********************");
 	}
 }

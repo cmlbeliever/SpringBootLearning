@@ -13,7 +13,8 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @EnableAutoConfiguration(exclude = { DataSourceAutoConfiguration.class })
 @ComponentScan()
 @EnableAsync
-@PropertySources({ @PropertySource("classpath:config/application-jdbc.properties") })
+@PropertySources({ @PropertySource("classpath:config/jdbc-rw.properties"),
+		@PropertySource("classpath:config/jdbc-r.properties") })
 public class BootApplication {
 
 	// @Bean

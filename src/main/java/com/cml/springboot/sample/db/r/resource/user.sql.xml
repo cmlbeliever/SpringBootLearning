@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.cml.springboot.sample.db.UserMapper">
+<mapper namespace="com.cml.springboot.sample.db.r.ReadOnlyUserMapper">
 
 	<select id="getUserByToken" parameterType="string" resultType="User">
 		SELECT
@@ -32,14 +32,5 @@
 			del_flg	=	0 <!-- 未删除 -->
 	
 	</select>
-
-	<update id="updateToken" parameterType="User">
-		UPDATE
-			t_user
-		SET
-			token	=	#{newToken}
-		WHERE
-			token	=	#{token}
-	</update>
 
 </mapper>

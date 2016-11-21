@@ -10,7 +10,8 @@ import org.springframework.stereotype.Component;
 import com.cml.springboot.framework.util.MD5;
 import com.cml.springboot.framework.util.UUIDUtil;
 import com.cml.springboot.sample.bean.User;
-import com.cml.springboot.sample.db.UserMapper;
+import com.cml.springboot.sample.db.r.ReadOnlyUserMapper;
+import com.cml.springboot.sample.db.rw.UserMapper;
 import com.cml.springboot.sample.service.UserService;
 
 @Transactional
@@ -18,7 +19,10 @@ import com.cml.springboot.sample.service.UserService;
 public class UserServiceImpl implements UserService {
 
 	@Autowired
-	private UserMapper userMapper;
+	private ReadOnlyUserMapper userMapper;
+
+	@Autowired
+	private UserMapper rwUserMapper;
 
 	@Override
 	public User findUserByToken(String token) throws SQLException {
@@ -36,7 +40,7 @@ public class UserServiceImpl implements UserService {
 			// 重新生成token
 			user.setNewToken(newToken);
 			user.setToken(loginUser.getToken());
-			int updateCount = userMapper.updateToken(user);
+			int updateCount = rwUserMapper.updateToken(user);
 
 			if (updateCount > 0) {
 				loginUser.setToken(newToken);

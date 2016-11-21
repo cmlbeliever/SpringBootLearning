@@ -11,15 +11,17 @@ import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.stereotype.Component;
 
 @Configuration
-public class MybatisConfig {
+public class MybatisRWConfig {
 
-	protected static Log log = LogFactory.getLog(MybatisConfig.class);
+	protected static Log log = LogFactory.getLog(MybatisRWConfig.class);
 
+	@Primary
 	@Bean(name = "sqlSessionFactory")
 	public SqlSessionFactory sqlSessionFactory(DataSource datasource, MybatisConfigurationProperties properties)
 			throws Exception {
@@ -49,6 +51,7 @@ public class MybatisConfig {
 
 	}
 
+	@Primary
 	@Bean(destroyMethod = "close", name = "dataSource")
 	public DataSource dataSource(DataSourceProperties properties) {
 
@@ -72,7 +75,7 @@ public class MybatisConfig {
 		return dataSource;
 	}
 
-	@ConfigurationProperties(prefix = "db.mybatis")
+	@ConfigurationProperties(prefix = "db.mybatis.rw")
 	@Component
 	public static class MybatisConfigurationProperties {
 		private String typeAliasesPackage;
@@ -122,7 +125,7 @@ public class MybatisConfig {
 	}
 
 	@Component("dataSourceProperties")
-	@ConfigurationProperties(prefix = "db.mybatis.jdbc")
+	@ConfigurationProperties(prefix = "db.mybatis.rw.jdbc")
 	public static class DataSourceProperties {
 		public String driverClassName;
 		public String url;
