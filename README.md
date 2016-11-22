@@ -36,6 +36,10 @@
     
   >   查找与解决打包jar后Mybatis扫描问题
   
+ 5. branch_i18n 
+    
+  >   国际化支持
+  
 #问题与解决
 1、Mybatis打包jar后无法扫描到bean与mapper问题，解决对应地址http://blog.csdn.net/cml_blog/article/details/53138851
 
