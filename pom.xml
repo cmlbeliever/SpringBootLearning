@@ -29,6 +29,26 @@
 
 	<dependencies>
 
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-context-support -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>4.3.2.RELEASE</version>
+		</dependency>
+
+
+		<!-- https://mvnrepository.com/artifact/org.springframework.integration/spring-integration-mail -->
+		<!-- <dependency> <groupId>org.springframework.integration</groupId> <artifactId>spring-integration-mail</artifactId> 
+			</dependency> -->
+
+		<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.7</version>
+		</dependency>
+
+
 		<!-- log4j. -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -247,7 +267,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.0</version>
 				<!-- <dependencies> <dependency> <groupId>org.codehaus.plexus</groupId> 
 					<artifactId>plexus-compiler-javac</artifactId> <version>1.6</version> </dependency> 
 					</dependencies> -->

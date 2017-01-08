@@ -1,0 +1,3 @@
+mvn install:install-file -Dfile=logback-core-1.1.7.jar -DgroupId=h.qos.logback -DartifactId=logback-core -Dversion=1.1.7 -Dpackaging=jar
+mvn install:install-file -Dfile=logback-classic-1.1.7.jar -DgroupId=h.qos.logback -DartifactId=logback-classic -Dversion=1.1.7 -Dpackaging=jar
+mvn install:install-file -Dfile=logback-access-1.1.7.jar -DgroupId=h.qos.logback -DartifactId=logback-access -Dversion=1.1.7 -Dpackaging=jar
