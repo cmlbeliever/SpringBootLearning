@@ -40,8 +40,14 @@
     
   >   国际化支持
   
+ 6. branch_mail
+    
+  >   邮件发送功能整合，注意需要在config/application.properties配置邮箱服务密码
+  
+  
 #问题与解决
 1、Mybatis打包jar后无法扫描到bean与mapper问题，解决对应地址http://blog.csdn.net/cml_blog/article/details/53138851
+2、163发送邮件功能问题，解决对应地址http://blog.csdn.net/cml_blog/article/details/53138851
 
 # 当前分支（master）测试说明 #
   >  详见demo.html
