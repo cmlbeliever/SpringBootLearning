@@ -29,6 +29,12 @@
 
 	<dependencies>
 
+		<!-- 集成ehcache需要的依赖 -->
+		<dependency>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache</artifactId>
+		</dependency>
+
 		<!-- log4j. -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
