@@ -2,6 +2,8 @@ package com.cml.springboot.sample.service;
 
 import java.sql.SQLException;
 
+import org.springframework.cache.annotation.CacheConfig;
+
 import com.cml.springboot.sample.bean.User;
 
 public interface UserService {

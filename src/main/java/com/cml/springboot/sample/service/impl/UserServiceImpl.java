@@ -4,23 +4,30 @@ import java.sql.SQLException;
 
 import javax.transaction.Transactional;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
 import com.cml.springboot.framework.util.MD5;
 import com.cml.springboot.framework.util.UUIDUtil;
 import com.cml.springboot.sample.bean.User;
 import com.cml.springboot.sample.db.UserMapper;
+import com.cml.springboot.sample.service.CacheKeys;
 import com.cml.springboot.sample.service.UserService;
 
 @Transactional
 @Component("userServiceImpl")
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService, CacheKeys {
+
+	protected static Log log = LogFactory.getLog(UserServiceImpl.class);
 
 	@Autowired
 	private UserMapper userMapper;
 
 	@Override
+	@Cacheable(key = "'user_'+#token", value = CACHE_USER_CACHE)
 	public User findUserByToken(String token) throws SQLException {
 		return userMapper.getUserByToken(token);
 	}

@@ -1,10 +1,12 @@
 package com.cml.springboot.sample.bean;
 
+import java.io.Serializable;
+
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 import org.joda.time.DateTime;
 
-public class User {
+public class User implements Serializable {
 
 	@Length(min = 3, message = "用户名长度不对")
 	@NotBlank(message = "${user.empty.username}")
@@ -78,6 +80,12 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	@Override
+	public String toString() {
+		return "User [username=" + username + ", password=" + password + ", token=" + token + ", newToken=" + newToken
+				+ ", userId=" + userId + ", birthday=" + birthday + ", nickName=" + nickName + "]";
 	}
 
 }

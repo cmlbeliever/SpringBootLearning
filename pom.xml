@@ -29,6 +29,12 @@
 
 	<dependencies>
 
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-context-support -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+		</dependency>
+
 		<!-- 集成ehcache需要的依赖 -->
 		<dependency>
 			<groupId>net.sf.ehcache</groupId>
@@ -285,4 +291,7 @@
 			</plugin>
 		</plugins>
 	</build>
+
+	<repositories>
+	</repositories>
 </project>
