@@ -6,6 +6,7 @@ import org.springframework.cache.annotation.CacheConfig;
 
 import com.cml.springboot.sample.bean.User;
 
+@CacheConfig(cacheNames="people")
 public interface UserService {
 	User findUserByToken(String token) throws SQLException;
 

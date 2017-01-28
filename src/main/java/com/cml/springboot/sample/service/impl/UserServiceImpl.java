@@ -2,12 +2,14 @@ package com.cml.springboot.sample.service.impl;
 
 import java.sql.SQLException;
 
+import javax.cache.annotation.CacheDefaults;
+import javax.cache.annotation.CacheKey;
+import javax.cache.annotation.CacheResult;
 import javax.transaction.Transactional;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
 import com.cml.springboot.framework.util.MD5;
@@ -19,6 +21,7 @@ import com.cml.springboot.sample.service.UserService;
 
 @Transactional
 @Component("userServiceImpl")
+@CacheDefaults(cacheName = CacheKeys.CACHE_DEFAULT)
 public class UserServiceImpl implements UserService, CacheKeys {
 
 	protected static Log log = LogFactory.getLog(UserServiceImpl.class);
@@ -27,9 +30,11 @@ public class UserServiceImpl implements UserService, CacheKeys {
 	private UserMapper userMapper;
 
 	@Override
-	@Cacheable(key = "'user_'+#token", value = CACHE_USER_CACHE)
-	public User findUserByToken(String token) throws SQLException {
-		return userMapper.getUserByToken(token);
+	@CacheResult()
+	public User findUserByToken(@CacheKey String token) throws SQLException {
+		User u = userMapper.getUserByToken(token);
+		log.info("====================read user from db=========");
+		return u;
 	}
 
 	@Override

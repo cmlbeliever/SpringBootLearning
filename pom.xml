@@ -29,16 +29,34 @@
 
 	<dependencies>
 
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-cache</artifactId>
+		</dependency>
+
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-context-support -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context-support</artifactId>
 		</dependency>
 
-		<!-- 集成ehcache需要的依赖 -->
 		<dependency>
-			<groupId>net.sf.ehcache</groupId>
+			<groupId>org.ehcache</groupId>
 			<artifactId>ehcache</artifactId>
+			<version>3.2.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.cache</groupId>
+			<artifactId>cache-api</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-core -->
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-core</artifactId>
+			<version>1.1.9</version>
 		</dependency>
 
 		<!-- log4j. -->
@@ -293,5 +311,9 @@
 	</build>
 
 	<repositories>
+		<repository>
+			<id>a</id>
+			<url>https://mvnrepository.com/artifact</url>
+		</repository>
 	</repositories>
 </project>
