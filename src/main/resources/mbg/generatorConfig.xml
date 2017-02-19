@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+
+	<!-- 配置参考地址http://www.jianshu.com/p/e09d2370b796 -->
+
+	<properties resource="mbg/mbg.properties" />
+
+	<classPathEntry location="${driverPath}" />
+
+	<context id="context1">
+		<property name="autoDelimitKeywords" value="false" />
+		<!-- 生成的Java文件的编码 -->
+		<property name="javaFileEncoding" value="UTF-8" />
+		<!-- 格式化java代码 -->
+		<property name="javaFormatter"
+			value="org.mybatis.generator.api.dom.DefaultJavaFormatter" />
+		<!-- 格式化XML代码 -->
+		<property name="xmlFormatter"
+			value="org.mybatis.generator.api.dom.DefaultXmlFormatter" />
+
+		<commentGenerator>
+			<property name="suppressDate" value="false" />
+			<property name="suppressAllComments" value="true" />
+			<property name="addRemarkComments" value="true" />
+		</commentGenerator>
+
+
+		<jdbcConnection connectionURL="${jdbcConnection.url}"
+			driverClass="${jdbcConnection.driverClass}" password="${jdbcConnection.username}"
+			userId="${jdbcConnection.password}" />
+
+		<javaTypeResolver type="com.cml.springboot.sample.mbg.MyTypeResolver">
+			<property name="forceBigDecimals" value="true" />
+		</javaTypeResolver>
+
+
+		<javaModelGenerator targetPackage="${targetPackage.javaModel}"
+			targetProject="${targetProject}">
+			<property name="trimStrings" value="false" />
+		</javaModelGenerator>
+
+		<sqlMapGenerator targetPackage="${targetPackage.sqlMapper}"
+			targetProject="${targetProject}" />
+		<javaClientGenerator targetPackage="${targetPackage.javaClient}"
+			targetProject="${targetProject}" type="XMLMAPPER" />
+
+		<!-- table可以配置多个,enable*几个参数是为了自动生成一些额外的sql操作,可以关闭 -->
+		<table domainObjectName="User" tableName="t_user"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+			<!-- 主键自动生成 -->
+			<generatedKey column="USER_ID" sqlStatement="mysql" />
+		</table>
+		<table tableName="t_api_log" domainObjectName="ApiLog"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+			<generatedKey column="id" sqlStatement="mysql" />
+		</table>
+	</context>
+</generatorConfiguration>
