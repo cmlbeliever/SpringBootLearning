@@ -9,7 +9,7 @@
 	<classPathEntry location="${driverPath}" />
 
 	<!-- defaultModelType=flat 表示包含blob类型的表不会再生成Blob类 -->
-	<context id="context1" defaultModelType="flat">
+	<context id="context1" defaultModelType="flat" targetRuntime="com.cml.springboot.sample.mbg.TkMyBatis3Impl">
 		<property name="autoDelimitKeywords" value="false" />
 		<!-- 生成的Java文件的编码 -->
 		<property name="javaFileEncoding" value="UTF-8" />
@@ -20,12 +20,15 @@
 		<property name="xmlFormatter"
 			value="org.mybatis.generator.api.dom.DefaultXmlFormatter" />
 
+		<plugin type="com.cml.springboot.sample.mbg.MyPlugin"></plugin>
+
 		<!-- 添加字段上的注释到javabean -->
 		<commentGenerator type="com.cml.springboot.sample.mbg.CommentGenerate">
 			<property name="suppressDate" value="false" />
 			<property name="suppressAllComments" value="true" />
 			<property name="addRemarkComments" value="true" />
 		</commentGenerator>
+
 
 
 		<jdbcConnection connectionURL="${jdbcConnection.url}"
@@ -48,7 +51,7 @@
 			targetProject="${targetProject}" type="XMLMAPPER" />
 
 		<!-- table可以配置多个,enable*几个参数是为了自动生成一些额外的sql操作,可以关闭 -->
-		<table tableName="%" enableCountByExample="false"
+		<table tableName="%" enableCountByExample="false"  mapperName="{0}Dao"
 			enableUpdateByExample="false" enableDeleteByExample="false"
 			enableSelectByExample="false" selectByExampleQueryId="false">
 			<!-- 主键自动生成 -->
