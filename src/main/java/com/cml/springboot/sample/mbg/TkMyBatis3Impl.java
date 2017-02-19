@@ -14,31 +14,6 @@ import org.mybatis.generator.codegen.mybatis3.model.RecordWithBLOBsGenerator;
 //MyBatis3 的实现
 public class TkMyBatis3Impl extends IntrospectedTableMyBatis3Impl {
 
-	protected void calculateJavaModelGenerators(List<String> warnings, ProgressCallback progressCallback) {
-		if (getRules().generateExampleClass()) {
-			AbstractJavaGenerator javaGenerator = new ExampleGenerator();
-			initializeAbstractGenerator(javaGenerator, warnings, progressCallback);
-			javaModelGenerators.add(javaGenerator);
-		}
-
-		if (getRules().generatePrimaryKeyClass()) {
-			AbstractJavaGenerator javaGenerator = new PrimaryKeyGenerator();
-			initializeAbstractGenerator(javaGenerator, warnings, progressCallback);
-			javaModelGenerators.add(javaGenerator);
-		}
-
-		if (getRules().generateBaseRecordClass()) {
-			AbstractJavaGenerator javaGenerator = new BaseRecordGenerator();
-			initializeAbstractGenerator(javaGenerator, warnings, progressCallback);
-			javaModelGenerators.add(javaGenerator);
-		}
-
-		if (getRules().generateRecordWithBLOBsClass()) {
-			AbstractJavaGenerator javaGenerator = new RecordWithBLOBsGenerator();
-			initializeAbstractGenerator(javaGenerator, warnings, progressCallback);
-			javaModelGenerators.add(javaGenerator);
-		}
-	}
 
 	@Override
 	protected String calculateMyBatis3XmlMapperFileName() {

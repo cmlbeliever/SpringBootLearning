@@ -51,7 +51,7 @@
 			targetProject="${targetProject}" type="XMLMAPPER" />
 
 		<!-- table可以配置多个,enable*几个参数是为了自动生成一些额外的sql操作,可以关闭 -->
-		<table tableName="%" enableCountByExample="false"  mapperName="{0}Dao"
+		<table tableName="%" enableCountByExample="false"  mapperName="{0}Mapper"
 			enableUpdateByExample="false" enableDeleteByExample="false"
 			enableSelectByExample="false" selectByExampleQueryId="false">
 			<!-- 主键自动生成 -->
