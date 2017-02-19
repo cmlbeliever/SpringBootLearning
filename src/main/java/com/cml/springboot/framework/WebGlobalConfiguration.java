@@ -8,12 +8,15 @@ import org.springframework.boot.autoconfigure.web.WebMvcProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.i18n.CookieLocaleResolver;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import com.cml.springboot.framework.deserializer.DateTimeDeserializer;
@@ -36,6 +39,19 @@ public class WebGlobalConfiguration extends WebMvcConfigurerAdapter {
 
 	@Autowired
 	private WebMvcProperties mvcProperties;
+
+	/**
+	 * 自定义国际化资源信息
+	 * 
+	 * @return
+	 */
+	@Bean
+	public ReloadableResourceBundleMessageSource messageSource() {
+		ReloadableResourceBundleMessageSource resourceBundleMessageSource = new ReloadableResourceBundleMessageSource();
+		resourceBundleMessageSource.setBasename("classpath:messages");
+		resourceBundleMessageSource.setDefaultEncoding("UTF-8");
+		return resourceBundleMessageSource;
+	}
 
 	/**
 	 * 1、 extends WebMvcConfigurationSupport 2、重写下面方法; setUseSuffixPatternMatch
@@ -66,6 +82,7 @@ public class WebGlobalConfiguration extends WebMvcConfigurerAdapter {
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(new LocaleChangeInterceptor()).addPathPatterns("/**");
 		registry.addInterceptor(paramInterceptor).addPathPatterns("/*");
 		registry.addInterceptor(tokenInterceptor).addPathPatterns("/*").excludePathPatterns("/user/*/login**",
 				"/user/info/**");

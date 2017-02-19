@@ -3,8 +3,10 @@ package com.cml.springboot.sample.controller;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,6 +22,15 @@ public class SampleController {
 
 	@Resource(name = "logServiceImpl")
 	private LogService logService;
+
+//	@Value("${message}")
+	private String message;
+
+	@RequestMapping("/demo")
+	public String demo(Model model) {
+		model.addAttribute("message", message);
+		return "demo";
+	}
 
 	@RequestMapping("/test")
 	@ResponseBody
@@ -62,11 +73,12 @@ public class SampleController {
 		return "addLog count=" + 1;
 	}
 
-//	@ExceptionHandler(Exception.class)
-//	@ResponseBody
-//	public String onError(Exception e, HttpServletRequest request) throws Exception {
-//		return "报错了:" + e.getMessage();
-//	}
+	// @ExceptionHandler(Exception.class)
+	// @ResponseBody
+	// public String onError(Exception e, HttpServletRequest request) throws
+	// Exception {
+	// return "报错了:" + e.getMessage();
+	// }
 	// @ExceptionHandler(Exception.class)
 	// public String onError(Exception e, HttpServletRequest request) {
 	// System.out.println("------------------->exception!!!!");
