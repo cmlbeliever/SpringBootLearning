@@ -1,19 +1,13 @@
 package com.cml.springboot.sample.mbg;
 
+import java.lang.reflect.Field;
 import java.text.MessageFormat;
-import java.util.List;
 
-import org.mybatis.generator.api.ProgressCallback;
-import org.mybatis.generator.codegen.AbstractJavaGenerator;
+import org.mybatis.generator.api.FullyQualifiedTable;
 import org.mybatis.generator.codegen.mybatis3.IntrospectedTableMyBatis3Impl;
-import org.mybatis.generator.codegen.mybatis3.model.BaseRecordGenerator;
-import org.mybatis.generator.codegen.mybatis3.model.ExampleGenerator;
-import org.mybatis.generator.codegen.mybatis3.model.PrimaryKeyGenerator;
-import org.mybatis.generator.codegen.mybatis3.model.RecordWithBLOBsGenerator;
 
 //MyBatis3 的实现
 public class TkMyBatis3Impl extends IntrospectedTableMyBatis3Impl {
-
 
 	@Override
 	protected String calculateMyBatis3XmlMapperFileName() {
@@ -36,6 +30,19 @@ public class TkMyBatis3Impl extends IntrospectedTableMyBatis3Impl {
 
 	private boolean stringHasValue(String mapperName) {
 		return mapperName != null && mapperName.trim().length() > 0;
+	}
+
+	@Override
+	public void setFullyQualifiedTable(FullyQualifiedTable fullyQualifiedTable) {
+		try {
+			Field domainObjectNameField = fullyQualifiedTable.getClass().getDeclaredField("domainObjectName");
+			domainObjectNameField.setAccessible(true);
+			domainObjectNameField.set(fullyQualifiedTable, "Base" + fullyQualifiedTable.getDomainObjectName());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		super.setFullyQualifiedTable(fullyQualifiedTable);
+		System.out.println("===setFullyQualifiedTable===>" + fullyQualifiedTable.getDomainObjectName());
 	}
 
 	@Override
