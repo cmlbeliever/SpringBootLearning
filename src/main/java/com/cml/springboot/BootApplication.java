@@ -32,8 +32,7 @@ public class BootApplication {
 	public static void main(String[] args) throws Exception {
 		SpringApplication application = new SpringApplication(BootApplication.class);
 		Map<String, Object> defaultProperties = new HashMap<>();
-		// defaultProperties.put("db.mybatis.mapperScanner.basePackage",
-		// "com.cml.springboot.sample.db");
+		defaultProperties.put("db.mybatis.mapperScanner.basePackage", "com.cml.springboot.sample.db");
 		application.setDefaultProperties(defaultProperties);
 		application.setWebEnvironment(true);
 		application.run(args);

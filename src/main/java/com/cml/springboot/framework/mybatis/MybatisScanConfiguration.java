@@ -10,8 +10,6 @@ import com.cml.springboot.framework.mybatis.scanner.MapperScanner;
 @Configuration
 @AutoConfigureAfter(MybatisConfig.class)
 @MapperScanner(basePackages = { "${db.mybatis.mapperScanner.basePackage}" }, sqlSessionFactoryRef = "sqlSessionFactory")
-// @MapperScan(basePackages = { "com.cml.springboot.sample.db" },
-// sqlSessionFactoryRef = "sqlSessionFactory")
 public class MybatisScanConfiguration {
 	protected static Log log = LogFactory.getLog(MybatisScanConfiguration.class);
 
