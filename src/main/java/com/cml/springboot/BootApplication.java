@@ -1,5 +1,8 @@
 package com.cml.springboot;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
@@ -27,6 +30,13 @@ public class BootApplication {
 	// }
 
 	public static void main(String[] args) throws Exception {
-		SpringApplication.run(BootApplication.class, args);
+		SpringApplication application = new SpringApplication(BootApplication.class);
+		Map<String, Object> defaultProperties = new HashMap<>();
+		// defaultProperties.put("db.mybatis.mapperScanner.basePackage",
+		// "com.cml.springboot.sample.db");
+		application.setDefaultProperties(defaultProperties);
+		application.setWebEnvironment(true);
+		application.run(args);
+		// SpringApplication.run(BootApplication.class, args);
 	}
 }

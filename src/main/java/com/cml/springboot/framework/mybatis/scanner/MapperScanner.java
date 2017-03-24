@@ -15,6 +15,7 @@ import org.springframework.context.annotation.Import;
 @Documented
 @Import(MapperScannerRegistrar.class)
 public @interface MapperScanner {
+
 	/**
 	 * Alias for the {@link #basePackages()} attribute. Allows for more concise
 	 * annotation declarations e.g.:
@@ -45,7 +46,9 @@ public @interface MapperScanner {
 	 * The {@link BeanNameGenerator} class to be used for naming detected
 	 * components within the Spring container.
 	 */
-	Class<? extends BeanNameGenerator> nameGenerator() default BeanNameGenerator.class;
+	Class<? extends BeanNameGenerator> nameGenerator()
+
+	default BeanNameGenerator.class;
 
 	/**
 	 * This property specifies the annotation that the scanner will search for.
@@ -55,7 +58,9 @@ public @interface MapperScanner {
 	 * <p>
 	 * Note this can be combined with markerInterface.
 	 */
-	Class<? extends Annotation> annotationClass() default Annotation.class;
+	Class<? extends Annotation> annotationClass()
+
+	default Annotation.class;
 
 	/**
 	 * This property specifies the parent that the scanner will search for.
@@ -65,14 +70,18 @@ public @interface MapperScanner {
 	 * <p>
 	 * Note this can be combined with annotationClass.
 	 */
-	Class<?> markerInterface() default Class.class;
+	Class<?> markerInterface()
+
+	default Class.class;
 
 	/**
 	 * Specifies which {@code SqlSessionTemplate} to use in the case that there
 	 * is more than one in the spring context. Usually this is only needed when
 	 * you have more than one datasource.
 	 */
-	String sqlSessionTemplateRef() default "";
+	String sqlSessionTemplateRef()
+
+	default "";
 
 	/**
 	 * Specifies which {@code SqlSessionFactory} to use in the case that there

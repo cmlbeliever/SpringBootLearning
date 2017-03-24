@@ -1,25 +1,25 @@
 package com.cml.springboot.framework.mybatis.scanner;
 
+import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.mybatis.spring.mapper.ClassPathMapperScanner;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanNameGenerator;
-import org.springframework.boot.autoconfigure.PropertyPlaceholderAutoConfiguration;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.ResourceLoaderAware;
 import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.annotation.AnnotationAttributes;
 import org.springframework.core.env.Environment;
-import org.springframework.core.env.PropertiesPropertySource;
-import org.springframework.core.env.PropertySource;
-import org.springframework.core.env.PropertySources;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.type.AnnotationMetadata;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.StringUtils;
@@ -35,16 +35,10 @@ public class MapperScannerRegistrar implements ImportBeanDefinitionRegistrar, Re
 	private ResourceLoader resourceLoader;
 	private Environment env;
 
+	protected final Log logger = LogFactory.getLog(getClass());
+
 	@Override
 	public void registerBeanDefinitions(AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry) {
-
-		// TODO 注入属性
-		PropertySourcesPlaceholderConfigurer propertyHolder = new PropertySourcesPlaceholderConfigurer();
-		propertyHolder.setEnvironment(env);
-		propertyHolder.setLocation(new ClassPathResource("classpath:config/application-jdbc.properties"));
-
-		PropertySources proSources = propertyHolder.getAppliedPropertySources();
-		PropertySource<?> mapper = proSources.get("db.mybatis.mapperLocations");
 
 		AnnotationAttributes annoAttrs = AnnotationAttributes
 				.fromMap(importingClassMetadata.getAnnotationAttributes(MapperScanner.class.getName()));
@@ -75,12 +69,12 @@ public class MapperScannerRegistrar implements ImportBeanDefinitionRegistrar, Re
 		List<String> basePackages = new ArrayList<String>();
 		for (String pkg : annoAttrs.getStringArray("value")) {
 			if (StringUtils.hasText(pkg)) {
-				basePackages.add(pkg);
+				basePackages.add(parsePlaceHolder(pkg));
 			}
 		}
 		for (String pkg : annoAttrs.getStringArray("basePackages")) {
 			if (StringUtils.hasText(pkg)) {
-				basePackages.add(pkg);
+				basePackages.add(parsePlaceHolder(pkg));
 			}
 		}
 		for (Class<?> clazz : annoAttrs.getClassArray("basePackageClasses")) {
@@ -91,14 +85,53 @@ public class MapperScannerRegistrar implements ImportBeanDefinitionRegistrar, Re
 
 	}
 
+	private String parsePlaceHolder(String pro) {
+		if (pro != null && pro.contains(PropertySourcesPlaceholderConfigurer.DEFAULT_PLACEHOLDER_PREFIX)) {
+			String value = env.getProperty(pro.substring(2, pro.length() - 1));
+
+			if (logger.isDebugEnabled()) {
+				logger.debug("find placeholder value " + value + " for key " + pro);
+			}
+
+			if (null == value) {
+				throw new IllegalArgumentException("property " + pro + " can not find!!!");
+			}
+			return value;
+		}
+		return pro;
+	}
+
+	/**
+	 * load properties
+	 * 
+	 * @param properties
+	 * @return
+	 */
+	private Properties loadProperties(String[] properties) {
+		Properties container = new Properties();
+		if (null != properties) {
+			PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+
+			for (String pro : properties) {
+				try {
+					container.load(resolver.getResource(pro).getInputStream());
+				} catch (IOException e) {
+					throw new IllegalArgumentException(e);
+				}
+			}
+
+		}
+		return container;
+	}
+
 	@Override
 	public void setResourceLoader(ResourceLoader loader) {
 		this.resourceLoader = loader;
 	}
 
 	@Override
-	public void setEnvironment(Environment env) {
-		this.env = env;
+	public void setEnvironment(Environment environment) {
+		this.env = environment;
 	}
 
 }
