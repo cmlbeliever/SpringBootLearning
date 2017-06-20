@@ -48,6 +48,10 @@
     
   >   添加Mybatis MapperScan动态扫描（占位符）功能 ，详情见博客：http://blog.csdn.net/cml_blog/article/details/65658654
   
+ 8. branch-mybatis-generate 
+    
+  >   mybatis beans生成工具，默认日期类型为DateTime类型，入口类：com.cml.springboot.sample.mbg.MybatisGenerateEntrance 
+  
   
 #问题与解决
 1、Mybatis打包jar后无法扫描到bean与mapper问题，解决对应地址http://blog.csdn.net/cml_blog/article/details/53138851
