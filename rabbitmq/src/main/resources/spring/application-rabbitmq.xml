@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+		http://www.springframework.org/schema/rabbit
+    http://www.springframework.org/schema/rabbit/spring-rabbit-1.0.xsd"
+	default-lazy-init="true">
+
+	<description>AMQP</description>
+
+	<context:property-placeholder
+		location="classpath:config/rabbitmq/rabbitmq.properties" />
+
+	<rabbit:connection-factory id="connectionFactory"
+		host="${rabbitmq.host}" username="${rabbitmq.username}" password="${rabbitmq.password}"
+		channel-cache-size="${rabbitmq.channelCacheSize}" />
+
+	<rabbit:admin connection-factory="connectionFactory" />
+
+	<rabbit:template exchange="test-mq-exchange" id="rabbitTemplate"
+		queue="newquene" connection-factory="connectionFactory" />
+
+	<rabbit:queue name="newquene" id="newquene" auto-delete="false"
+		exclusive="false" durable="true" />
+
+	<rabbit:direct-exchange name="test-mq-exchange"
+		durable="true" auto-delete="false" id="test-mq-exchange">
+		<rabbit:bindings>
+			<rabbit:binding queue="newquene" key="newquene" />
+		</rabbit:bindings>
+	</rabbit:direct-exchange>
+
+	<rabbit:listener-container prefetch="1"
+		connection-factory="connectionFactory" acknowledge="auto">
+		<rabbit:listener queues="newquene" ref="queueListenter"
+			method="onMessageArrived" />
+	</rabbit:listener-container>
+
+	<bean id="queueListenter" class="com.cml.learning.rabbitmq.spring.MessageReceiver" />
+
+	<bean class="com.cml.learning.rabbitmq.spring.MailService">
+		<property name="rabbitTemplate" ref="rabbitTemplate" />
+	</bean>
+
+</beans>
