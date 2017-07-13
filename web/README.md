@@ -3,7 +3,7 @@
 此项目主要作为SpringBoot学习，和根据实际项目对SpringBoot进行配置改造
 主要使用框架：SpringBoot(Spring,SpringMVC),Mybatis,ehcache,javamail
 
-# WEB工程项目结构 #
+# 项目结构 #
  - **程序入口**
 > com.cml.springboot.BootApplication
 
@@ -20,10 +20,6 @@
  详见：wiki Home page
 # 分支说明 #
 
- 1. branch-release 
-
- >    web功能release分支，只包含了web的功能
-    
  1. master 
 
  >    主要分支，模拟常用api功能。
