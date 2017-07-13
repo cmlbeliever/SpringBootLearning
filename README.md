@@ -5,7 +5,7 @@
     项目持续维护中...
 
 # 项目结构 #
-- web项目整合了多种web项目需求功能,详情请看[https://github.com/cmlbeliever/SpringBootLearning/tree/master/web](https://github.com/cmlbeliever/SpringBootLearning/tree/master/web "点我跳转")
+- web项目整合了多种web项目需求功能,详情请看[https://github.com/cmlbeliever/SpringBootLearning/tree/master/web](tree/master/web "点我跳转")
 - rabbitmq项目是对rabbitmq框架的学习与研发的工程，详情请看[https://github.com/cmlbeliever/SpringBootLearning/tree/master/rabbitmq](https://github.com/cmlbeliever/SpringBootLearning/tree/master/rabbitmq "点我跳转")
 
 # rabbitmq工程说明 #
