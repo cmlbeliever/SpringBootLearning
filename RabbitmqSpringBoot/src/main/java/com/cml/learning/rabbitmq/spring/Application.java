@@ -19,7 +19,7 @@ public class Application {
 		MailService service = context.getBean(MailService.class);
 
 		// 发送次数的标识，每次执行后累加
-		int time = 3;
+		int time = 6;
 
 		System.out.println("====================before send=======================");
 
@@ -50,7 +50,7 @@ public class Application {
 
 		System.out.println("======================send success==============================");
 
-		Thread.sleep(500000);
+		Thread.sleep(2000);
 		context.close();
 	}
 }

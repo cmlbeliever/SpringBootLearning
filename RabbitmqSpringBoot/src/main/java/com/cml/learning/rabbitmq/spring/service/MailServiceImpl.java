@@ -11,7 +11,7 @@ import com.cml.learning.rabbitmq.spring.model.EmailModel;
 public class MailServiceImpl implements MailService {
 	@Autowired
 	private AmqpTemplate template;
-	@Value("${rabbitmq.exchange.topic}")
+	@Value("${rabbitmq.exchange.manualTopic}")
 	private String topicExchange;
 	@Value("${rabbitmq.exchange.direct}")
 	private String directExchange;
