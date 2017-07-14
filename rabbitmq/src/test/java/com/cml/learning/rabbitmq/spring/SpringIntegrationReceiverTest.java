@@ -3,11 +3,8 @@ package com.cml.learning.rabbitmq.spring;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.cml.learning.rabbitmq.spring.model.EmailModel;
-import com.cml.learning.rabbitmq.spring.service.MailService;
-
 /**
- * 整合Spring测试
+ * 整合Spring测试，接收消息
  * 
  * @author cml
  *
@@ -15,7 +12,8 @@ import com.cml.learning.rabbitmq.spring.service.MailService;
 public class SpringIntegrationReceiverTest {
 	@Test
 	public void testMessage() throws Exception {
-		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:spring/application-rabbitmq.xml");
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:spring/application-rabbitmq-listener.xml");
 		System.out.println("receiver started!!!");
+		Thread.sleep(1000000);
 	}
 }

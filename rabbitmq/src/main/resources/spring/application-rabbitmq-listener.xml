@@ -96,13 +96,4 @@
 		<property name="messageConverter" ref="messageConverter" />
 		<property name="autoACK" value="false" />
 	</bean>
-
-	<bean id="mailService"
-		class="com.cml.learning.rabbitmq.spring.service.MailServiceImpl">
-		<constructor-arg ref="rabbitTemplate" />
-		<property name="fanoutExchange" value="${rabbitmq.exchange.fanout}" />
-		<property name="topicExchange" value="${rabbitmq.exchange.topic}" />
-		<property name="directExchange" value="${rabbitmq.exchange.direct}" />
-	</bean>
-
 </beans>

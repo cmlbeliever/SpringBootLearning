@@ -7,15 +7,15 @@ import com.cml.learning.rabbitmq.spring.model.EmailModel;
 import com.cml.learning.rabbitmq.spring.service.MailService;
 
 /**
- * 整合Spring测试
+ * 整合Spring测试,发送消息
  * 
  * @author cml
  *
  */
-public class SpringIntegrationTest {
+public class SpringIntegrationSendTest {
 	@Test
 	public void testMessage() throws Exception {
-		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:spring/application-rabbitmq.xml");
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:spring/application-rabbitmq-client.xml");
 		MailService service = context.getBean(MailService.class);
 
 		// 发送次数的标识，每次执行后累加
