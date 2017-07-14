@@ -20,31 +20,89 @@
 		host="${rabbitmq.host}" username="${rabbitmq.username}" password="${rabbitmq.password}"
 		channel-cache-size="${rabbitmq.channelCacheSize}" />
 
+
 	<rabbit:admin connection-factory="connectionFactory" />
 
-	<rabbit:template exchange="test-mq-exchange" id="rabbitTemplate"
-		queue="newquene" connection-factory="connectionFactory" />
+	<rabbit:template id="rabbitTemplate" message-converter="messageConverter"
+		connection-factory="connectionFactory" />
 
-	<rabbit:queue name="newquene" id="newquene" auto-delete="false"
-		exclusive="false" durable="true" />
+	<!-- quenes配置 -->
+	<rabbit:queue name="${rabbitmq.exchange.topic.quene}" id="topicQuene"
+		auto-delete="false" exclusive="false" durable="true" />
+	<rabbit:queue name="${rabbitmq.exchange.manualTopic.quene}"
+		id="manualTopicQuene" auto-delete="false" exclusive="false" durable="true" />
+	<rabbit:queue name="${rabbitmq.exchange.direct.quene}" id="directQuene"
+		auto-delete="false" exclusive="false" durable="true" />
+	<rabbit:queue name="${rabbitmq.exchange.fanout.quene}" id="fanoutQuene"
+		auto-delete="false" exclusive="false" durable="true" />
 
-	<rabbit:direct-exchange name="test-mq-exchange"
-		durable="true" auto-delete="false" id="test-mq-exchange">
+	<!-- exchange配置 -->
+	<rabbit:topic-exchange name="${rabbitmq.exchange.topic}"
+		durable="true" auto-delete="false" id="topicExchange">
 		<rabbit:bindings>
-			<rabbit:binding queue="newquene" key="newquene" />
+			<rabbit:binding queue="${rabbitmq.exchange.topic.quene}"
+				pattern="${rabbitmq.exchange.topic.route}" />
+			<rabbit:binding queue="${rabbitmq.exchange.manualTopic.quene}"
+				pattern="${rabbitmq.exchange.manualTopic.route}" />
+		</rabbit:bindings>
+	</rabbit:topic-exchange>
+
+	<rabbit:direct-exchange name="${rabbitmq.exchange.direct}"
+		durable="true" auto-delete="false" id="directExchange">
+		<rabbit:bindings>
+			<rabbit:binding queue="${rabbitmq.exchange.direct.quene}"
+				key="${rabbitmq.exchange.direct.route}" />
 		</rabbit:bindings>
 	</rabbit:direct-exchange>
 
+	<rabbit:fanout-exchange name="${rabbitmq.exchange.fanout}"
+		durable="true" auto-delete="false" id="fanoutExchange">
+		<rabbit:bindings>
+			<rabbit:binding queue="${rabbitmq.exchange.fanout.quene}" />
+		</rabbit:bindings>
+	</rabbit:fanout-exchange>
+
+	<!-- 消息监听 -->
 	<rabbit:listener-container prefetch="1"
 		connection-factory="connectionFactory" acknowledge="auto">
-		<rabbit:listener queues="newquene" ref="queueListenter"
-			method="onMessageArrived" />
+		<rabbit:listener ref="directMessageListener" queues="directQuene" />
+		<rabbit:listener ref="fanoutMessageListener" queues="fanoutQuene" />
+		<rabbit:listener ref="topicMessageListener" queues="topicQuene" />
+	</rabbit:listener-container>
+	<rabbit:listener-container prefetch="1"
+		connection-factory="connectionFactory" acknowledge="manual">
+		<rabbit:listener ref="topicManulACKMessageListener"
+			queues="manualTopicQuene" />
 	</rabbit:listener-container>
 
-	<bean id="queueListenter" class="com.cml.learning.rabbitmq.spring.MessageReceiver" />
+	<bean id="messageConverter"
+		class="org.springframework.amqp.support.converter.Jackson2JsonMessageConverter" />
 
-	<bean class="com.cml.learning.rabbitmq.spring.MailService">
-		<property name="rabbitTemplate" ref="rabbitTemplate" />
+	<bean id="directMessageListener"
+		class="com.cml.learning.rabbitmq.spring.receiver.DirectMessageReceiver">
+		<property name="messageConverter" ref="messageConverter" />
+	</bean>
+	<bean id="fanoutMessageListener"
+		class="com.cml.learning.rabbitmq.spring.receiver.FanoutMessageReceiver">
+		<property name="messageConverter" ref="messageConverter" />
+	</bean>
+	<bean id="topicMessageListener"
+		class="com.cml.learning.rabbitmq.spring.receiver.TopicMessageReceiver">
+		<property name="messageConverter" ref="messageConverter" />
+	</bean>
+	<!-- 手动确认的消息 -->
+	<bean id="topicManulACKMessageListener"
+		class="com.cml.learning.rabbitmq.spring.receiver.TopicManualACKMessageReceiver">
+		<property name="messageConverter" ref="messageConverter" />
+		<property name="autoACK" value="false" />
+	</bean>
+
+	<bean id="mailService"
+		class="com.cml.learning.rabbitmq.spring.service.MailServiceImpl">
+		<constructor-arg ref="rabbitTemplate" />
+		<property name="fanoutExchange" value="${rabbitmq.exchange.fanout}" />
+		<property name="topicExchange" value="${rabbitmq.exchange.topic}" />
+		<property name="directExchange" value="${rabbitmq.exchange.direct}" />
 	</bean>
 
 </beans>

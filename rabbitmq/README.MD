@@ -1,5 +1,5 @@
 # rabbitmq项目说明 #
-    通过Spring与SpringBoot两种方式整合，完成rabbitmq基本消息发送与结构功能
+    通过Spring与SpringBoot两种方式整合，完成rabbitmq基本消息发送与接收功能
 
 # 基于docker的rabbitmq环境安装 #
 1. 获取镜像： docker pull rabbitmq:management
