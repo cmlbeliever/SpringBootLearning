@@ -3,6 +3,7 @@
 
 # 项目运行要求 #
 - 正确安装好rabbitmq
+- 正确配置好config/rabbitmq/rabbitmq.properties中rabbitmq连接信息
 
 # 基于docker的rabbitmq环境安装 #
 1. 获取镜像： docker pull rabbitmq:management
