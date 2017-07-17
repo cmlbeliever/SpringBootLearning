@@ -12,9 +12,12 @@ import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.amqp.SimpleRabbitListenerContainerFactoryConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import com.cml.learning.rabbitmq.spring.constant.PlaceHolderConst;
 
 @Configuration
 public class RabbitConfiguration {
@@ -48,7 +51,7 @@ public class RabbitConfiguration {
 		factory.setAcknowledgeMode(AcknowledgeMode.MANUAL);
 		return factory;
 	}
-	
+
 	@Bean
 	public RabbitAdmin rabbitAdmmin(ConnectionFactory connectionFactory) {
 		return new RabbitAdmin(connectionFactory);
@@ -56,48 +59,47 @@ public class RabbitConfiguration {
 
 	/******************* queue *********************************/
 	@Bean
-	public Queue topicQueue() {
-		return new Queue("manualTopicQuene");
+	public Queue topicQueue(@Value(PlaceHolderConst.Queues.manualTopicQueue) String queue) {
+		return new Queue(queue);
 	}
 
 	@Bean
-	public Queue mailFanoutQuene() {
-		return new Queue("mailFanoutQuene");
+	public Queue mailFanoutQuene(@Value(PlaceHolderConst.Queues.mailFanoutQueue) String queue) {
+		return new Queue(queue);
 	}
 
 	@Bean
-	public Queue directQueue() {
-	 return new Queue("maildirectQuene");
+	public Queue directQueue(@Value(PlaceHolderConst.Queues.mailDirectQueue) String queue) {
+		return new Queue(queue);
 	}
-
 
 	/******************* queue *********************************/
 
 	/******************* exchange *********************************/
 
 	@Bean
-	public FanoutExchange fanoutExchange() {
-		return new FanoutExchange("mailFanout");
+	public FanoutExchange fanoutExchange(@Value(PlaceHolderConst.Exchanges.mailFanoutExchange) String exchange) {
+		return new FanoutExchange(exchange);
 	}
 
 	@Bean
-	public TopicExchange topicExchange() {
-		return new TopicExchange("manualTopic");
+	public TopicExchange topicExchange(@Value(PlaceHolderConst.Exchanges.manualTopicExchange) String exchange) {
+		return new TopicExchange(exchange);
 	}
 
 	@Bean
-	public DirectExchange directExchange() {
-		return new DirectExchange("maildirect");
+	public DirectExchange directExchange(@Value(PlaceHolderConst.Exchanges.maildirectExchange) String exchange) {
+		return new DirectExchange(exchange);
 	}
 
 	@Bean
-	public Binding topicBinding(TopicExchange topicExchange, Queue topicQueue) {
-		return BindingBuilder.bind(topicQueue).to(topicExchange).with("mailManul.*");
+	public Binding topicBinding(TopicExchange topicExchange, Queue topicQueue, @Value(PlaceHolderConst.Routes.mailTopicRoute) String route) {
+		return BindingBuilder.bind(topicQueue).to(topicExchange).with(route);
 	}
 
 	@Bean
-	public Binding directBinding(DirectExchange directExchange, Queue directQueue) {
-		return BindingBuilder.bind(directQueue).to(directExchange).with("mail");
+	public Binding directBinding(DirectExchange directExchange, Queue directQueue, @Value(PlaceHolderConst.Routes.mailDirectRoute) String route) {
+		return BindingBuilder.bind(directQueue).to(directExchange).with(route);
 	}
 
 	@Bean

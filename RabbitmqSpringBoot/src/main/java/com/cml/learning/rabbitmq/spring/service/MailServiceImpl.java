@@ -5,17 +5,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import com.cml.learning.rabbitmq.spring.constant.PlaceHolderConst;
 import com.cml.learning.rabbitmq.spring.model.EmailModel;
 
 @Component
 public class MailServiceImpl implements MailService {
 	@Autowired
 	private AmqpTemplate template;
-	@Value("${rabbitmq.exchange.manualTopic}")
+	
+	@Value(PlaceHolderConst.Exchanges.manualTopicExchange)
 	private String topicExchange;
-	@Value("${rabbitmq.exchange.direct}")
+	@Value(PlaceHolderConst.Exchanges.maildirectExchange)
 	private String directExchange;
-	@Value("${rabbitmq.exchange.fanout}")
+	@Value(PlaceHolderConst.Exchanges.mailFanoutExchange)
 	private String fanoutExchange;
 
 	public MailServiceImpl(AmqpTemplate template) {
