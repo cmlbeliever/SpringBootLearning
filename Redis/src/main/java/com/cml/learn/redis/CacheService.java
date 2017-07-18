@@ -9,7 +9,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 
 @Component
-@CacheConfig(cacheNames="name")
+@CacheConfig(cacheNames = "name")
 public class CacheService {
 	@Autowired
 	private StringRedisTemplate template;
@@ -26,10 +26,28 @@ public class CacheService {
 		template.boundValueOps("name").set(name);
 	}
 
-	@Cacheable
+	@Cacheable()
 	public String getName() {
-		System.out.println("==================getName========================");
+		System.out.println("==================getName=======================");
 		return (String) template.boundValueOps("name").get();
+	}
+
+	@Cacheable()
+	public String getName2() {
+		System.out.println("==================getName2========================");
+		return (String) template.boundValueOps("name").get();
+	}
+
+	@Cacheable(value="getName3",key="#root.methodName")
+	public String getName3() {
+		System.out.println("==================getName3========================");
+		try {
+			Thread.sleep(200);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "name3";
 	}
 
 }
