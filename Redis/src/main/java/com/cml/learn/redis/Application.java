@@ -10,8 +10,9 @@ public class Application {
 		ConfigurableApplicationContext context = SpringApplication.run(Application.class, args);
 		CacheService service = context.getBean(CacheService.class);
 		for (int i = 10; i < 20; i++) {
-			System.out.println(i+":"+service.getName());
+			System.out.println(i + ":" + service.getName());
 			service.setName("name" + i);
 		}
+
 	}
 }
