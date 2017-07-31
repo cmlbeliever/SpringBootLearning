@@ -1,0 +1,6 @@
+
+/target/
+/logs
+/transaction-logs
+/.idea/
+/.settings/

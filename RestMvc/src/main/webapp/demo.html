@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body >
+	<h1>master api demo</h1>
+	 <p><label th:text="#{welcome}">23456</label></p>
+	<ul>
+		国际化测试 #{message}
+		<li>通常方式登录(user/login)：<a target="_blank" href="user/login?username=11111111111&password=123456">user/login?username=11111111111&pasword=123456</a></span></li>
+		<li>restful方式登录(user/{username}/login)：<a target="_blank" href="user/11111111111/login?password=123456">user/11111111111/login?password=123456</a></li>
+		<li>restful方式获取用户信息(user/info/{token})：<a target="_blank" href="user/info/token">user/info/token</a></li>
+	</ul>
+	<h4><font color=red>注：为了测试方便，将请求url设置为可接受get方式</font></h4>
+</body>
+</html>

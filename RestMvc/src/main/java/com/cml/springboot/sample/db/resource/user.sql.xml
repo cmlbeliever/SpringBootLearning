@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cml.springboot.sample.db.UserMapper">
+
+	<select id="getUserByToken" parameterType="string" resultType="User">
+		SELECT
+			 user_id	AS	userId,
+			 birthday	AS	birthday,
+			 nick_name	AS	nickName,
+			 token		AS	token
+		FROM
+			 t_user
+		WHERE
+			token	=	#{_parameter}
+		AND
+			del_flg	=	0 <!-- 未删除 -->
+	</select>
+
+	<select id="getUser" parameterType="User" resultType="User">
+		SELECT
+			 user_id	AS	userId,
+			 birthday	AS	birthday,
+			 nick_name	AS	nickName,
+			 token		AS	token
+		FROM
+			 t_user
+		WHERE
+			mobile			=	#{username}
+		AND
+			user_passwd		= 	#{password}
+		AND
+			del_flg	=	0 <!-- 未删除 -->
+	
+	</select>
+
+	<update id="updateToken" parameterType="User">
+		UPDATE
+			t_user
+		SET
+			token	=	#{newToken}
+		WHERE
+			token	=	#{token}
+	</update>
+
+</mapper>
