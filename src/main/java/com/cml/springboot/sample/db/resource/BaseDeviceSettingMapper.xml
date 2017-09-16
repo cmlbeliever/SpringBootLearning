@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cml.springboot.sample.db.BaseDeviceSettingMapper">
+  <resultMap id="BaseResultMap" type="com.cml.springboot.sample.bean.BaseDeviceSetting">
+    <result column="device_id" jdbcType="OTHER" property="deviceId" />
+    <result column="name" jdbcType="OTHER" property="name" />
+    <result column="person_distance" jdbcType="OTHER" property="personDistance" />
+    <result column="study_span" jdbcType="OTHER" property="studySpan" />
+    <result column="study_idle" jdbcType="OTHER" property="studyIdle" />
+    <result column="env_light_alarm" jdbcType="OTHER" property="envLightAlarm" />
+    <result column="light_diff_alarm" jdbcType="OTHER" property="lightDiffAlarm" />
+  </resultMap>
+  <insert id="insert" parameterType="com.cml.springboot.sample.bean.BaseDeviceSetting">
+    insert into device_setting (device_id, name, person_distance, 
+      study_span, study_idle, env_light_alarm, 
+      light_diff_alarm)
+    values (#{deviceId,jdbcType=OTHER}, #{name,jdbcType=OTHER}, #{personDistance,jdbcType=OTHER}, 
+      #{studySpan,jdbcType=OTHER}, #{studyIdle,jdbcType=OTHER}, #{envLightAlarm,jdbcType=OTHER}, 
+      #{lightDiffAlarm,jdbcType=OTHER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cml.springboot.sample.bean.BaseDeviceSetting">
+    insert into device_setting
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="deviceId != null">
+        device_id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="personDistance != null">
+        person_distance,
+      </if>
+      <if test="studySpan != null">
+        study_span,
+      </if>
+      <if test="studyIdle != null">
+        study_idle,
+      </if>
+      <if test="envLightAlarm != null">
+        env_light_alarm,
+      </if>
+      <if test="lightDiffAlarm != null">
+        light_diff_alarm,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="deviceId != null">
+        #{deviceId,jdbcType=OTHER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=OTHER},
+      </if>
+      <if test="personDistance != null">
+        #{personDistance,jdbcType=OTHER},
+      </if>
+      <if test="studySpan != null">
+        #{studySpan,jdbcType=OTHER},
+      </if>
+      <if test="studyIdle != null">
+        #{studyIdle,jdbcType=OTHER},
+      </if>
+      <if test="envLightAlarm != null">
+        #{envLightAlarm,jdbcType=OTHER},
+      </if>
+      <if test="lightDiffAlarm != null">
+        #{lightDiffAlarm,jdbcType=OTHER},
+      </if>
+    </trim>
+  </insert>
+</mapper>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cml.springboot.sample.db.BaseAudioSettingMapper">
+  <resultMap id="BaseResultMap" type="com.cml.springboot.sample.bean.BaseAudioSetting">
+    <result column="device_id" jdbcType="OTHER" property="deviceId" />
+    <result column="posture" jdbcType="OTHER" property="posture" />
+    <result column="time_span" jdbcType="OTHER" property="timeSpan" />
+    <result column="env_light" jdbcType="OTHER" property="envLight" />
+  </resultMap>
+  <insert id="insert" parameterType="com.cml.springboot.sample.bean.BaseAudioSetting">
+    insert into audio_setting (device_id, posture, time_span, 
+      env_light)
+    values (#{deviceId,jdbcType=OTHER}, #{posture,jdbcType=OTHER}, #{timeSpan,jdbcType=OTHER}, 
+      #{envLight,jdbcType=OTHER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cml.springboot.sample.bean.BaseAudioSetting">
+    insert into audio_setting
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="deviceId != null">
+        device_id,
+      </if>
+      <if test="posture != null">
+        posture,
+      </if>
+      <if test="timeSpan != null">
+        time_span,
+      </if>
+      <if test="envLight != null">
+        env_light,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="deviceId != null">
+        #{deviceId,jdbcType=OTHER},
+      </if>
+      <if test="posture != null">
+        #{posture,jdbcType=OTHER},
+      </if>
+      <if test="timeSpan != null">
+        #{timeSpan,jdbcType=OTHER},
+      </if>
+      <if test="envLight != null">
+        #{envLight,jdbcType=OTHER},
+      </if>
+    </trim>
+  </insert>
+</mapper>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cml.springboot.sample.db.BaseSuggestionMapper">
+  <resultMap id="BaseResultMap" type="com.cml.springboot.sample.bean.BaseSuggestion">
+    <id column="id" jdbcType="OTHER" property="id" />
+    <result column="user_id" jdbcType="OTHER" property="userId" />
+    <result column="content" jdbcType="OTHER" property="content" />
+    <result column="create_date" jdbcType="OTHER" property="createDate" />
+    <result column="update_time" jdbcType="OTHER" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, content, create_date, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigInteger" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from suggestion
+    where id = #{id,jdbcType=OTHER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigInteger">
+    delete from suggestion
+    where id = #{id,jdbcType=OTHER}
+  </delete>
+  <insert id="insert" parameterType="com.cml.springboot.sample.bean.BaseSuggestion">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.math.BigInteger">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into suggestion (id, user_id, content, 
+      create_date, update_time)
+    values (#{id,jdbcType=OTHER}, #{userId,jdbcType=OTHER}, #{content,jdbcType=OTHER}, 
+      #{createDate,jdbcType=OTHER}, #{updateTime,jdbcType=OTHER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cml.springboot.sample.bean.BaseSuggestion">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.math.BigInteger">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into suggestion
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      id,
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      #{id,jdbcType=OTHER},
+      <if test="userId != null">
+        #{userId,jdbcType=OTHER},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=OTHER},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=OTHER},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=OTHER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cml.springboot.sample.bean.BaseSuggestion">
+    update suggestion
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=OTHER},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=OTHER},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=OTHER},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=OTHER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=OTHER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cml.springboot.sample.bean.BaseSuggestion">
+    update suggestion
+    set user_id = #{userId,jdbcType=OTHER},
+      content = #{content,jdbcType=OTHER},
+      create_date = #{createDate,jdbcType=OTHER},
+      update_time = #{updateTime,jdbcType=OTHER}
+    where id = #{id,jdbcType=OTHER}
+  </update>
+</mapper>

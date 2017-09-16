@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cml.springboot.sample.db.BaseDeviceMapper">
+  <resultMap id="BaseResultMap" type="com.cml.springboot.sample.bean.BaseDevice">
+    <id column="device_id" jdbcType="OTHER" property="deviceId" />
+    <result column="memo" jdbcType="OTHER" property="memo" />
+    <result column="name" jdbcType="OTHER" property="name" />
+    <result column="qr_code_url" jdbcType="OTHER" property="qrCodeUrl" />
+    <result column="mac" jdbcType="OTHER" property="mac" />
+    <result column="register_status" jdbcType="OTHER" property="registerStatus" />
+    <result column="create_date" jdbcType="OTHER" property="createDate" />
+    <result column="update_time" jdbcType="OTHER" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    device_id, memo, name, qr_code_url, mac, register_status, create_date, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigInteger" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from device
+    where device_id = #{deviceId,jdbcType=OTHER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigInteger">
+    delete from device
+    where device_id = #{deviceId,jdbcType=OTHER}
+  </delete>
+  <insert id="insert" parameterType="com.cml.springboot.sample.bean.BaseDevice">
+    insert into device (device_id, memo, name, 
+      qr_code_url, mac, register_status, 
+      create_date, update_time)
+    values (#{deviceId,jdbcType=OTHER}, #{memo,jdbcType=OTHER}, #{name,jdbcType=OTHER}, 
+      #{qrCodeUrl,jdbcType=OTHER}, #{mac,jdbcType=OTHER}, #{registerStatus,jdbcType=OTHER}, 
+      #{createDate,jdbcType=OTHER}, #{updateTime,jdbcType=OTHER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cml.springboot.sample.bean.BaseDevice">
+    insert into device
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="deviceId != null">
+        device_id,
+      </if>
+      <if test="memo != null">
+        memo,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="qrCodeUrl != null">
+        qr_code_url,
+      </if>
+      <if test="mac != null">
+        mac,
+      </if>
+      <if test="registerStatus != null">
+        register_status,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="deviceId != null">
+        #{deviceId,jdbcType=OTHER},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=OTHER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=OTHER},
+      </if>
+      <if test="qrCodeUrl != null">
+        #{qrCodeUrl,jdbcType=OTHER},
+      </if>
+      <if test="mac != null">
+        #{mac,jdbcType=OTHER},
+      </if>
+      <if test="registerStatus != null">
+        #{registerStatus,jdbcType=OTHER},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=OTHER},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=OTHER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cml.springboot.sample.bean.BaseDevice">
+    update device
+    <set>
+      <if test="memo != null">
+        memo = #{memo,jdbcType=OTHER},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=OTHER},
+      </if>
+      <if test="qrCodeUrl != null">
+        qr_code_url = #{qrCodeUrl,jdbcType=OTHER},
+      </if>
+      <if test="mac != null">
+        mac = #{mac,jdbcType=OTHER},
+      </if>
+      <if test="registerStatus != null">
+        register_status = #{registerStatus,jdbcType=OTHER},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=OTHER},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=OTHER},
+      </if>
+    </set>
+    where device_id = #{deviceId,jdbcType=OTHER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cml.springboot.sample.bean.BaseDevice">
+    update device
+    set memo = #{memo,jdbcType=OTHER},
+      name = #{name,jdbcType=OTHER},
+      qr_code_url = #{qrCodeUrl,jdbcType=OTHER},
+      mac = #{mac,jdbcType=OTHER},
+      register_status = #{registerStatus,jdbcType=OTHER},
+      create_date = #{createDate,jdbcType=OTHER},
+      update_time = #{updateTime,jdbcType=OTHER}
+    where device_id = #{deviceId,jdbcType=OTHER}
+  </update>
+</mapper>

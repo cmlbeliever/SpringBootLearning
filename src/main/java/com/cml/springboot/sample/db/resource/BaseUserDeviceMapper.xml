@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cml.springboot.sample.db.BaseUserDeviceMapper">
+  <resultMap id="BaseResultMap" type="com.cml.springboot.sample.bean.BaseUserDevice">
+    <id column="id" jdbcType="OTHER" property="id" />
+    <result column="device_id" jdbcType="OTHER" property="deviceId" />
+    <result column="user_id" jdbcType="OTHER" property="userId" />
+    <result column="bind_status" jdbcType="OTHER" property="bindStatus" />
+    <result column="bind_time" jdbcType="OTHER" property="bindTime" />
+    <result column="create_date" jdbcType="OTHER" property="createDate" />
+    <result column="update_time" jdbcType="OTHER" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, device_id, user_id, bind_status, bind_time, create_date, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigInteger" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_device
+    where id = #{id,jdbcType=OTHER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigInteger">
+    delete from user_device
+    where id = #{id,jdbcType=OTHER}
+  </delete>
+  <insert id="insert" parameterType="com.cml.springboot.sample.bean.BaseUserDevice">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.math.BigInteger">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into user_device (id, device_id, user_id, 
+      bind_status, bind_time, create_date, 
+      update_time)
+    values (#{id,jdbcType=OTHER}, #{deviceId,jdbcType=OTHER}, #{userId,jdbcType=OTHER}, 
+      #{bindStatus,jdbcType=OTHER}, #{bindTime,jdbcType=OTHER}, #{createDate,jdbcType=OTHER}, 
+      #{updateTime,jdbcType=OTHER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cml.springboot.sample.bean.BaseUserDevice">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.math.BigInteger">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into user_device
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      id,
+      <if test="deviceId != null">
+        device_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="bindStatus != null">
+        bind_status,
+      </if>
+      <if test="bindTime != null">
+        bind_time,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      #{id,jdbcType=OTHER},
+      <if test="deviceId != null">
+        #{deviceId,jdbcType=OTHER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=OTHER},
+      </if>
+      <if test="bindStatus != null">
+        #{bindStatus,jdbcType=OTHER},
+      </if>
+      <if test="bindTime != null">
+        #{bindTime,jdbcType=OTHER},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=OTHER},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=OTHER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cml.springboot.sample.bean.BaseUserDevice">
+    update user_device
+    <set>
+      <if test="deviceId != null">
+        device_id = #{deviceId,jdbcType=OTHER},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=OTHER},
+      </if>
+      <if test="bindStatus != null">
+        bind_status = #{bindStatus,jdbcType=OTHER},
+      </if>
+      <if test="bindTime != null">
+        bind_time = #{bindTime,jdbcType=OTHER},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=OTHER},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=OTHER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=OTHER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cml.springboot.sample.bean.BaseUserDevice">
+    update user_device
+    set device_id = #{deviceId,jdbcType=OTHER},
+      user_id = #{userId,jdbcType=OTHER},
+      bind_status = #{bindStatus,jdbcType=OTHER},
+      bind_time = #{bindTime,jdbcType=OTHER},
+      create_date = #{createDate,jdbcType=OTHER},
+      update_time = #{updateTime,jdbcType=OTHER}
+    where id = #{id,jdbcType=OTHER}
+  </update>
+</mapper>

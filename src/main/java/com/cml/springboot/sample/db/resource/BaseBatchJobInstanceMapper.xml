@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cml.springboot.sample.db.BaseBatchJobInstanceMapper">
+  <resultMap id="BaseResultMap" type="com.cml.springboot.sample.bean.BaseBatchJobInstance">
+    <id column="JOB_INSTANCE_ID" jdbcType="OTHER" property="jobInstanceId" />
+    <result column="VERSION" jdbcType="OTHER" property="version" />
+    <result column="JOB_NAME" jdbcType="OTHER" property="jobName" />
+    <result column="JOB_KEY" jdbcType="OTHER" property="jobKey" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    JOB_INSTANCE_ID, VERSION, JOB_NAME, JOB_KEY
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigInteger" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from BATCH_JOB_INSTANCE
+    where JOB_INSTANCE_ID = #{jobInstanceId,jdbcType=OTHER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigInteger">
+    delete from BATCH_JOB_INSTANCE
+    where JOB_INSTANCE_ID = #{jobInstanceId,jdbcType=OTHER}
+  </delete>
+  <insert id="insert" parameterType="com.cml.springboot.sample.bean.BaseBatchJobInstance">
+    insert into BATCH_JOB_INSTANCE (JOB_INSTANCE_ID, VERSION, JOB_NAME, 
+      JOB_KEY)
+    values (#{jobInstanceId,jdbcType=OTHER}, #{version,jdbcType=OTHER}, #{jobName,jdbcType=OTHER}, 
+      #{jobKey,jdbcType=OTHER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cml.springboot.sample.bean.BaseBatchJobInstance">
+    insert into BATCH_JOB_INSTANCE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="jobInstanceId != null">
+        JOB_INSTANCE_ID,
+      </if>
+      <if test="version != null">
+        VERSION,
+      </if>
+      <if test="jobName != null">
+        JOB_NAME,
+      </if>
+      <if test="jobKey != null">
+        JOB_KEY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="jobInstanceId != null">
+        #{jobInstanceId,jdbcType=OTHER},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=OTHER},
+      </if>
+      <if test="jobName != null">
+        #{jobName,jdbcType=OTHER},
+      </if>
+      <if test="jobKey != null">
+        #{jobKey,jdbcType=OTHER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cml.springboot.sample.bean.BaseBatchJobInstance">
+    update BATCH_JOB_INSTANCE
+    <set>
+      <if test="version != null">
+        VERSION = #{version,jdbcType=OTHER},
+      </if>
+      <if test="jobName != null">
+        JOB_NAME = #{jobName,jdbcType=OTHER},
+      </if>
+      <if test="jobKey != null">
+        JOB_KEY = #{jobKey,jdbcType=OTHER},
+      </if>
+    </set>
+    where JOB_INSTANCE_ID = #{jobInstanceId,jdbcType=OTHER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cml.springboot.sample.bean.BaseBatchJobInstance">
+    update BATCH_JOB_INSTANCE
+    set VERSION = #{version,jdbcType=OTHER},
+      JOB_NAME = #{jobName,jdbcType=OTHER},
+      JOB_KEY = #{jobKey,jdbcType=OTHER}
+    where JOB_INSTANCE_ID = #{jobInstanceId,jdbcType=OTHER}
+  </update>
+</mapper>

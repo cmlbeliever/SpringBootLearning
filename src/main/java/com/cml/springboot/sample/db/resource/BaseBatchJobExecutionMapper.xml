@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cml.springboot.sample.db.BaseBatchJobExecutionMapper">
+  <resultMap id="BaseResultMap" type="com.cml.springboot.sample.bean.BaseBatchJobExecution">
+    <id column="JOB_EXECUTION_ID" jdbcType="OTHER" property="jobExecutionId" />
+    <result column="VERSION" jdbcType="OTHER" property="version" />
+    <result column="JOB_INSTANCE_ID" jdbcType="OTHER" property="jobInstanceId" />
+    <result column="CREATE_TIME" jdbcType="OTHER" property="createTime" />
+    <result column="START_TIME" jdbcType="OTHER" property="startTime" />
+    <result column="END_TIME" jdbcType="OTHER" property="endTime" />
+    <result column="STATUS" jdbcType="OTHER" property="status" />
+    <result column="EXIT_CODE" jdbcType="OTHER" property="exitCode" />
+    <result column="EXIT_MESSAGE" jdbcType="OTHER" property="exitMessage" />
+    <result column="LAST_UPDATED" jdbcType="OTHER" property="lastUpdated" />
+    <result column="JOB_CONFIGURATION_LOCATION" jdbcType="OTHER" property="jobConfigurationLocation" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    JOB_EXECUTION_ID, VERSION, JOB_INSTANCE_ID, CREATE_TIME, START_TIME, END_TIME, STATUS, 
+    EXIT_CODE, EXIT_MESSAGE, LAST_UPDATED, JOB_CONFIGURATION_LOCATION
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigInteger" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from BATCH_JOB_EXECUTION
+    where JOB_EXECUTION_ID = #{jobExecutionId,jdbcType=OTHER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigInteger">
+    delete from BATCH_JOB_EXECUTION
+    where JOB_EXECUTION_ID = #{jobExecutionId,jdbcType=OTHER}
+  </delete>
+  <insert id="insert" parameterType="com.cml.springboot.sample.bean.BaseBatchJobExecution">
+    insert into BATCH_JOB_EXECUTION (JOB_EXECUTION_ID, VERSION, JOB_INSTANCE_ID, 
+      CREATE_TIME, START_TIME, END_TIME, 
+      STATUS, EXIT_CODE, EXIT_MESSAGE, 
+      LAST_UPDATED, JOB_CONFIGURATION_LOCATION)
+    values (#{jobExecutionId,jdbcType=OTHER}, #{version,jdbcType=OTHER}, #{jobInstanceId,jdbcType=OTHER}, 
+      #{createTime,jdbcType=OTHER}, #{startTime,jdbcType=OTHER}, #{endTime,jdbcType=OTHER}, 
+      #{status,jdbcType=OTHER}, #{exitCode,jdbcType=OTHER}, #{exitMessage,jdbcType=OTHER}, 
+      #{lastUpdated,jdbcType=OTHER}, #{jobConfigurationLocation,jdbcType=OTHER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cml.springboot.sample.bean.BaseBatchJobExecution">
+    insert into BATCH_JOB_EXECUTION
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="jobExecutionId != null">
+        JOB_EXECUTION_ID,
+      </if>
+      <if test="version != null">
+        VERSION,
+      </if>
+      <if test="jobInstanceId != null">
+        JOB_INSTANCE_ID,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="startTime != null">
+        START_TIME,
+      </if>
+      <if test="endTime != null">
+        END_TIME,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="exitCode != null">
+        EXIT_CODE,
+      </if>
+      <if test="exitMessage != null">
+        EXIT_MESSAGE,
+      </if>
+      <if test="lastUpdated != null">
+        LAST_UPDATED,
+      </if>
+      <if test="jobConfigurationLocation != null">
+        JOB_CONFIGURATION_LOCATION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="jobExecutionId != null">
+        #{jobExecutionId,jdbcType=OTHER},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=OTHER},
+      </if>
+      <if test="jobInstanceId != null">
+        #{jobInstanceId,jdbcType=OTHER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=OTHER},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=OTHER},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=OTHER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=OTHER},
+      </if>
+      <if test="exitCode != null">
+        #{exitCode,jdbcType=OTHER},
+      </if>
+      <if test="exitMessage != null">
+        #{exitMessage,jdbcType=OTHER},
+      </if>
+      <if test="lastUpdated != null">
+        #{lastUpdated,jdbcType=OTHER},
+      </if>
+      <if test="jobConfigurationLocation != null">
+        #{jobConfigurationLocation,jdbcType=OTHER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cml.springboot.sample.bean.BaseBatchJobExecution">
+    update BATCH_JOB_EXECUTION
+    <set>
+      <if test="version != null">
+        VERSION = #{version,jdbcType=OTHER},
+      </if>
+      <if test="jobInstanceId != null">
+        JOB_INSTANCE_ID = #{jobInstanceId,jdbcType=OTHER},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=OTHER},
+      </if>
+      <if test="startTime != null">
+        START_TIME = #{startTime,jdbcType=OTHER},
+      </if>
+      <if test="endTime != null">
+        END_TIME = #{endTime,jdbcType=OTHER},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=OTHER},
+      </if>
+      <if test="exitCode != null">
+        EXIT_CODE = #{exitCode,jdbcType=OTHER},
+      </if>
+      <if test="exitMessage != null">
+        EXIT_MESSAGE = #{exitMessage,jdbcType=OTHER},
+      </if>
+      <if test="lastUpdated != null">
+        LAST_UPDATED = #{lastUpdated,jdbcType=OTHER},
+      </if>
+      <if test="jobConfigurationLocation != null">
+        JOB_CONFIGURATION_LOCATION = #{jobConfigurationLocation,jdbcType=OTHER},
+      </if>
+    </set>
+    where JOB_EXECUTION_ID = #{jobExecutionId,jdbcType=OTHER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cml.springboot.sample.bean.BaseBatchJobExecution">
+    update BATCH_JOB_EXECUTION
+    set VERSION = #{version,jdbcType=OTHER},
+      JOB_INSTANCE_ID = #{jobInstanceId,jdbcType=OTHER},
+      CREATE_TIME = #{createTime,jdbcType=OTHER},
+      START_TIME = #{startTime,jdbcType=OTHER},
+      END_TIME = #{endTime,jdbcType=OTHER},
+      STATUS = #{status,jdbcType=OTHER},
+      EXIT_CODE = #{exitCode,jdbcType=OTHER},
+      EXIT_MESSAGE = #{exitMessage,jdbcType=OTHER},
+      LAST_UPDATED = #{lastUpdated,jdbcType=OTHER},
+      JOB_CONFIGURATION_LOCATION = #{jobConfigurationLocation,jdbcType=OTHER}
+    where JOB_EXECUTION_ID = #{jobExecutionId,jdbcType=OTHER}
+  </update>
+</mapper>

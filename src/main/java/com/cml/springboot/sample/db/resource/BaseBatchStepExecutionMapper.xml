@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cml.springboot.sample.db.BaseBatchStepExecutionMapper">
+  <resultMap id="BaseResultMap" type="com.cml.springboot.sample.bean.BaseBatchStepExecution">
+    <id column="STEP_EXECUTION_ID" jdbcType="OTHER" property="stepExecutionId" />
+    <result column="VERSION" jdbcType="OTHER" property="version" />
+    <result column="STEP_NAME" jdbcType="OTHER" property="stepName" />
+    <result column="JOB_EXECUTION_ID" jdbcType="OTHER" property="jobExecutionId" />
+    <result column="START_TIME" jdbcType="OTHER" property="startTime" />
+    <result column="END_TIME" jdbcType="OTHER" property="endTime" />
+    <result column="STATUS" jdbcType="OTHER" property="status" />
+    <result column="COMMIT_COUNT" jdbcType="OTHER" property="commitCount" />
+    <result column="READ_COUNT" jdbcType="OTHER" property="readCount" />
+    <result column="FILTER_COUNT" jdbcType="OTHER" property="filterCount" />
+    <result column="WRITE_COUNT" jdbcType="OTHER" property="writeCount" />
+    <result column="READ_SKIP_COUNT" jdbcType="OTHER" property="readSkipCount" />
+    <result column="WRITE_SKIP_COUNT" jdbcType="OTHER" property="writeSkipCount" />
+    <result column="PROCESS_SKIP_COUNT" jdbcType="OTHER" property="processSkipCount" />
+    <result column="ROLLBACK_COUNT" jdbcType="OTHER" property="rollbackCount" />
+    <result column="EXIT_CODE" jdbcType="OTHER" property="exitCode" />
+    <result column="EXIT_MESSAGE" jdbcType="OTHER" property="exitMessage" />
+    <result column="LAST_UPDATED" jdbcType="OTHER" property="lastUpdated" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    STEP_EXECUTION_ID, VERSION, STEP_NAME, JOB_EXECUTION_ID, START_TIME, END_TIME, STATUS, 
+    COMMIT_COUNT, READ_COUNT, FILTER_COUNT, WRITE_COUNT, READ_SKIP_COUNT, WRITE_SKIP_COUNT, 
+    PROCESS_SKIP_COUNT, ROLLBACK_COUNT, EXIT_CODE, EXIT_MESSAGE, LAST_UPDATED
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigInteger" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from BATCH_STEP_EXECUTION
+    where STEP_EXECUTION_ID = #{stepExecutionId,jdbcType=OTHER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigInteger">
+    delete from BATCH_STEP_EXECUTION
+    where STEP_EXECUTION_ID = #{stepExecutionId,jdbcType=OTHER}
+  </delete>
+  <insert id="insert" parameterType="com.cml.springboot.sample.bean.BaseBatchStepExecution">
+    insert into BATCH_STEP_EXECUTION (STEP_EXECUTION_ID, VERSION, STEP_NAME, 
+      JOB_EXECUTION_ID, START_TIME, END_TIME, 
+      STATUS, COMMIT_COUNT, READ_COUNT, 
+      FILTER_COUNT, WRITE_COUNT, READ_SKIP_COUNT, 
+      WRITE_SKIP_COUNT, PROCESS_SKIP_COUNT, ROLLBACK_COUNT, 
+      EXIT_CODE, EXIT_MESSAGE, LAST_UPDATED
+      )
+    values (#{stepExecutionId,jdbcType=OTHER}, #{version,jdbcType=OTHER}, #{stepName,jdbcType=OTHER}, 
+      #{jobExecutionId,jdbcType=OTHER}, #{startTime,jdbcType=OTHER}, #{endTime,jdbcType=OTHER}, 
+      #{status,jdbcType=OTHER}, #{commitCount,jdbcType=OTHER}, #{readCount,jdbcType=OTHER}, 
+      #{filterCount,jdbcType=OTHER}, #{writeCount,jdbcType=OTHER}, #{readSkipCount,jdbcType=OTHER}, 
+      #{writeSkipCount,jdbcType=OTHER}, #{processSkipCount,jdbcType=OTHER}, #{rollbackCount,jdbcType=OTHER}, 
+      #{exitCode,jdbcType=OTHER}, #{exitMessage,jdbcType=OTHER}, #{lastUpdated,jdbcType=OTHER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cml.springboot.sample.bean.BaseBatchStepExecution">
+    insert into BATCH_STEP_EXECUTION
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="stepExecutionId != null">
+        STEP_EXECUTION_ID,
+      </if>
+      <if test="version != null">
+        VERSION,
+      </if>
+      <if test="stepName != null">
+        STEP_NAME,
+      </if>
+      <if test="jobExecutionId != null">
+        JOB_EXECUTION_ID,
+      </if>
+      <if test="startTime != null">
+        START_TIME,
+      </if>
+      <if test="endTime != null">
+        END_TIME,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="commitCount != null">
+        COMMIT_COUNT,
+      </if>
+      <if test="readCount != null">
+        READ_COUNT,
+      </if>
+      <if test="filterCount != null">
+        FILTER_COUNT,
+      </if>
+      <if test="writeCount != null">
+        WRITE_COUNT,
+      </if>
+      <if test="readSkipCount != null">
+        READ_SKIP_COUNT,
+      </if>
+      <if test="writeSkipCount != null">
+        WRITE_SKIP_COUNT,
+      </if>
+      <if test="processSkipCount != null">
+        PROCESS_SKIP_COUNT,
+      </if>
+      <if test="rollbackCount != null">
+        ROLLBACK_COUNT,
+      </if>
+      <if test="exitCode != null">
+        EXIT_CODE,
+      </if>
+      <if test="exitMessage != null">
+        EXIT_MESSAGE,
+      </if>
+      <if test="lastUpdated != null">
+        LAST_UPDATED,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="stepExecutionId != null">
+        #{stepExecutionId,jdbcType=OTHER},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=OTHER},
+      </if>
+      <if test="stepName != null">
+        #{stepName,jdbcType=OTHER},
+      </if>
+      <if test="jobExecutionId != null">
+        #{jobExecutionId,jdbcType=OTHER},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=OTHER},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=OTHER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=OTHER},
+      </if>
+      <if test="commitCount != null">
+        #{commitCount,jdbcType=OTHER},
+      </if>
+      <if test="readCount != null">
+        #{readCount,jdbcType=OTHER},
+      </if>
+      <if test="filterCount != null">
+        #{filterCount,jdbcType=OTHER},
+      </if>
+      <if test="writeCount != null">
+        #{writeCount,jdbcType=OTHER},
+      </if>
+      <if test="readSkipCount != null">
+        #{readSkipCount,jdbcType=OTHER},
+      </if>
+      <if test="writeSkipCount != null">
+        #{writeSkipCount,jdbcType=OTHER},
+      </if>
+      <if test="processSkipCount != null">
+        #{processSkipCount,jdbcType=OTHER},
+      </if>
+      <if test="rollbackCount != null">
+        #{rollbackCount,jdbcType=OTHER},
+      </if>
+      <if test="exitCode != null">
+        #{exitCode,jdbcType=OTHER},
+      </if>
+      <if test="exitMessage != null">
+        #{exitMessage,jdbcType=OTHER},
+      </if>
+      <if test="lastUpdated != null">
+        #{lastUpdated,jdbcType=OTHER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cml.springboot.sample.bean.BaseBatchStepExecution">
+    update BATCH_STEP_EXECUTION
+    <set>
+      <if test="version != null">
+        VERSION = #{version,jdbcType=OTHER},
+      </if>
+      <if test="stepName != null">
+        STEP_NAME = #{stepName,jdbcType=OTHER},
+      </if>
+      <if test="jobExecutionId != null">
+        JOB_EXECUTION_ID = #{jobExecutionId,jdbcType=OTHER},
+      </if>
+      <if test="startTime != null">
+        START_TIME = #{startTime,jdbcType=OTHER},
+      </if>
+      <if test="endTime != null">
+        END_TIME = #{endTime,jdbcType=OTHER},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=OTHER},
+      </if>
+      <if test="commitCount != null">
+        COMMIT_COUNT = #{commitCount,jdbcType=OTHER},
+      </if>
+      <if test="readCount != null">
+        READ_COUNT = #{readCount,jdbcType=OTHER},
+      </if>
+      <if test="filterCount != null">
+        FILTER_COUNT = #{filterCount,jdbcType=OTHER},
+      </if>
+      <if test="writeCount != null">
+        WRITE_COUNT = #{writeCount,jdbcType=OTHER},
+      </if>
+      <if test="readSkipCount != null">
+        READ_SKIP_COUNT = #{readSkipCount,jdbcType=OTHER},
+      </if>
+      <if test="writeSkipCount != null">
+        WRITE_SKIP_COUNT = #{writeSkipCount,jdbcType=OTHER},
+      </if>
+      <if test="processSkipCount != null">
+        PROCESS_SKIP_COUNT = #{processSkipCount,jdbcType=OTHER},
+      </if>
+      <if test="rollbackCount != null">
+        ROLLBACK_COUNT = #{rollbackCount,jdbcType=OTHER},
+      </if>
+      <if test="exitCode != null">
+        EXIT_CODE = #{exitCode,jdbcType=OTHER},
+      </if>
+      <if test="exitMessage != null">
+        EXIT_MESSAGE = #{exitMessage,jdbcType=OTHER},
+      </if>
+      <if test="lastUpdated != null">
+        LAST_UPDATED = #{lastUpdated,jdbcType=OTHER},
+      </if>
+    </set>
+    where STEP_EXECUTION_ID = #{stepExecutionId,jdbcType=OTHER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cml.springboot.sample.bean.BaseBatchStepExecution">
+    update BATCH_STEP_EXECUTION
+    set VERSION = #{version,jdbcType=OTHER},
+      STEP_NAME = #{stepName,jdbcType=OTHER},
+      JOB_EXECUTION_ID = #{jobExecutionId,jdbcType=OTHER},
+      START_TIME = #{startTime,jdbcType=OTHER},
+      END_TIME = #{endTime,jdbcType=OTHER},
+      STATUS = #{status,jdbcType=OTHER},
+      COMMIT_COUNT = #{commitCount,jdbcType=OTHER},
+      READ_COUNT = #{readCount,jdbcType=OTHER},
+      FILTER_COUNT = #{filterCount,jdbcType=OTHER},
+      WRITE_COUNT = #{writeCount,jdbcType=OTHER},
+      READ_SKIP_COUNT = #{readSkipCount,jdbcType=OTHER},
+      WRITE_SKIP_COUNT = #{writeSkipCount,jdbcType=OTHER},
+      PROCESS_SKIP_COUNT = #{processSkipCount,jdbcType=OTHER},
+      ROLLBACK_COUNT = #{rollbackCount,jdbcType=OTHER},
+      EXIT_CODE = #{exitCode,jdbcType=OTHER},
+      EXIT_MESSAGE = #{exitMessage,jdbcType=OTHER},
+      LAST_UPDATED = #{lastUpdated,jdbcType=OTHER}
+    where STEP_EXECUTION_ID = #{stepExecutionId,jdbcType=OTHER}
+  </update>
+</mapper>

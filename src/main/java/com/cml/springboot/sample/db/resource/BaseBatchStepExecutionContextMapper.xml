@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cml.springboot.sample.db.BaseBatchStepExecutionContextMapper">
+  <resultMap id="BaseResultMap" type="com.cml.springboot.sample.bean.BaseBatchStepExecutionContext">
+    <id column="STEP_EXECUTION_ID" jdbcType="OTHER" property="stepExecutionId" />
+    <result column="SHORT_CONTEXT" jdbcType="OTHER" property="shortContext" />
+    <result column="SERIALIZED_CONTEXT" jdbcType="OTHER" property="serializedContext" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    STEP_EXECUTION_ID, SHORT_CONTEXT, SERIALIZED_CONTEXT
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigInteger" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from BATCH_STEP_EXECUTION_CONTEXT
+    where STEP_EXECUTION_ID = #{stepExecutionId,jdbcType=OTHER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigInteger">
+    delete from BATCH_STEP_EXECUTION_CONTEXT
+    where STEP_EXECUTION_ID = #{stepExecutionId,jdbcType=OTHER}
+  </delete>
+  <insert id="insert" parameterType="com.cml.springboot.sample.bean.BaseBatchStepExecutionContext">
+    insert into BATCH_STEP_EXECUTION_CONTEXT (STEP_EXECUTION_ID, SHORT_CONTEXT, SERIALIZED_CONTEXT
+      )
+    values (#{stepExecutionId,jdbcType=OTHER}, #{shortContext,jdbcType=OTHER}, #{serializedContext,jdbcType=OTHER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cml.springboot.sample.bean.BaseBatchStepExecutionContext">
+    insert into BATCH_STEP_EXECUTION_CONTEXT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="stepExecutionId != null">
+        STEP_EXECUTION_ID,
+      </if>
+      <if test="shortContext != null">
+        SHORT_CONTEXT,
+      </if>
+      <if test="serializedContext != null">
+        SERIALIZED_CONTEXT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="stepExecutionId != null">
+        #{stepExecutionId,jdbcType=OTHER},
+      </if>
+      <if test="shortContext != null">
+        #{shortContext,jdbcType=OTHER},
+      </if>
+      <if test="serializedContext != null">
+        #{serializedContext,jdbcType=OTHER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cml.springboot.sample.bean.BaseBatchStepExecutionContext">
+    update BATCH_STEP_EXECUTION_CONTEXT
+    <set>
+      <if test="shortContext != null">
+        SHORT_CONTEXT = #{shortContext,jdbcType=OTHER},
+      </if>
+      <if test="serializedContext != null">
+        SERIALIZED_CONTEXT = #{serializedContext,jdbcType=OTHER},
+      </if>
+    </set>
+    where STEP_EXECUTION_ID = #{stepExecutionId,jdbcType=OTHER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cml.springboot.sample.bean.BaseBatchStepExecutionContext">
+    update BATCH_STEP_EXECUTION_CONTEXT
+    set SHORT_CONTEXT = #{shortContext,jdbcType=OTHER},
+      SERIALIZED_CONTEXT = #{serializedContext,jdbcType=OTHER}
+    where STEP_EXECUTION_ID = #{stepExecutionId,jdbcType=OTHER}
+  </update>
+</mapper>
