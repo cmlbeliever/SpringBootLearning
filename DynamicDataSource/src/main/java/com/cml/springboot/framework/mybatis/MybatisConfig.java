@@ -49,7 +49,7 @@ public class MybatisConfig {
 
 	}
 
-	@Bean(destroyMethod = "close", name = "dataSource")
+	@Bean(destroyMethod = "close", name = "write")
 	public DataSource dataSource(DataSourceProperties properties) {
 
 		log.info("*************************dataSource***********************");

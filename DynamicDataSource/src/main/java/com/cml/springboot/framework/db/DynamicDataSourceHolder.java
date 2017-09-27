@@ -1,7 +1,5 @@
 package com.cml.springboot.framework.db;
 
-import javax.sql.DataSource;
-
 /**
  * 动态数据源处理
  * 
@@ -9,17 +7,18 @@ import javax.sql.DataSource;
  *
  */
 public class DynamicDataSourceHolder {
-	private static ThreadLocal<DataSource> holderDataSource = new ThreadLocal<>();
+	private static ThreadLocal<String> holderDataSource = new ThreadLocal<>();
 
-	public static void setDataSource(DataSource dataSource) {
+	public static void setDataSource(String dataSource) {
 		holderDataSource.set(dataSource);
 	}
 
-	public static DataSource getDataSource() {
+	public static String getDataSource() {
 		return holderDataSource.get();
 	}
-	
+
 	public static void clear() {
 		holderDataSource.remove();
 	}
+
 }
