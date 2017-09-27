@@ -21,7 +21,7 @@ import org.springframework.stereotype.Component;
  */
 public class DynamicDataSourceAutoConfiguration {
 
-	@Component
+	@Component("dynamicDataSource")
 	@Primary
 	public class DynamicDataSource extends AbstractRoutingDataSource implements ApplicationContextAware {
 
