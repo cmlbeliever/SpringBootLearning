@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * 动态数据源自动处理
- * 
+ * TransactionProxyFactoryBean
  * @author cml
  *
  */
@@ -29,7 +29,7 @@ public class DynamicDataSourceAutoConfiguration {
 
 		@Override
 		protected Object determineCurrentLookupKey() {
-			return null;
+			return DynamicDataSourceHolder.getDataSource();
 		}
 
 		@Override
