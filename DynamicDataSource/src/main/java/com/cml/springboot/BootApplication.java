@@ -9,11 +9,14 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
 import org.springframework.scheduling.annotation.EnableAsync;
 
+import com.cml.springboot.framework.db.EnableDynamicDataSource;
+
 @Configuration
 @EnableAutoConfiguration(exclude = { DataSourceAutoConfiguration.class })
 @ComponentScan()
 @EnableAsync
 @PropertySources({ @PropertySource("classpath:config/application-jdbc.properties") })
+@EnableDynamicDataSource
 public class BootApplication {
 
 	// @Bean
