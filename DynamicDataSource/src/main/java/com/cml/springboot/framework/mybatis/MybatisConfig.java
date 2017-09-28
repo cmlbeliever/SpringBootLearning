@@ -8,6 +8,7 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.ibatis.io.VFS;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,7 +22,7 @@ public class MybatisConfig {
 	protected static Log log = LogFactory.getLog(MybatisConfig.class);
 
 	@Bean(name = "sqlSessionFactory")
-	public SqlSessionFactory sqlSessionFactory(DataSource datasource, MybatisConfigurationProperties properties)
+	public SqlSessionFactory sqlSessionFactory(@Qualifier("write") DataSource datasource, MybatisConfigurationProperties properties)
 			throws Exception {
 
 		log.info("*************************sqlSessionFactory:begin***********************" + properties);
@@ -42,8 +43,7 @@ public class MybatisConfig {
 
 		SqlSessionFactory resultSessionFactory = sessionFactory.getObject();
 
-		log.info("*************************sqlSessionFactory:successs:" + resultSessionFactory
-				+ "***********************" + properties);
+		log.info("*************************sqlSessionFactory:successs:" + resultSessionFactory + "***********************" + properties);
 
 		return resultSessionFactory;
 
@@ -114,9 +114,8 @@ public class MybatisConfig {
 
 		@Override
 		public String toString() {
-			return "MybatisConfigurationProperties [typeAliasesPackage=" + typeAliasesPackage + ", typeHandlerPackage="
-					+ typeHandlerPackage + ", mapperLocations=" + mapperLocations + ", configLocation=" + configLocation
-					+ "]";
+			return "MybatisConfigurationProperties [typeAliasesPackage=" + typeAliasesPackage + ", typeHandlerPackage=" + typeHandlerPackage
+					+ ", mapperLocations=" + mapperLocations + ", configLocation=" + configLocation + "]";
 		}
 
 	}
@@ -137,10 +136,9 @@ public class MybatisConfig {
 
 		@Override
 		public String toString() {
-			return "DataSourceProperties [driverClassName=" + driverClassName + ", url=" + url + ", username="
-					+ username + ", password=" + password + ", maxActive=" + maxActive + ", maxIdle=" + maxIdle
-					+ ", minIdle=" + minIdle + ", maxWait=" + maxWait + ", initialSize=" + initialSize
-					+ ", validationQuery=" + validationQuery + "]";
+			return "DataSourceProperties [driverClassName=" + driverClassName + ", url=" + url + ", username=" + username + ", password=" + password
+					+ ", maxActive=" + maxActive + ", maxIdle=" + maxIdle + ", minIdle=" + minIdle + ", maxWait=" + maxWait + ", initialSize="
+					+ initialSize + ", validationQuery=" + validationQuery + "]";
 		}
 
 		public String getDriverClassName() {

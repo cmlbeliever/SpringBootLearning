@@ -68,7 +68,7 @@ public class DynamicDataSourceAutoConfiguration {
 			}
 
 			// 默认数据源设置
-			setDefaultTargetDataSource(getDefaultDataSource());
+			setDefaultTargetDataSource(targetDataSource.get(getDefaultDataSource()));
 
 			super.afterPropertiesSet();
 		}
