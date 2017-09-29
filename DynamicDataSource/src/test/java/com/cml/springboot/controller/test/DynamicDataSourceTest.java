@@ -25,4 +25,10 @@ public class DynamicDataSourceTest {
 		User loginUser = userService.login(user);
 		System.out.println("登录结果：" + loginUser);
 	}
+
+	@Test
+	public void testFindUser() throws Exception {
+		User loginUser = userService.findUserByToken("xxx");
+		System.out.println("查询用户结果：" + loginUser);
+	}
 }
