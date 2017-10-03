@@ -44,6 +44,7 @@ public class TransactionAspect {
 				if (StringUtils.startsWith(method, key)) {
 					DynamicDataSourceHolder.setDataSource(DynamicDataSource.DATASOURCE_STRATEGY.get(key));
 					logger.info("find datasource ==>" + key + ",datasource:" + DynamicDataSourceHolder.getDataSource());
+					break;
 				}
 			}
 		} catch (Exception e) {
