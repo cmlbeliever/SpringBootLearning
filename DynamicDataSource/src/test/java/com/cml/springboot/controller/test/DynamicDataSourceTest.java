@@ -20,8 +20,8 @@ public class DynamicDataSourceTest {
 	@Test
 	public void testLogin() throws Exception {
 		User user = new User();
-		user.setUsername("admin");
-		user.setPassword("111111");
+		user.setUsername("11111111111");
+		user.setPassword("123456");
 		User loginUser = userService.login(user);
 		System.out.println("登录结果：" + loginUser);
 	}

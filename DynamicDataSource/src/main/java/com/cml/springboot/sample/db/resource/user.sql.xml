@@ -37,7 +37,8 @@
 		UPDATE
 			t_user
 		SET
-			token	=	#{newToken}
+			token	=	#{newToken},
+			update_date	=	NOW()
 		WHERE
 			token	=	#{token}
 	</update>
