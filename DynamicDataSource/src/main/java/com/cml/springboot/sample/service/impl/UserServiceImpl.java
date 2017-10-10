@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
 		return userMapper.getUserByToken(token);
 	}
 
-	@Transactional(rollbackOn = Exception.class)
+	@Transactional()
 	@Override
 	public User login(User user) throws Exception {
 
@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService {
 				loginUser.setToken(newToken);
 				return loginUser;
 			} else {
-				throw new Exception("发生并发错误！");
+				throw new RuntimeException("发生并发错误！");
 			}
 
 		}

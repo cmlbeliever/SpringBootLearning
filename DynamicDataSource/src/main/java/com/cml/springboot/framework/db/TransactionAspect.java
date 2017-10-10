@@ -3,6 +3,7 @@ package com.cml.springboot.framework.db;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.core.config.Order;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
@@ -19,6 +20,7 @@ import com.cml.springboot.framework.db.DynamicDataSourceAutoConfiguration.Dynami
  * @author admin
  *
  */
+@Order(1)
 @Aspect
 @EnableAspectJAutoProxy
 @Component
