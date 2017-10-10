@@ -1,5 +1,7 @@
 package com.cml.springboot.sample.service.impl;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
+
 import java.sql.SQLException;
 
 import javax.transaction.Transactional;
@@ -11,9 +13,11 @@ import org.springframework.stereotype.Component;
 
 import com.cml.springboot.framework.util.MD5;
 import com.cml.springboot.framework.util.UUIDUtil;
+import com.cml.springboot.sample.bean.LogBean;
 import com.cml.springboot.sample.bean.User;
 import com.cml.springboot.sample.controller.UserController;
 import com.cml.springboot.sample.db.UserMapper;
+import com.cml.springboot.sample.service.LogService;
 import com.cml.springboot.sample.service.UserService;
 
 @Transactional
@@ -24,6 +28,9 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserMapper userMapper;
+
+	@Autowired
+	private LogService logService;
 
 	@Override
 	public User findUserByToken(String token) throws SQLException {
@@ -45,9 +52,15 @@ public class UserServiceImpl implements UserService {
 			int updateCount = userMapper.updateToken(user);
 			LOG.info("更新的数量===》" + updateCount);
 			// 特意更新两次，验证事务
-			updateCount = userMapper.updateToken(user);
-			LOG.info("更新的数量2===》" + updateCount);
+//			updateCount = userMapper.updateToken(user);
+//			LOG.info("更新的数量2===》" + updateCount);
 
+			LogBean logbean = new LogBean();
+			logbean.setApiUrl("login");
+			logbean.setCallDayStr("20171010");
+			logbean.setParameters("none");
+			logService.insertLog(logbean);
+			
 			if (updateCount > 0) {
 				loginUser.setToken(newToken);
 				return loginUser;
@@ -56,6 +69,7 @@ public class UserServiceImpl implements UserService {
 			}
 
 		}
+	
 		return null;
 	}
 
