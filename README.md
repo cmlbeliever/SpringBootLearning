@@ -8,6 +8,7 @@
 - web项目整合了多种web项目需求功能,详情[点我跳转](../../tree/master/web "点我跳转")
 - rabbitmq项目是对rabbitmq框架整合Spring的学习与研发的工程，详情[点我跳转](../../tree/master/rabbitmq "点我跳转")
 - RabbitmqSpringBoot项目是对rabbitmq框架整合SpringBoot的学习与研发的工程，详情[点我跳转](../../tree/master/RabbitmqSpringBoot "点我跳转")
+- DynamicDataSource项目是db自动对读写分离整合SpringBoot的学习与研发的工程，详情[点我跳转](../../tree/master/DynamicDataSource "点我跳转")
 
 # rabbitmq工程说明 #
     以Spring与Spring的方式整合rabbitmq
@@ -17,6 +18,9 @@
 
 # web工程说明 #
     整合了web开发常用的功能与框架，如Shiro,I18n,邮件，mybatis等功能。
+
+# DynamicDataSource工程说明 #
+    通过AbstractRoutingDataSource对DB动态读写分离
 
 #web工程问题与解决#
 - Mybatis打包jar后无法扫描到bean与mapper问题，解决对应地址http://blog.csdn.net/cml_blog/article/details/53138851
