@@ -1,7 +1,5 @@
 package com.cml.springboot.sample.service.impl;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
-
 import java.sql.SQLException;
 
 import javax.transaction.Transactional;
@@ -15,7 +13,6 @@ import com.cml.springboot.framework.util.MD5;
 import com.cml.springboot.framework.util.UUIDUtil;
 import com.cml.springboot.sample.bean.LogBean;
 import com.cml.springboot.sample.bean.User;
-import com.cml.springboot.sample.controller.UserController;
 import com.cml.springboot.sample.db.UserMapper;
 import com.cml.springboot.sample.service.LogService;
 import com.cml.springboot.sample.service.UserService;

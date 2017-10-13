@@ -3,13 +3,13 @@ package com.cml.springboot.framework.db;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.logging.log4j.core.config.Order;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import com.cml.springboot.framework.db.DynamicDataSourceAutoConfiguration.DynamicDataSource;
@@ -21,12 +21,13 @@ import com.cml.springboot.framework.db.DynamicDataSourceAutoConfiguration.Dynami
  *
  */
 @Order(1)
-@Aspect
+@Aspect()
 @EnableAspectJAutoProxy
 @Component
 public class TransactionAspect {
 
 	protected static Log logger = LogFactory.getLog(TransactionAspect.class);
+	
 
 	@Pointcut("execution(* com.cml.springboot.sample.service.impl.*.*(..))")
 	public void aspect() {
