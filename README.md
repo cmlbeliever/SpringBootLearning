@@ -20,7 +20,7 @@
     整合了web开发常用的功能与框架，如Shiro,I18n,邮件，mybatis等功能。
 
 # DynamicDataSource工程说明 #
-    通过AbstractRoutingDataSource对DB动态读写分离
+    通过AbstractRoutingDataSource对DB动态读写分离，博客地址：http://blog.csdn.net/cml_blog/article/details/78224798
 
 #web工程问题与解决#
 - Mybatis打包jar后无法扫描到bean与mapper问题，解决对应地址http://blog.csdn.net/cml_blog/article/details/53138851
