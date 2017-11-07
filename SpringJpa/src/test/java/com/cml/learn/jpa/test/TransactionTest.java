@@ -18,6 +18,6 @@ public class TransactionTest {
 
 	@Test
 	public void testTransaction() throws Exception {
-		userService.testTransaction(1, 2);
+		userService.testTransaction(1,2);
 	}
 }

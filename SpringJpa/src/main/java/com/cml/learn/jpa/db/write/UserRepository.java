@@ -1,4 +1,4 @@
-package com.cml.learn.jpa.db;
+package com.cml.learn.jpa.db.write;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

@@ -21,6 +21,10 @@
 	</parent>
 
 	<dependencies>
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+		</dependency>
 		<!-- https://mvnrepository.com/artifact/joda-time/joda-time -->
 		<dependency>
 			<groupId>joda-time</groupId>

@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.cml.learn.jpa.db.UserRepository;
 import com.cml.learn.jpa.db.bean.User;
+import com.cml.learn.jpa.db.write.UserRepository;
 
 @Service
 @Transactional()
@@ -28,13 +28,13 @@ public class UserService {
 		log.info("update user 1 success!!!");
 
 		User secondUser = userRepository.findOne(second);
-		log.info("secondUserNickname:" + user.getNickName());
+		log.info("secondUserNickname:" + secondUser.getNickName());
 
 		secondUser.setNickName("modified by Senond!!");
 		userRepository.save(secondUser);
 
 		log.info("update user 2 success!!!");
 
-		throw new RuntimeException("");
+//		throw new RuntimeException("");
 	}
 }

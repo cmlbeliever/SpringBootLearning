@@ -9,8 +9,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.cml.learn.jpa.Application;
-import com.cml.learn.jpa.db.UserRepository;
 import com.cml.learn.jpa.db.bean.User;
+import com.cml.learn.jpa.db.write.UserRepository;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class)
