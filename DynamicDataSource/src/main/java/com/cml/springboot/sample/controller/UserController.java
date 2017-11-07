@@ -6,12 +6,16 @@ import javax.validation.Valid;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.cml.springboot.framework.controller.BaseController;
 import com.cml.springboot.framework.response.BaseResponse;
@@ -22,7 +26,7 @@ import com.cml.springboot.sample.service.UserService;
 
 @Controller
 @RequestMapping("/user")
-public class UserController extends BaseController {
+public class UserController extends BaseController implements ApplicationContextAware {
 
 	protected static Log LOG = LogFactory.getLog(UserController.class);
 
@@ -61,8 +65,7 @@ public class UserController extends BaseController {
 
 	@RequestMapping(path = "/{username}/login")
 	@ResponseBody
-	public BaseResponse restfulLogin(@PathVariable("username") String username, @RequestParam String password)
-			throws Exception {
+	public BaseResponse restfulLogin(@PathVariable("username") String username, @RequestParam String password) throws Exception {
 
 		if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
 			return new BaseResponse(FAIL, "用户名或密码为空");
@@ -79,6 +82,11 @@ public class UserController extends BaseController {
 		}
 
 		return new BaseResponse(FAIL, "用户名或密码错误");
+	}
+
+	@Override
+	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+		System.out.println("===========userController==========>" + applicationContext.getApplicationName() + "," + applicationContext.getId());
 	}
 
 }
