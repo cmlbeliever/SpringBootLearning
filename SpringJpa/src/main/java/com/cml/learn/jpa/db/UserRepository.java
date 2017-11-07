@@ -29,4 +29,6 @@ public interface UserRepository extends CrudRepository<User, Integer> {
 	User findFirstByOrderByNickNameAsc();
 
 	Page<User> findAll(Pageable page);
+
+	<T> T findByUserId(Integer id, Class<T> result);
 }
