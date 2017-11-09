@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 // @EnableJpaRepositories()
 @EnableAspectJAutoProxy
+// @SpringBootApplication()
 @SpringBootApplication(exclude = { DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class,
 		DataSourceTransactionManagerAutoConfiguration.class })
 public class Application {

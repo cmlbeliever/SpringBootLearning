@@ -1,6 +1,9 @@
 package com.cml.learn.jpa.db.bean;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,9 +13,16 @@ import javax.persistence.Transient;
 
 import org.joda.time.DateTime;
 
+import com.cml.learn.jpa.framework.db.converter.DateToDateTimeConverter;
+
 @Entity
 @Table(name = "t_user")
-public class User {
+public class User implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1148417078117097629L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,6 +38,7 @@ public class User {
 	@Transient
 	private String newToken;
 
+	@Convert(converter = DateToDateTimeConverter.class)
 	private DateTime birthday;
 
 	private String nickName;
@@ -35,10 +46,11 @@ public class User {
 	private Short gender;
 
 	private String mobile;
-
+	@Convert(converter = DateToDateTimeConverter.class)
 	private DateTime createDate;
+	@Convert(converter = DateToDateTimeConverter.class)
 	private DateTime lastLoginDate;
-
+	@Convert(converter = DateToDateTimeConverter.class)
 	private DateTime updateDate;
 
 	public DateTime getLastLoginDate() {
