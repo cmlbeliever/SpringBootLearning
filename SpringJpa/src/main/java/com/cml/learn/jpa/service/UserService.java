@@ -35,6 +35,18 @@ public class UserService {
 
 		log.info("update user 2 success!!!");
 
-//		throw new RuntimeException("");
+		// throw new RuntimeException("");
+	}
+
+	public void modifyUser(int id, String nickname) throws Exception {
+		User user = userRepository.findOne(id);
+		if (null == user) {
+			return;
+		}
+
+		log.info("firstUserNickname:" + user.getNickName());
+
+		user.setNickName(nickname);
+		userRepository.save(user);
 	}
 }
