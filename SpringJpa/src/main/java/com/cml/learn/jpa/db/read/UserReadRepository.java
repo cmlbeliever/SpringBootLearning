@@ -10,5 +10,5 @@ import com.cml.learn.jpa.db.bean.User;
  * @author cml
  *
  */
-public interface UserReadRepository extends CrudRepository<User, Integer> {
+public interface UserReadRepository extends CrudRepository<User, Long> {
 }
