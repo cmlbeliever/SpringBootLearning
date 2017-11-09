@@ -6,7 +6,6 @@ import java.util.Map;
 import javax.sql.DataSource;
 
 import org.apache.commons.dbcp.BasicDataSource;
-import org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -22,7 +21,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaDialect;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 
-@EnableJpaRepositories(value = "com.cml.learn.jpa", entityManagerFactoryRef = "writeEntityManagerFactory", transactionManagerRef = "writeTransactionManager")
+@EnableJpaRepositories(value = "com.cml.learn.jpa.db.write", entityManagerFactoryRef = "writeEntityManagerFactory", transactionManagerRef = "writeTransactionManager")
 @Configuration
 public class WriteDbConfig {
 
@@ -46,7 +45,8 @@ public class WriteDbConfig {
 		return dataSource;
 	}
 
-	@Bean
+	@Primary
+	@Bean("writeTransactionManager")
 	PlatformTransactionManager writeTransactionManager() {
 		return new JpaTransactionManager(writeEntityManagerFactory().getObject());
 	}
