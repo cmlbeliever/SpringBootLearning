@@ -20,6 +20,7 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaDialect;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @EnableJpaRepositories(value = "com.cml.learn.jpa.db.read", entityManagerFactoryRef = "readEntityManagerFactory", transactionManagerRef = "readTransactionManager")
 @Configuration

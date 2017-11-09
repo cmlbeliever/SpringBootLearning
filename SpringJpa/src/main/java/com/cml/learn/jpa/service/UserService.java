@@ -18,19 +18,19 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 
-	public void testTransaction(int id, int second) throws Exception {
+	public void testTransaction(long id, long second) throws Exception {
 		User user = userRepository.findOne(id);
-		log.info("firstUserNickname:" + user.getNickName());
+		log.info("firstUserNickname:" + user.getNickname());
 
-		user.setNickName("modifiedByFirst!");
+		user.setNickname("modifiedByFirst!");
 		userRepository.save(user);
 
 		log.info("update user 1 success!!!");
 
 		User secondUser = userRepository.findOne(second);
-		log.info("secondUserNickname:" + secondUser.getNickName());
+		log.info("secondUserNickname:" + secondUser.getNickname());
 
-		secondUser.setNickName("modified by Senond!!");
+		secondUser.setNickname("modified by Senond!!");
 		userRepository.save(secondUser);
 
 		log.info("update user 2 success!!!");
@@ -38,15 +38,15 @@ public class UserService {
 		// throw new RuntimeException("");
 	}
 
-	public void modifyUser(int id, String nickname) throws Exception {
+	public void modifyUser(long id, String nickname) throws Exception {
 		User user = userRepository.findOne(id);
 		if (null == user) {
 			return;
 		}
 
-		log.info("firstUserNickname:" + user.getNickName());
+		log.info("firstUserNickname:" + user.getNickname());
 
-		user.setNickName(nickname);
+		user.setNickname(nickname);
 		userRepository.save(user);
 	}
 }

@@ -12,21 +12,14 @@ import com.cml.learn.jpa.db.bean.User;
  * @author cml
  *
  */
-public interface UserRepository extends CrudRepository<User, Integer> {
-	/**
-	 * 根据email获取数据
-	 * 
-	 * @param email
-	 * @return
-	 */
-	User findByUserEmail(String email);
+public interface UserRepository extends CrudRepository<User, Long> {
 
 	/**
 	 * 获取根据昵称升序的第一条数据
 	 * 
 	 * @return
 	 */
-	User findFirstByOrderByNickNameAsc();
+	User findFirstByOrderByNicknameAsc();
 
 	Page<User> findAll(Pageable page);
 

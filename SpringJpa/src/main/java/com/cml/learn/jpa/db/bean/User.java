@@ -1,15 +1,18 @@
 package com.cml.learn.jpa.db.bean;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import org.joda.time.DateTime;
 
@@ -22,123 +25,50 @@ public class User implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1148417078117097629L;
+	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer userId;
+	@Id()
+	@Column(name = "user_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long userId;
 
-	private String userEmail;
+	private String username;
 
-	@Column(name = "user_passwd")
 	private String password;
 
-	private String token;
+	private String nickname;
 
-	@Transient
-	private String newToken;
+	// mappedBy 对应bean的属性
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	private List<Order> orders;
 
 	@Convert(converter = DateToDateTimeConverter.class)
-	private DateTime birthday;
-
-	private String nickName;
-
-	private Short gender;
-
-	private String mobile;
+	private DateTime createTime;
 	@Convert(converter = DateToDateTimeConverter.class)
-	private DateTime createDate;
-	@Convert(converter = DateToDateTimeConverter.class)
-	private DateTime lastLoginDate;
-	@Convert(converter = DateToDateTimeConverter.class)
-	private DateTime updateDate;
+	private DateTime updateTime;
 
-	public DateTime getLastLoginDate() {
-		return lastLoginDate;
+	public List<Order> getOrders() {
+		return orders;
 	}
 
-	public void setLastLoginDate(DateTime lastLoginDate) {
-		this.lastLoginDate = lastLoginDate;
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
 	}
 
-	public DateTime getCreateDate() {
-		return createDate;
-	}
-
-	public void setCreateDate(DateTime createDate) {
-		this.createDate = createDate;
-	}
-
-	public DateTime getUpdateDate() {
-		return updateDate;
-	}
-
-	public void setUpdateDate(DateTime updateDate) {
-		this.updateDate = updateDate;
-	}
-
-	public String getMobile() {
-		return mobile;
-	}
-
-	public void setMobile(String mobile) {
-		this.mobile = mobile;
-	}
-
-	public Short getGender() {
-		return gender;
-	}
-
-	public void setGender(Short gender) {
-		this.gender = gender;
-	}
-
-	public Integer getUserId() {
+	public Long getUserId() {
 		return userId;
 	}
 
-	public void setUserId(Integer userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 
-	public DateTime getBirthday() {
-		return birthday;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setBirthday(DateTime birthday) {
-		this.birthday = birthday;
-	}
-
-	public String getNickName() {
-		return nickName;
-	}
-
-	public void setNickName(String nickName) {
-		this.nickName = nickName;
-	}
-
-	public String getToken() {
-		return token;
-	}
-
-	public void setToken(String token) {
-		this.token = token;
-	}
-
-	public String getNewToken() {
-		return newToken;
-	}
-
-	public void setNewToken(String newToken) {
-		this.newToken = newToken;
-	}
-
-	public String getUserEmail() {
-		return userEmail;
-	}
-
-	public void setUserEmail(String userEmail) {
-		this.userEmail = userEmail;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getPassword() {
@@ -149,11 +79,28 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
-	@Override
-	public String toString() {
-		return "User [userId=" + userId + ", userEmail=" + userEmail + ", password=" + password + ", token=" + token + ", newToken=" + newToken
-				+ ", birthday=" + birthday + ", nickName=" + nickName + ", gender=" + gender + ", mobile=" + mobile + ", createDate=" + createDate
-				+ ", lastLoginDate=" + lastLoginDate + ", updateDate=" + updateDate + "]";
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+	public DateTime getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(DateTime createTime) {
+		this.createTime = createTime;
+	}
+
+	public DateTime getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(DateTime updateTime) {
+		this.updateTime = updateTime;
 	}
 
 }
