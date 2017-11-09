@@ -2,7 +2,6 @@ package com.cml.learn.jpa.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -31,9 +30,6 @@ public class HelloWorldController {
 	@ResponseBody
 	User test(@PathVariable long id) throws Exception {
 		User user = userReadRepository.findOne(id);
-		if (null != user) {
-			System.out.println(user.getOrders());
-		}
 		return user;
 	}
 }
