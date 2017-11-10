@@ -15,6 +15,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.cml.learn.jpa.Application;
 import com.cml.learn.jpa.db.bean.Order;
 import com.cml.learn.jpa.db.bean.User;
+import com.cml.learn.jpa.db.read.UserReadRepository;
 import com.cml.learn.jpa.db.write.UserRepository;
 
 @RunWith(SpringRunner.class)
@@ -22,6 +23,9 @@ import com.cml.learn.jpa.db.write.UserRepository;
 public class UserQueryTest {
 	@Autowired
 	private UserRepository userRepository;
+
+	@Autowired
+	private UserReadRepository userReadRepository;
 
 	/**
 	 * 注意要添加上事务，否则延迟加载时连接已经关闭，导致无法加载
@@ -57,6 +61,11 @@ public class UserQueryTest {
 		System.out.println("totalPage:" + users.getTotalPages());
 		System.out.println("getUsers:" + users.getContent());
 
+	}
+
+	@Test
+	public void testQueryUserByUsername() {
+		System.out.println(userReadRepository.findUserIdByUsername("user11"));
 	}
 
 }
