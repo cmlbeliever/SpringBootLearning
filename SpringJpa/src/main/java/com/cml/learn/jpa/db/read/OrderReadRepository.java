@@ -28,10 +28,13 @@ public interface OrderReadRepository extends CrudRepository<Order, Long> {
 
 	/**
 	 * 获取用户和订单部分信息
+	 * 
 	 * @param id
 	 * @return
 	 */
 	OrderQueryDTO3 findOrderAndUserById(Long id);
+
+	<T> T findOrderAndUser2ById(Long id, Class<T> t);
 
 	Order findById(Long id);
 }

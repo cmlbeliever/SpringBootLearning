@@ -2,3 +2,4 @@
 /target/
 /logs
 /transaction-logs
+/.apt_generated/

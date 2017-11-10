@@ -45,5 +45,8 @@ public class OrderQueryTest {
 		OrderQueryDTO3 order6 = orderReadRepository.findOrderAndUserById(1L);
 		log.info("6=====获取用户和订单部分信息===" + order6 + ",username:" + order6.getUser().getUsername() + "," + order6.getUser().getClass());
 
+		OrderQueryDTO3 order7 = orderReadRepository.findOrderAndUser2ById(1L, OrderQueryDTO3.class);
+		log.info("7=====获取用户和订单部分信息===" + order7 + ",username:" + order7.getUser().getUsername() + "," + order7.getUser().getClass());
+
 	}
 }
