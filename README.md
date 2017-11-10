@@ -4,6 +4,10 @@
     主要使用框架：SpringBoot(Spring,SpringMVC),MyBatis,Ehcache,Rabbitmq,JavaMail。
     项目持续维护中...
 
+# 博客资源 #
+- Mybatis打包jar后无法扫描到bean与mapper问题，解决对应地址http://blog.csdn.net/cml_blog/article/details/53138851
+- 163发送邮件功能问题，解决对应地址http://blog.csdn.net/cml_blog/article/details/54235510
+
 # 项目结构 #
 - web项目整合了多种web项目需求功能,详情[点我跳转](../../tree/master/web "点我跳转")
 - rabbitmq项目是对rabbitmq框架整合Spring的学习与研发的工程，详情[点我跳转](../../tree/master/rabbitmq "点我跳转")
