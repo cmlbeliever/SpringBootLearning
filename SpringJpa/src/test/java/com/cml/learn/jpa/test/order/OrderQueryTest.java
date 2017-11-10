@@ -23,12 +23,16 @@ public class OrderQueryTest {
 
 	@Autowired
 	private OrderReadRepository orderReadRepository;
-
+	
 	@Test
 	public void tesetReadOrder() {
+
 		log.info("=======================start=======================");
 		Order order1 = orderReadRepository.findById(1L);
 		log.info("1=======================普通查询=======================" + order1);
+		Order cacheOrder = orderReadRepository.findById(1L);
+		log.info("1=======================普通缓存查询=======================" + cacheOrder);
+		
 
 		OrderQueryDTO order2 = orderReadRepository.findOrderWithUserNameByOrderId(1L, OrderQueryDTO.class);
 		log.info("2=====使用接口作为projection===" + order2 + "," + order2.getClass().getName());

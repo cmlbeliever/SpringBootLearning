@@ -1,5 +1,6 @@
 package com.cml.learn.jpa.db.read;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
@@ -36,5 +37,6 @@ public interface OrderReadRepository extends CrudRepository<Order, Long> {
 
 	<T> T findOrderAndUser2ById(Long id, Class<T> t);
 
+	@Cacheable(value = "simpleCache",key="'users' + #root.args[0]")
 	Order findById(Long id);
 }
