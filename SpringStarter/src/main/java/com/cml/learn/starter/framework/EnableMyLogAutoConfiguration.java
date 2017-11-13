@@ -9,6 +9,9 @@ import java.lang.annotation.Target;
 
 import org.springframework.context.annotation.Import;
 
+import com.cml.learn.starter.framework.factorybean.AbstractMyLogFactoryBean;
+import com.cml.learn.starter.framework.factorybean.MyLogFactoryBean;
+
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
@@ -16,4 +19,6 @@ import org.springframework.context.annotation.Import;
 @Import(MyLogAutofigurationRegistrar.class)
 public @interface EnableMyLogAutoConfiguration {
 	String basePackage() default "";
+
+	Class<? extends AbstractMyLogFactoryBean> implClass() default MyLogFactoryBean.class;
 }

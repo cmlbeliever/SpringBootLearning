@@ -1,13 +1,11 @@
 package com.cml.learn.starter.framework;
 
 import java.io.IOException;
-import java.lang.annotation.Annotation;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.config.AbstractFactoryBean;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
-import org.springframework.beans.factory.support.BeanNameGenerator;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.ResourceLoaderAware;
 import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
@@ -54,6 +52,8 @@ public class MyLogAutofigurationRegistrar implements ImportBeanDefinitionRegistr
 		AnnotationAttributes annoAttrs = AnnotationAttributes
 				.fromMap(importingClassMetadata.getAnnotationAttributes(EnableMyLogAutoConfiguration.class.getName()));
 		String basePackage = annoAttrs.getString("basePackage");
+		
+		Class<? extends AbstractFactoryBean> implClass=annoAttrs.getClass("implClass");
 
 		// 扫描基础包下所有带有MyLogScanner注解的接口
 		MyLogClasspathScanner scanner = new MyLogClasspathScanner(registry);
@@ -66,7 +66,7 @@ public class MyLogAutofigurationRegistrar implements ImportBeanDefinitionRegistr
 				return className.endsWith("package-info");
 			}
 		});
-
+		scanner.setFactoryBeanImplClass(implClass);
 		scanner.doScan(basePackage);
 	}
 

@@ -5,7 +5,7 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.AnnotatedBeanDefinition;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.AbstractFactoryBean;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinitionHolder;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
@@ -13,12 +13,11 @@ import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
 import org.springframework.context.annotation.ClassPathBeanDefinitionScanner;
 
-import com.cml.learn.starter.framework.MyLogFactoryBean;
-
 public class MyLogClasspathScanner extends ClassPathBeanDefinitionScanner {
 
 	private static Logger log = LoggerFactory.getLogger(MyLogClasspathScanner.class);
-	private BeanDefinitionRegistry registry;
+
+	private Class<? extends AbstractFactoryBean> factoryBeanImplClass;
 
 	public MyLogClasspathScanner(BeanDefinitionRegistry registry) {
 		super(registry);
@@ -32,8 +31,8 @@ public class MyLogClasspathScanner extends ClassPathBeanDefinitionScanner {
 			for (BeanDefinitionHolder holder : beanDefinitions) {
 				GenericBeanDefinition defination = (GenericBeanDefinition) holder.getBeanDefinition();
 				defination.getPropertyValues().addPropertyValue("mapperInterface", defination.getBeanClassName());
-				//设置bean工厂和对应的属性值
-				defination.setBeanClass(MyLogFactoryBean.class);
+				// 设置bean工厂和对应的属性值
+				defination.setBeanClass(this.factoryBeanImplClass);
 				defination.setAutowireMode(AbstractBeanDefinition.AUTOWIRE_BY_TYPE);
 			}
 		}
@@ -61,4 +60,9 @@ public class MyLogClasspathScanner extends ClassPathBeanDefinitionScanner {
 			return false;
 		}
 	}
+
+	public void setFactoryBeanImplClass(Class<? extends AbstractFactoryBean> factoryBeanImplClass) {
+		this.factoryBeanImplClass = factoryBeanImplClass;
+	}
+
 }
