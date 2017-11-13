@@ -23,9 +23,9 @@ public interface OrderReadRepository extends CrudRepository<Order, Long> {
 	@Query("select  orderName as orderName, user.userId as userId,user.username as username  from Order where id = ?1")
 	OrderQueryDTO findOrderWithUserNameByOrderId2(Long id);
 
-	<T> T findOrderName111ById(Long id, Class<T> target);
+	<T> T findOrderNameWithAnyTypeById(Long id, Class<T> target);
 
-	OrderQueryDTO2 findOrderName222ById(Long id);
+	OrderQueryDTO2 findOrderNameById(Long id);
 
 	/**
 	 * 获取用户和订单部分信息
@@ -35,7 +35,7 @@ public interface OrderReadRepository extends CrudRepository<Order, Long> {
 	 */
 	OrderQueryDTO3 findOrderAndUserById(Long id);
 
-	<T> T findOrderAndUser2ById(Long id, Class<T> t);
+	<T> T findOrderAndUserWithAnyTypeById(Long id, Class<T> t);
 
 	@Cacheable(value = "simpleCache",key="'users' + #root.args[0]")
 	Order findById(Long id);
