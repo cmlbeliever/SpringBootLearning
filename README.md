@@ -4,6 +4,10 @@
     主要使用框架：SpringBoot(Spring,SpringMVC),MyBatis,Ehcache,Rabbitmq,JavaMail。
     项目持续维护中...
 
+# 全新的参数缓存框架
+
+一个专注于提升管理页面开发难度的参数缓存框架，简化参数保存流程，支持分布式与集群拓展，详见：https://github.com/cmlbeliever/cacheable-search
+
 # 博客资源 #
 - Mybatis打包jar后无法扫描到bean与mapper问题，解决对应地址http://blog.csdn.net/cml_blog/article/details/53138851
 - 163发送邮件功能问题，解决对应地址http://blog.csdn.net/cml_blog/article/details/54235510
