@@ -8,15 +8,21 @@ import com.cml.springboot.message.TestMessage;
 @Component
 public class Producer {
 
-	private final KafkaTemplate<Object, TestMessage> kafkaTemplate;
+	private final KafkaTemplate<Object, Object> kafkaTemplate;
 
-	Producer(KafkaTemplate<Object, TestMessage> kafkaTemplate) {
+	public Producer(KafkaTemplate<Object, Object> kafkaTemplate) {
+		super();
 		this.kafkaTemplate = kafkaTemplate;
 	}
 
 	public void send(TestMessage message) {
-		this.kafkaTemplate.send("test1", message);
+		this.kafkaTemplate.send("test2", message);
 		System.out.println("Sent sample message [" + message + "]");
+	}
+
+	public void send(String message) {
+		this.kafkaTemplate.send("test2", message);
+		System.out.println("Sent sample str message [" + message + "]");
 	}
 
 }
