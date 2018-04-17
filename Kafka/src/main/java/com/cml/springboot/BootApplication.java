@@ -16,17 +16,17 @@ import com.cml.springboot.kafka.Producer;
 public class BootApplication {
 
 	public static void main(String[] args) throws Exception {
-		// SpringApplication app = new SpringApplication(BootApplication.class);
-		// app.setWebApplicationType(WebApplicationType.NONE);
+		 SpringApplication app = new SpringApplication(BootApplication.class);
+		 app.setWebApplicationType(WebApplicationType.NONE);
 		// app.setWebEnvironment(false);
-		// app.run(args);
-		SpringApplication.run(BootApplication.class, args);
+		 app.run(args);
+//		SpringApplication.run(BootApplication.class, args);
 	}
 
 	@Autowired
 	private Producer producer;
 
-	@Scheduled(fixedRate = 10_000)
+	@Scheduled(fixedRate = 5_000)
 	public void scheduleSendMessage() {
 		producer.send((Math.random() * 1000) + "A simple test message");
 	}

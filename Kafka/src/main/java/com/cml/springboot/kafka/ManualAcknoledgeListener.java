@@ -17,7 +17,6 @@ public class ManualAcknoledgeListener implements AcknowledgingMessageListener<Ob
 			if (data.offset() % 2 == 1) {
 				acknowledgment.acknowledge();
 			}
-			acknowledgment.acknowledge();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
