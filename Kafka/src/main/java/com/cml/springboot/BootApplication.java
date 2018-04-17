@@ -1,18 +1,13 @@
 package com.cml.springboot;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
 import org.springframework.kafka.annotation.EnableKafka;
-import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
-import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
 import com.cml.springboot.kafka.Producer;
-import com.cml.springboot.message.TestMessage;
 
 @SpringBootApplication
 @EnableScheduling
@@ -26,10 +21,9 @@ public class BootApplication {
 	@Autowired
 	private Producer producer;
 
-	@Scheduled(fixedRate = 2000)
+	@Scheduled(fixedRate = 10_000)
 	public void scheduleSendMessage() {
-		producer.send(new TestMessage((int) (Math.random() * 1000), "A simple test message"));
-		producer.send("Test===>" + System.currentTimeMillis());
+		producer.send((Math.random() * 1000) + "A simple test message");
 	}
 
 	// @Bean
