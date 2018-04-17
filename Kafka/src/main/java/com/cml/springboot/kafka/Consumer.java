@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 class Consumer {
 
 	@KafkaListener(topics = "test2")
-	public void processMessage(ConsumerRecord<?, ?> message) throws Exception {
+	public void processMessage(ConsumerRecord<Object, Object> message) throws Exception {
 		message.headers().forEach(t -> {
 			System.out.println("header:" + t.key() + ":" + new String(t.value()));
 		});
