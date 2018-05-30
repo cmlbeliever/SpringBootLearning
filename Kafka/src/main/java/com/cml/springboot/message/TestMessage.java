@@ -3,7 +3,9 @@ package com.cml.springboot.message;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class TestMessage {
+import java.io.Serializable;
+
+public class TestMessage implements Serializable {
 	private int code;
 	private String value;
 
