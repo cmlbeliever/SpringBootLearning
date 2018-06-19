@@ -3,7 +3,9 @@ package com.cml.learn.async;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Component;
+import org.springframework.util.concurrent.ListenableFuture;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +25,11 @@ public class AsyncService {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    @Async
+    public ListenableFuture<String> testLisenableAsync(int index) {
+        return AsyncResult.forValue("testValue:" + index + ",threadId:" + Thread.currentThread().getId());
     }
 
     private synchronized void addThreadQuene(int index) {

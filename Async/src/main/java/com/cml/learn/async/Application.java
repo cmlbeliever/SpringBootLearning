@@ -1,5 +1,7 @@
 package com.cml.learn.async;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
@@ -8,6 +10,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.concurrent.FailureCallback;
+import org.springframework.util.concurrent.SuccessCallback;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -20,6 +24,7 @@ public class Application {
         SpringApplication.run(Application.class, args);
     }
 
+    private Logger logger = LoggerFactory.getLogger(getClass());
     @Autowired
     private AsyncService asyncService;
 
@@ -29,6 +34,20 @@ public class Application {
             IntStream.range(1, 1000).forEach(index -> {
                 asyncService.testAsync(index);
             });
+        };
+    }
+
+    @Bean
+    public ApplicationRunner listenerableRunner() {
+        return (arguments) -> {
+            IntStream.range(1, 10).forEach(index -> {
+                asyncService.testLisenableAsync(index).addCallback(s -> {
+                    logger.info("asyncSuccess----->" + s);
+                }, e -> {
+                    logger.error("asyncFail", e);
+                });
+            });
+
         };
     }
 }
