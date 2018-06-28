@@ -18,6 +18,7 @@
 - RabbitmqSpringBoot项目是对rabbitmq框架整合SpringBoot的学习与研发的工程，详情[点我跳转](../../tree/master/RabbitmqSpringBoot "点我跳转")
 - DynamicDataSource项目是db自动对读写分离整合SpringBoot的学习与研发的工程，详情[点我跳转](../../tree/master/DynamicDataSource "点我跳转")
 - SpringJpa项目是使用Spring-Data-Jpa，进行数据操作，实现读写分离功能。详情[点我跳转](../../tree/master/SpringJpa "点我跳转")
+- Async： Async使用与线程池测试详情[点我跳转](../../tree/master/Async "点我跳转")
 
 # rabbitmq工程说明 #
     以Spring与Spring的方式整合rabbitmq
@@ -30,6 +31,9 @@
 
 # DynamicDataSource工程说明 #
     通过AbstractRoutingDataSource对DB动态读写分离，博客地址：http://blog.csdn.net/cml_blog/article/details/78224798
+
+# Async工程说明 #
+    @Async 使用场景和线程使用说明，博客地址：https://blog.csdn.net/cml_blog/article/details/80849728
 
 #web工程问题与解决#
 - Mybatis打包jar后无法扫描到bean与mapper问题，解决对应地址http://blog.csdn.net/cml_blog/article/details/53138851
