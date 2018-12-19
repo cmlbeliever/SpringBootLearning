@@ -16,9 +16,11 @@ public class AccessLogFilter implements WebFilter {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
         return chain.filter(exchange).doOnError(t -> {
-            System.out.println("onError:" + t);
+            System.out.println("onError:" + t + Thread.currentThread().getId());
+        }).doOnSuccess(t -> {
+            System.out.println("success:" + t + Thread.currentThread().getId());
         }).doFinally(t -> {
-            System.out.println("finally");
+            System.out.println("finally" + Thread.currentThread().getId());
         });
     }
 }
