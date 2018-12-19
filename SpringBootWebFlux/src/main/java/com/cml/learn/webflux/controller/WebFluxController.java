@@ -18,6 +18,12 @@ public class WebFluxController {
         return Mono.just("result:" + name);
     }
 
+    @GetMapping("/testError")
+    public Mono<String> testError() {
+        System.out.println("error==>");
+        throw new IllegalArgumentException("xxxx");
+    }
+
     @GetMapping("/testList")
     public Flux<String> testList(@RequestParam String name) {
         return Flux.just(name.split(","));
