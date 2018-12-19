@@ -1,5 +1,6 @@
 package com.cml.learn.webflux.filter;
 
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import org.springframework.web.server.WebFilter;
@@ -13,14 +14,18 @@ import reactor.core.publisher.Mono;
  */
 @Component
 public class AccessLogFilter implements WebFilter {
+
+    private org.slf4j.Logger logger = LoggerFactory.getLogger(getClass());
+
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
-        return chain.filter(exchange).doOnError(t -> {
-            System.out.println("onError:" + t + Thread.currentThread().getId());
+        final ServerWebExchange ex = new PayloadServerWebExchangeDecorator(exchange);
+        return chain.filter(ex).doOnError(t -> {
+            logger.info("onError:" + t);
         }).doOnSuccess(t -> {
-            System.out.println("success:" + t + Thread.currentThread().getId());
+            logger.info("success:" + t);
         }).doFinally(t -> {
-            System.out.println("finally" + Thread.currentThread().getId());
+            logger.info("finally-->" + ((PartnerServerHttpResponseDecorator) ex.getResponse()).getBody());
         });
     }
 }

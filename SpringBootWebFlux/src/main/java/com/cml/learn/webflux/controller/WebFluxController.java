@@ -7,13 +7,14 @@ import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.time.Duration;
 import java.util.stream.IntStream;
 
 @RestController
 @RequestMapping("/webflux")
 public class WebFluxController {
 
-    @GetMapping("/test1")
+    @RequestMapping("/test1")
     public Mono<String> test1(@RequestParam String name) {
         return Mono.just("result:" + name);
     }

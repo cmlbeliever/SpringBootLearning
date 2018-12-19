@@ -14,9 +14,9 @@ public class Application {
 		SpringApplication.run(Application.class, args);
 	}
 
-	@RequestMapping
-	@ResponseBody
-	public String index() {
-		return "hello world";
-	}
+//	@RequestMapping
+//	@ResponseBody
+//	public String index() {
+//		return "hello world";
+//	}
 }
