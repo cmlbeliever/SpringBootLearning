@@ -25,7 +25,7 @@ public class AccessLogFilter implements WebFilter {
         }).doOnSuccess(t -> {
             logger.info("success:" + t);
         }).doFinally(t -> {
-            logger.info("finally-->" + ((PartnerServerHttpResponseDecorator) ex.getResponse()).getBody());
+            logger.info("finally-->" + ((PartnerServerHttpResponseDecorator) ex.getResponse()).getBody() + ":" + Thread.currentThread().getId() + ":" + Thread.currentThread().getName());
         });
     }
 }

@@ -21,8 +21,6 @@
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-aop:2.0.7.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter:2.0.7.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot:2.0.7.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-context:5.0.11.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-expression:5.0.11.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-autoconfigure:2.0.7.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-logging:2.0.7.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: ch.qos.logback:logback-classic:1.2.3" level="project" />
@@ -89,6 +87,14 @@
     <orderEntry type="library" name="Maven: io.netty:netty-transport-native-epoll:linux-x86_64:4.1.31.Final" level="project" />
     <orderEntry type="library" name="Maven: io.netty:netty-common:4.1.31.Final" level="project" />
     <orderEntry type="library" name="Maven: io.netty:netty-transport-native-unix-common:4.1.31.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-actuator:2.0.7.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-actuator-autoconfigure:2.0.7.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-actuator:2.0.7.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-context:5.0.11.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-expression:5.0.11.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: io.micrometer:micrometer-core:1.0.8" level="project" />
+    <orderEntry type="library" name="Maven: org.hdrhistogram:HdrHistogram:2.1.10" level="project" />
+    <orderEntry type="library" name="Maven: org.latencyutils:LatencyUtils:2.0.3" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.12" level="project" />
   </component>
 </module>
