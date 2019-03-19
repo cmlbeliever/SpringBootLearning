@@ -28,6 +28,6 @@ public class FlywayApplication {
         Page<City> cities = cityRepository.findAll(new PageRequest(0, 100));
         System.out.println("result===>" + cities.getContent());
 
-        app.close();
+//        app.close();
     }
 }

@@ -4,6 +4,17 @@ spring:
     driver-class-name: org.h2.Driver
     username: sa
     password: sa
+  h2:
+    console:
+      enabled: true
+      path: /h2/console
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: none #第一次使用时需要设置为create
+#  jpa:
+#    hibernate:
+logging:
+  level:
+    org:
+      hibernate: DEBUG
+#      ddl-auto: create
